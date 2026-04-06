@@ -9,6 +9,7 @@
   --secondary-rgb: 0, 185, 174;
   --tertiary: #FFCC00;
   --tertiary-rgb: 255, 204, 0;
+  --surface-highest-rgb: 53, 53, 52;
 
   --background: #131313;
   --foreground: #e5e2e1;
@@ -155,17 +156,17 @@ button {
    PREFERS-REDUCED-MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
   .animate-in,
   .animate-scale {
-    transition: none !important;
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }
 
@@ -173,7 +174,7 @@ button {
    GLASSMORPHISM UTILITY
    ============================================================ */
 .glass {
-  background: rgba(var(--surface-container-highest), var(--glass-opacity));
+  background: rgba(var(--surface-highest-rgb), 0.55);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
 }
@@ -225,6 +226,7 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   min-height: 44px;
   background-color: var(--primary);
   color: white;
@@ -258,6 +260,7 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   min-height: 44px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -290,4 +293,9 @@ section {
 .btn-secondary:active {
   transform: translateY(0);
   box-shadow: 0 0 10px rgba(var(--secondary-rgb), 0.15);
+}
+
+@media (max-width: 768px) {
+  section { padding: 70px 0; }
+  .container { padding: 0 16px; }
 }
