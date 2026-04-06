@@ -144,13 +144,43 @@ No cart, no backend, no external ordering platform.
 
 ---
 
+## Animations
+
+Inspired by the Crafto Pizza Parlor reference. Implemented with CSS `@keyframes` + native `IntersectionObserver` — no animation library added.
+
+### Scroll-triggered entrance (all sections)
+- A `useInView` custom hook wraps `IntersectionObserver` and returns a `ref` + `inView: boolean`
+- Elements start as `opacity: 0; transform: translateY(24px)` and transition to `opacity: 1; transform: translateY(0)` when they enter the viewport
+- Applied via a CSS class toggle: `.animate-in` added when `inView === true`
+- `transition: 0.5s cubic-bezier(0.37, 0, 0.63, 1)`
+
+### Staggered grid items
+- Card grids (Signature Picks, Menu grid, Events calendar, Gallery) stagger children using `animation-delay: calc(var(--index) * 80ms)` via CSS custom property set inline
+
+### Hover effects
+- **Cards** — `transform: translateY(-4px)` + elevated `box-shadow` on hover, `transition: 0.3s ease`
+- **Buttons** — scale `1.02` + glow shadow on hover (already partially in place)
+- **Feature/highlight boxes** — border color brightens + subtle background shift, `transition: 0.4s cubic-bezier(0.61, 1, 0.88, 1)`
+
+### Process step reveal
+- Step items scale from `0.9` + `opacity: 0` to `1` + `opacity: 1` on scroll entry, staggered
+
+### Navbar
+- Hamburger icon: lines rotate/collapse on open, `transition: 0.25s`
+- Navbar background solidifies on scroll (transparent at top → glassmorphism when scrolled)
+
+### Marquee
+- Existing CSS `animation: marquee` retained, speed tuned
+
+---
+
 ## Out of Scope
 
 - Online ordering cart
 - Payment processing
 - Email/backend form submissions
 - External review API (Yelp, Google)
-- Animation libraries (Framer Motion, GSAP) — CSS transitions only
+- Animation libraries (Framer Motion, GSAP) — native CSS + IntersectionObserver only
 - CMS integration
 
 ---
