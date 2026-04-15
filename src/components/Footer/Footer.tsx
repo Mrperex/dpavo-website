@@ -21,13 +21,6 @@ export default function Footer({
 
   return (
     <>
-      {/* Curved SVG divider */}
-      <div className={styles.curveWrap}>
-        <svg className={styles.curveSvg} viewBox="0 0 1440 90" preserveAspectRatio="none">
-          <path d="M0,0 C360,90 1080,90 1440,0 L1440,90 L0,90 Z" fill="#232323" />
-        </svg>
-      </div>
-
       <footer className={styles.footer}>
         <div className="container">
 

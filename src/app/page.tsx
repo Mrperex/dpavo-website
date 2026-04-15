@@ -258,7 +258,7 @@ export default function Home() {
                   className={styles.pickCard}
                 >
                   <div className={styles.pickImgWrap}>
-                    <img src="/media/alitas.jpg" alt={alitas.name} />
+                    <img src="/media/alitas-infierno.png" alt={alitas.name} />
                   </div>
                   <div className={styles.pickRating}>
                     <span className={styles.pickStars}>★★★★★</span>
@@ -333,45 +333,6 @@ export default function Home() {
         </div>
       </AnimSection>
 
-      {/* ══════════════════════════════════════
-          TESTIMONIALS
-      ══════════════════════════════════════ */}
-      <AnimSection className={styles.testimonialsSection}>
-        <div className="container">
-          <div className={styles.testimonialLayout}>
-            {/* Meta + nav */}
-            <div className={styles.testimonialMeta}>
-              <h3>What They Say</h3>
-              <div className={styles.testimonialNav}>
-                <button className={styles.navArrow} aria-label="Previous">←</button>
-                <button className={styles.navArrow} aria-label="Next">→</button>
-              </div>
-            </div>
-
-            {/* Polaroid 1 */}
-            <div className={styles.polaroid}>
-              <div className={styles.polaroidImgPlaceholder}><Pizza size={32} strokeWidth={1.2} /></div>
-              <span className={styles.polaroidSig}>{REVIEWS[0].nameEn}</span>
-            </div>
-
-            {/* Polaroid 2 */}
-            <div className={`${styles.polaroid} ${styles.testimonialQuote}`}>
-              <div className={styles.polaroidImgPlaceholder}><Music size={32} strokeWidth={1.2} /></div>
-              <span className={styles.polaroidSig}>{REVIEWS[1].nameEn}</span>
-            </div>
-
-            {/* Quote — spans col 3 row 1 */}
-            <div className={styles.testimonialQuote} style={{ gridColumn: '3', gridRow: '1' }}>
-              <blockquote className={styles.quoteText}>
-                &ldquo;{REVIEWS[0].quoteEn}&rdquo;
-              </blockquote>
-              <span className={styles.ratingPill}>
-                <Star size={12} fill="currentColor" /> {REVIEWS[0].stars}.0 / 5
-              </span>
-            </div>
-          </div>
-        </div>
-      </AnimSection>
 
       {/* ══════════════════════════════════════
           WHY CHOOSE US

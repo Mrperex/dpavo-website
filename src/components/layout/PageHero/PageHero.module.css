@@ -12,9 +12,9 @@
 
 .default .backdrop {
   background:
-    radial-gradient(circle at 20% 30%, rgba(var(--primary-rgb), 0.22), transparent 32%),
-    radial-gradient(circle at 80% 20%, rgba(var(--secondary-rgb), 0.16), transparent 28%),
-    linear-gradient(135deg, #181818 0%, #101010 100%);
+    radial-gradient(circle at 20% 30%, rgba(var(--primary-rgb), 0.35), transparent 50%),
+    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.4) 100%),
+    url('/media/menu-hero-background-2.jpg') center/cover no-repeat;
 }
 
 .warm .backdrop {
