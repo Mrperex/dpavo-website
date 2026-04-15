@@ -1,0 +1,135 @@
+.storySection { padding: 80px 0; }
+
+.storySplit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.storyText { display: flex; flex-direction: column; gap: 16px; }
+.storyPara { color: rgba(255,255,255,0.68); font-size: 1.02rem; line-height: 1.75; }
+
+.storyPlaceholder {
+  min-height: 420px;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 40% 40%, rgba(var(--tertiary-rgb),0.12), transparent 55%),
+    var(--surface-high);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+}
+
+.placeholderLabel {
+  font-family: var(--font-labels), sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.25);
+}
+
+/* Values */
+.valuesSection { padding: 80px 0; background: var(--surface-low); }
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 20px;
+}
+
+.valueCard {
+  padding: 36px 30px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.valueCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.35);
+}
+
+.valueNum {
+  font-family: var(--font-headlines), sans-serif;
+  font-size: 3rem;
+  color: rgba(var(--primary-rgb),0.2);
+  letter-spacing: -0.04em;
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
+.valueCard h3 { font-size: 1.35rem; margin-bottom: 10px; }
+.valueCard p  { color: rgba(255,255,255,0.55); font-size: 0.9rem; }
+
+/* Team */
+.teamSection { padding: 80px 0; }
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.teamCard {
+  padding: 28px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+}
+
+.teamAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--surface-high);
+  margin: 0 auto 16px;
+}
+
+.teamCard h3 { font-size: 1.1rem; margin-bottom: 4px; }
+.teamCard p  { color: rgba(255,255,255,0.45); font-size: 0.82rem; }
+
+/* Visit */
+.visitSection { padding: 80px 0; }
+
+.visitBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 56px;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,0.07);
+  background: var(--surface-low);
+}
+
+.visitDetails { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+.visitDetails p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.95rem;
+}
+
+.visitMapPlaceholder {
+  min-height: 280px;
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(var(--primary-rgb),0.12), transparent 60%),
+    var(--surface-high);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.visitMapPlaceholder p { color: rgba(255,255,255,0.35); font-size: 0.85rem; }
+
+@media (max-width: 1024px) {
+  .storySplit, .valuesGrid, .visitBox { grid-template-columns: 1fr; }
+  .visitBox { padding: 36px 24px; }
+}

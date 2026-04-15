@@ -1,0 +1,189 @@
+/* ── Curve divider ─────────────────────────────── */
+.curveWrap {
+  line-height: 0;
+  overflow: hidden;
+  margin-bottom: -1px;
+}
+.curveSvg {
+  width: 100%;
+  height: clamp(50px, 6vw, 90px);
+  display: block;
+}
+
+/* ── Footer body ───────────────────────────────── */
+.footer {
+  background: #232323;
+  padding: 0 0 0;
+}
+
+/* Centered logo area */
+.logoCenter {
+  text-align: center;
+  padding: 52px 0 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 48px;
+}
+.logoName {
+  font-family: var(--font-display), sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  display: block;
+  margin-bottom: 4px;
+}
+.logoName span { color: var(--gold); }
+.logoSub {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  display: block;
+}
+
+/* 3-column grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.col h4 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 20px;
+}
+
+.col p,
+.col address {
+  font-style: normal;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.col a {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.col a:hover { color: var(--gold); }
+
+.col p svg,
+.col a svg { flex-shrink: 0; color: var(--gold); margin-top: 2px; }
+
+/* Hours schedule */
+.scheduleList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.scheduleList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.scheduleList li:last-child { border-bottom: none; padding-bottom: 0; }
+.scheduleList li span:first-child { color: rgba(255,255,255,0.35); }
+
+/* Social icons */
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+.socialIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.6);
+  transition: background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+.socialIcon:hover {
+  background: var(--red);
+  color: #fff;
+}
+.socialIcon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Horizontal nav */
+.footerNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+}
+.footerNav a {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 4px 8px;
+}
+.footerNav a:hover { color: #fff; }
+.footerNavDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+
+/* Copyright */
+.copyright {
+  text-align: center;
+  padding: 24px 0 32px;
+  color: rgba(255,255,255,0.2);
+  font-size: 0.78rem;
+}
+.copyright a {
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.copyright a:hover { color: var(--gold); }
+
+/* ── Responsive ────────────────────────────────── */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; gap: 32px; }
+  .footerNav { gap: 4px; }
+}

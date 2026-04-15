@@ -1,0 +1,453 @@
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import {
+  Phone, ArrowRight, Flame, Star,
+  Pizza, Fish, Music, Utensils, Camera, Calendar,
+  MapPin, Zap, Heart, Waves, ChefHat, GlassWater,
+} from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+import { useInView } from '@/hooks/useInView';
+import { WA_GENERAL, WA_ORDER } from '@/content/config';
+import { MENU_ITEMS } from '@/content/menu';
+import { REVIEWS } from '@/content/reviews';
+import Navbar from '@/components/Navbar/Navbar';
+import Footer from '@/components/Footer/Footer';
+import styles from './page.module.css';
+
+function AnimSection({ children, className }: { children: React.ReactNode; className?: string }) {
+  const [ref, inView] = useInView<HTMLElement>();
+  return (
+    <section ref={ref} className={`${className ?? ''} animate-in ${inView ? 'visible' : ''}`}>
+      {children}
+    </section>
+  );
+}
+
+export default function Home() {
+  const { t } = useLanguage();
+  const featured = MENU_ITEMS.filter((i) => i.featured);
+  const allItems = MENU_ITEMS;
+
+  return (
+    <main>
+      <Navbar />
+
+      {/* ══════════════════════════════════════
+          HERO
+      ══════════════════════════════════════ */}
+      <section className={styles.hero}>
+        <div className={styles.heroInner}>
+          <span className={styles.heroScript}>Auténtico</span>
+          <h1 className={styles.heroTitle}>
+            D&apos;<span>P</span>avo
+          </h1>
+          <p className={styles.heroSub}>{t.hero.subtitle}</p>
+          <div className={styles.heroCtas}>
+            <Link href="/menu" className={styles.heroCtaDark}>
+              {t.hero.cta1} <ArrowRight size={15} />
+            </Link>
+            <Link href="/events" className={styles.heroCtaOutline}>
+              {t.hero.cta2}
+            </Link>
+          </div>
+        </div>
+
+        {/* Pizza image + TODAY badge */}
+        <div className={styles.heroImageArea}>
+          <div className={styles.heroImageWrap}>
+            <img
+              src="/media/pizza-hero.png"
+              alt="La Pavorosa - D'Pavo signature pizza"
+              className={styles.heroImg}
+            />
+          </div>
+          <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.todayBadge}>
+            <strong>Today&apos;s</strong>
+            <span>Special</span>
+          </a>
+        </div>
+
+        {/* Bottom wave into next section */}
+        <div className={styles.heroWave}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" fill="#ffffff" />
+          </svg>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          CATEGORIES
+      ══════════════════════════════════════ */}
+      <AnimSection className={styles.categoriesSection}>
+        <div className="container">
+          <p className={styles.catTitle}>What are you craving?</p>
+          <div className={styles.catGrid}>
+            {[
+              { label: 'Pizzas',    href: '/menu',    icon: <Pizza    size={40} strokeWidth={1.2} /> },
+              { label: 'Mariscos', href: '/menu',    icon: <Fish     size={40} strokeWidth={1.2} /> },
+              { label: 'Picaderas',href: '/menu',    icon: <Utensils size={40} strokeWidth={1.2} /> },
+              { label: 'Drinks',   href: '/menu',    icon: <GlassWater size={40} strokeWidth={1.2} /> },
+              { label: 'Events',   href: '/events',  icon: <Calendar size={40} strokeWidth={1.2} /> },
+              { label: 'Gallery',  href: '/gallery', icon: <Camera   size={40} strokeWidth={1.2} /> },
+            ].map((cat) => (
+              <Link key={cat.label} href={cat.href} className={styles.catItem}>
+                <div className={styles.catIcon}>{cat.icon}</div>
+                <span className={styles.catLabel}>{cat.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </AnimSection>
+
+      {/* ══════════════════════════════════════
+          ABOUT
+      ══════════════════════════════════════ */}
+      <AnimSection className={styles.aboutSection}>
+        <div className="container">
+          <div className={styles.aboutGrid}>
+
+            {/* Image side */}
+            <div className={styles.aboutImageSide}>
+              <span className={styles.verticalText}>SIGNATURE</span>
+              <div className={styles.aboutImgWrap}>
+                <img
+                  src="/media/dpavo-food-1.jpg"
+                  alt="D'Pavo signature food"
+                />
+              </div>
+              <div className={styles.authenticBadge}>
+                <span>100%</span>
+                <strong>Authentic</strong>
+                <span>Flavor</span>
+              </div>
+            </div>
+
+            {/* Text side */}
+            <div className={styles.aboutText}>
+              <h2 className={styles.aboutHeading}>
+                Born in Verón.<br />Built to Last.
+              </h2>
+              <p className={styles.aboutPara}>
+                {t.aboutPage.storyBody[0]}
+              </p>
+              <div className={styles.aboutActions}>
+                <Link href="/about" className={styles.heroCtaDark}>
+                  Our Story <ArrowRight size={14} />
+                </Link>
+                <a href={WA_GENERAL} className={styles.aboutPhone} target="_blank" rel="noopener noreferrer">
+                  <Phone size={15} /> (829) 753-1995
+                </a>
+              </div>
+              <div className={styles.featuresRow}>
+                {[
+                  { icon: <ChefHat size={22} strokeWidth={1.4} />, title: 'Handcrafted', desc: 'Every pizza made to order.' },
+                  { icon: <Waves   size={22} strokeWidth={1.4} />, title: 'Fresh Seafood', desc: 'Caribbean-sourced mariscos.' },
+                  { icon: <Music   size={22} strokeWidth={1.4} />, title: 'Live Nights', desc: 'DJs every weekend.' },
+                ].map((f) => (
+                  <div key={f.title} className={styles.featureItem}>
+                    <div className={styles.featureIconWrap}>{f.icon}</div>
+                    <div>
+                      <h4>{f.title}</h4>
+                      <p>{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </AnimSection>
+
+      {/* ══════════════════════════════════════
+          POPULAR PICKS
+      ══════════════════════════════════════ */}
+      <AnimSection className={styles.picksSection}>
+        <span className={styles.picksWatermark}>DELICIOSO</span>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionHeaderLabel}>Our Picks</span>
+            <span className={styles.sectionHeaderDivider} />
+            <h2 className={styles.sectionHeaderTitle}>Fan Favorites</h2>
+          </div>
+
+          <div className={styles.picksGrid}>
+            {featured.map((item) => (
+              <a
+                key={item.id}
+                href={WA_ORDER(item.name)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.pickCard}
+              >
+                <div className={styles.pickImgWrap}>
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} />
+                  ) : (
+                    <div style={{ width: '100%', height: '100%', background: '#f5f4f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Pizza size={40} strokeWidth={1.2} color="var(--red)" />
+                    </div>
+                  )}
+                </div>
+                <div className={styles.pickRating}>
+                  <span className={styles.pickStars}>★★★★★</span>
+                  <span className={styles.pickScore}>5.0</span>
+                </div>
+                <p className={styles.pickName}>{item.name}</p>
+                <div className={styles.pickPricing}>
+                  <span className={styles.pickPrice}>{item.price}</span>
+                </div>
+              </a>
+            ))}
+
+            {/* 4th card - featured Wings */}
+            {(() => {
+              const alitas = MENU_ITEMS.find((i) => i.id === 5);
+              if (!alitas) return null;
+              return (
+                <a
+                  key="alitas"
+                  href={WA_ORDER(alitas.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.pickCard}
+                >
+                  <div className={styles.pickImgWrap}>
+                    <img src="/media/alitas.jpg" alt={alitas.name} />
+                  </div>
+                  <div className={styles.pickRating}>
+                    <span className={styles.pickStars}>★★★★★</span>
+                    <span className={styles.pickScore}>5.0</span>
+                  </div>
+                  <p className={styles.pickName}>{alitas.name}</p>
+                  <div className={styles.pickPricing}>
+                    <span className={styles.pickPrice}>{alitas.price}</span>
+                  </div>
+                </a>
+              );
+            })()}
+          </div>
+
+          <div className={styles.exploreCircleWrap}>
+            <Link href="/menu" className={styles.exploreCircle}>
+              <ArrowRight size={18} />
+              Full<br />Menu
+            </Link>
+          </div>
+        </div>
+      </AnimSection>
+
+      {/* ══════════════════════════════════════
+          EXCLUSIVE MENU LIST
+      ══════════════════════════════════════ */}
+      <AnimSection className={styles.menuListSection}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionHeaderLabel}>Exclusive</span>
+            <span className={styles.sectionHeaderDivider} />
+            <h2 className={styles.sectionHeaderTitle}>Our Menu</h2>
+          </div>
+
+          <div className={styles.menuListGrid}>
+            {allItems.map((item) => (
+              <a
+                key={item.id}
+                href={WA_ORDER(item.name)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.menuListItem}
+              >
+                <div>
+                  {item.image ? (
+                    <div className={styles.menuListImg}>
+                      <img src={item.image} alt={item.name} />
+                    </div>
+                  ) : (
+                    <div className={styles.menuListImgPlaceholder}>
+                      {item.category === 'Pizza' ? <Pizza size={24} strokeWidth={1.2} /> : item.category === 'Mariscos' ? <Fish size={24} strokeWidth={1.2} /> : item.category === 'Drinks' ? <GlassWater size={24} strokeWidth={1.2} /> : <Utensils size={24} strokeWidth={1.2} />}
+                    </div>
+                  )}
+                </div>
+                <div className={styles.menuListInfo}>
+                  <p className={styles.menuListName}>
+                    {item.name}
+                    {item.featured && (
+                      <span className={styles.menuListBadge}>
+                        <Flame size={9} /> Hot
+                      </span>
+                    )}
+                  </p>
+                  <p className={styles.menuListDesc}>{item.description}</p>
+                </div>
+                <p className={styles.menuListPrice}>
+                  <sup>$</sup>{item.price.replace('$', '')}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </AnimSection>
+
+      {/* ══════════════════════════════════════
+          TESTIMONIALS
+      ══════════════════════════════════════ */}
+      <AnimSection className={styles.testimonialsSection}>
+        <div className="container">
+          <div className={styles.testimonialLayout}>
+            {/* Meta + nav */}
+            <div className={styles.testimonialMeta}>
+              <h3>What They Say</h3>
+              <div className={styles.testimonialNav}>
+                <button className={styles.navArrow} aria-label="Previous">←</button>
+                <button className={styles.navArrow} aria-label="Next">→</button>
+              </div>
+            </div>
+
+            {/* Polaroid 1 */}
+            <div className={styles.polaroid}>
+              <div className={styles.polaroidImgPlaceholder}><Pizza size={32} strokeWidth={1.2} /></div>
+              <span className={styles.polaroidSig}>{REVIEWS[0].nameEn}</span>
+            </div>
+
+            {/* Polaroid 2 */}
+            <div className={`${styles.polaroid} ${styles.testimonialQuote}`}>
+              <div className={styles.polaroidImgPlaceholder}><Music size={32} strokeWidth={1.2} /></div>
+              <span className={styles.polaroidSig}>{REVIEWS[1].nameEn}</span>
+            </div>
+
+            {/* Quote — spans col 3 row 1 */}
+            <div className={styles.testimonialQuote} style={{ gridColumn: '3', gridRow: '1' }}>
+              <blockquote className={styles.quoteText}>
+                &ldquo;{REVIEWS[0].quoteEn}&rdquo;
+              </blockquote>
+              <span className={styles.ratingPill}>
+                <Star size={12} fill="currentColor" /> {REVIEWS[0].stars}.0 / 5
+              </span>
+            </div>
+          </div>
+        </div>
+      </AnimSection>
+
+      {/* ══════════════════════════════════════
+          WHY CHOOSE US
+      ══════════════════════════════════════ */}
+      <AnimSection className={styles.whySection}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionHeaderLabel}>Why D&apos;Pavo</span>
+            <span className={styles.sectionHeaderDivider} />
+            <h2 className={styles.sectionHeaderTitle}>The Difference</h2>
+          </div>
+
+          <div className={styles.whyGrid}>
+            {[
+              { icon: <Pizza  size={24} strokeWidth={1.4} />, title: 'Artisan Pizzas',       desc: 'Made fresh daily with premium imported and local ingredients.' },
+              { icon: <Fish   size={24} strokeWidth={1.4} />, title: 'Fresh Mariscos',       desc: 'Caribbean seafood sourced daily — shrimp, calamari and more.' },
+              { icon: <Music  size={24} strokeWidth={1.4} />, title: 'Nightlife Energy',     desc: 'DJs every weekend and themed events that keep Verón moving.' },
+              { icon: <MapPin size={24} strokeWidth={1.4} />, title: 'Prime Location',       desc: "Located in Verón, the heart of Punta Cana's local culture." },
+              { icon: <Zap    size={24} strokeWidth={1.4} />, title: 'Fast WhatsApp Orders', desc: 'Order directly on WhatsApp. No apps, no waiting. Instant service.' },
+              { icon: <Heart  size={24} strokeWidth={1.4} />, title: 'Community Roots',      desc: "Born and built in Verón. We're proud of where we came from." },
+            ].map((item) => (
+              <div key={item.title} className={styles.whyItem}>
+                <div className={styles.whyIconWrap}>{item.icon}</div>
+                <div>
+                  <h4>{item.title}</h4>
+                  <p>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </AnimSection>
+
+      {/* ══════════════════════════════════════
+          PROMO BANNERS
+      ══════════════════════════════════════ */}
+      <AnimSection className={styles.promoSection}>
+        <div className="container">
+          <div className={styles.promoBanners}>
+
+            {/* Banner 1 — Pizza */}
+            <div className={styles.promoBanner}>
+              <div className={styles.promoBannerText}>
+                <span className={styles.promoBannerLabel}>Signature Pizza</span>
+                <h3 className={styles.promoBannerTitle}>La<br />Pavorosa</h3>
+                <a href={WA_ORDER('La Pavorosa')} className={styles.heroCtaDark} target="_blank" rel="noopener noreferrer">
+                  Order Now <ArrowRight size={14} />
+                </a>
+              </div>
+              <img
+                src="/media/pizza-pavorosa.jpg"
+                alt="La Pavorosa"
+                className={styles.promoBannerImg}
+              />
+              <div className={styles.promoBadge}>
+                <strong>Best Seller</strong>
+                <span>2024</span>
+              </div>
+              <span className={styles.promoBannerBg}>PIZZA</span>
+            </div>
+
+            {/* Banner 2 — Events */}
+            <div className={styles.promoBanner}>
+              <div className={styles.promoBannerText}>
+                <span className={styles.promoBannerLabel}>Every Weekend</span>
+                <h3 className={styles.promoBannerTitle}>Live<br />DJ Night</h3>
+                <Link href="/events" className={styles.heroCtaDark}>
+                  See Events <ArrowRight size={14} />
+                </Link>
+              </div>
+              <img
+                src="/media/dj-events.jpg"
+                alt="DJ Events at D'Pavo"
+                className={styles.promoBannerImg}
+              />
+              <div className={styles.promoBadge}>
+                <strong>Fri &amp; Sat</strong>
+                <span>Night</span>
+              </div>
+              <span className={styles.promoBannerBg}>PARTY</span>
+            </div>
+
+          </div>
+        </div>
+      </AnimSection>
+
+      {/* ══════════════════════════════════════
+          CTA BANNER
+      ══════════════════════════════════════ */}
+      <div className={styles.ctaBanner}>
+        <div className="container">
+          <div className={styles.ctaBannerInner}>
+            <p className={styles.ctaBannerText}>
+              EXPERIENCIA GASTRONÓMICA INIGUALABLE
+              <span>·</span>
+              VERÓN, PUNTA CANA
+            </p>
+            <a
+              href={WA_GENERAL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.ctaBannerPhone}
+            >
+              (829) 753-1995
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <Footer
+        tagline={t.footer.tagline}
+        explore={t.footer.explore}
+        visit={t.footer.visit}
+        address={t.footer.address}
+        hoursShort={t.footer.hoursShort}
+        whatsapp={t.footer.whatsapp}
+        rights={t.footer.rights}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery }}
+        waHref={WA_GENERAL}
+      />
+    </main>
+  );
+}

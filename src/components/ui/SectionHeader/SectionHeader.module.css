@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.center .action {
+  margin-top: 8px;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-top: 4px;
+}
+
+.subtitle {
+  max-width: 540px;
+  color: rgba(255,255,255,0.58);
+  margin-top: 12px;
+}
+
+.center .subtitle {
+  margin: 12px auto 0;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
