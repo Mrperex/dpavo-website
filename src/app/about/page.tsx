@@ -42,7 +42,7 @@ export default function AboutPage() {
             </div>
             <div className={styles.storyVisual}>
               <div className={styles.storyPlaceholder}>
-                <span className={styles.placeholderLabel}>Venue Photo</span>
+                <span className={styles.placeholderLabel}>{t.aboutPage.venuePlaceholder}</span>
               </div>
             </div>
           </div>

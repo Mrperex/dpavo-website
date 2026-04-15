@@ -1,4 +1,26 @@
 export const en = {
+  home: {
+    heroScript: 'Authentic',
+    categoriesTitle: 'What are you craving?',
+    aboutHeading1: 'Born in Verón.',
+    aboutHeading2: 'Built to Last.',
+    aboutCta: 'Our Story',
+    features: [
+      { title: 'Handcrafted', desc: 'Every pizza made to order.' },
+      { title: 'Fresh Seafood', desc: 'Caribbean-sourced mariscos.' },
+      { title: 'Live Nights', desc: 'DJs every weekend.' },
+    ],
+    picksLabel: 'Our Picks',
+    picksTitle: 'Fan Favorites',
+    banner1Label: 'Signature Pizza',
+    banner1Cta: 'Order Now',
+    bestSeller: 'Best Seller',
+    banner2Label: 'Every Weekend',
+    banner2Title: 'Live DJ Night',
+    banner2Cta: 'See Events',
+    friSat: 'Fri & Sat',
+    night: 'Night',
+  },
   nav: {
     home: 'Home',
     menu: 'Menu',
@@ -122,7 +144,8 @@ export const en = {
   },
   aboutPage: {
     label: 'Our Story',
-    title: 'Nuestra Historia.',
+    title: 'Our Story.',
+    venuePlaceholder: 'Venue Photo',
     subtitle: "Born in Verón, built for everyone — D'Pavo is the intersection of flavor, culture and urban energy.",
     storyTitle: "How D'Pavo Started.",
     storyBody: [

@@ -18,7 +18,7 @@ export default function GalleryPage() {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [gridRef, gridInView] = useInView<HTMLDivElement>();
 
-  const cats = ['All', 'Food', 'Venue', 'Events'];
+  const cats = ['All', 'Food', 'Venue', 'Events']; // internal filter keys
 
   const filtered = active === 'All'
     ? GALLERY_ITEMS
@@ -37,13 +37,13 @@ export default function GalleryPage() {
         tone="dark"
       >
         <div className={styles.cats}>
-          {cats.map((cat) => (
+          {cats.map((cat, i) => (
             <button
               key={cat}
               className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
               onClick={() => setActive(cat)}
             >
-              {cat}
+              {t.galleryPage.categories[i]}
             </button>
           ))}
         </div>

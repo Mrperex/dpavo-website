@@ -18,7 +18,7 @@ export default function MenuPage() {
   const [active, setActive] = useState<string>('All');
   const [gridRef, gridInView] = useInView<HTMLDivElement>();
 
-  const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks'];
+  const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks']; // internal filter keys
 
   const filtered = active === 'All'
     ? MENU_ITEMS
@@ -40,13 +40,13 @@ export default function MenuPage() {
       <div className={styles.catsBar}>
         <div className="container">
           <div className={styles.cats}>
-            {cats.map((cat) => (
+            {cats.map((cat, i) => (
               <button
                 key={cat}
                 className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
                 onClick={() => setActive(cat)}
               >
-                {cat}
+                {t.menuPage.categories[i]}
               </button>
             ))}
           </div>

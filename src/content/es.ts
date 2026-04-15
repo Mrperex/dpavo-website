@@ -2,6 +2,28 @@
 import type { Content } from './en';
 
 export const es: Content = {
+  home: {
+    heroScript: 'Auténtico',
+    categoriesTitle: '¿Qué se te antoja?',
+    aboutHeading1: 'Nacido en Verón.',
+    aboutHeading2: 'Para Quedarse.',
+    aboutCta: 'Nuestra Historia',
+    features: [
+      { title: 'Artesanal', desc: 'Cada pizza hecha al momento.' },
+      { title: 'Mariscos Frescos', desc: 'Mariscos del Caribe.' },
+      { title: 'Noches en Vivo', desc: 'DJs cada fin de semana.' },
+    ],
+    picksLabel: 'Nuestros Picks',
+    picksTitle: 'Los Favoritos',
+    banner1Label: 'Pizza Estrella',
+    banner1Cta: 'Ordenar Ahora',
+    bestSeller: 'El Más Pedido',
+    banner2Label: 'Cada Fin de Semana',
+    banner2Title: 'Noche de DJ',
+    banner2Cta: 'Ver Eventos',
+    friSat: 'Vie & Sáb',
+    night: 'Noche',
+  },
   nav: {
     home: 'Inicio',
     menu: 'Menú',
@@ -125,7 +147,8 @@ export const es: Content = {
   },
   aboutPage: {
     label: 'Nuestra Historia',
-    title: 'Our Story.',
+    title: 'Nuestra Historia.',
+    venuePlaceholder: 'Foto del Local',
     subtitle: 'Un lugar nacido en Verón con ambición, sabor y ritmo.',
     storyTitle: "Cómo Empezó D'Pavo.",
     storyBody: [

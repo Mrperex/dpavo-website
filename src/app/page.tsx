@@ -93,7 +93,7 @@ export default function Home() {
       ══════════════════════════════════════ */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
-          <span className={styles.heroScript}>Auténtico</span>
+          <span className={styles.heroScript}>{t.home.heroScript}</span>
           <h1 className={styles.heroTitle}>
             D&apos;<span>P</span>avo
           </h1>
@@ -141,7 +141,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           CATEGORIES
       ══════════════════════════════════════ */}
-      <CategoriesSection title="What are you craving?" />
+      <CategoriesSection title={t.home.categoriesTitle} />
 
       {/* ══════════════════════════════════════
           ABOUT
@@ -173,14 +173,14 @@ export default function Home() {
             {/* Text side */}
             <div className={styles.aboutText}>
               <h2 className={styles.aboutHeading}>
-                Born in Verón.<br />Built to Last.
+                {t.home.aboutHeading1}<br />{t.home.aboutHeading2}
               </h2>
               <p className={styles.aboutPara}>
                 {t.aboutPage.storyBody[0]}
               </p>
               <div className={styles.aboutActions}>
                 <Link href="/about" className={styles.heroCtaDark}>
-                  Our Story <ArrowRight size={14} />
+                  {t.home.aboutCta} <ArrowRight size={14} />
                 </Link>
                 <a href={WA_GENERAL} className={styles.aboutPhone} target="_blank" rel="noopener noreferrer">
                   <Phone size={15} /> (829) 753-1995
@@ -188,9 +188,9 @@ export default function Home() {
               </div>
               <div className={styles.featuresRow}>
                 {[
-                  { icon: <ChefHat size={22} strokeWidth={1.4} />, title: 'Handcrafted', desc: 'Every pizza made to order.' },
-                  { icon: <Waves   size={22} strokeWidth={1.4} />, title: 'Fresh Seafood', desc: 'Caribbean-sourced mariscos.' },
-                  { icon: <Music   size={22} strokeWidth={1.4} />, title: 'Live Nights', desc: 'DJs every weekend.' },
+                  { icon: <ChefHat size={22} strokeWidth={1.4} />, ...t.home.features[0] },
+                  { icon: <Waves   size={22} strokeWidth={1.4} />, ...t.home.features[1] },
+                  { icon: <Music   size={22} strokeWidth={1.4} />, ...t.home.features[2] },
                 ].map((f) => (
                   <div key={f.title} className={styles.featureItem}>
                     <div className={styles.featureIconWrap}>{f.icon}</div>
@@ -213,9 +213,9 @@ export default function Home() {
         <span className={styles.picksWatermark}>DELICIOSO</span>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionHeaderLabel}>Our Picks</span>
+            <span className={styles.sectionHeaderLabel}>{t.home.picksLabel}</span>
             <span className={styles.sectionHeaderDivider} />
-            <h2 className={styles.sectionHeaderTitle}>Fan Favorites</h2>
+            <h2 className={styles.sectionHeaderTitle}>{t.home.picksTitle}</h2>
           </div>
 
           <div className={styles.picksGrid}>
@@ -378,10 +378,10 @@ export default function Home() {
             {/* Banner 1 — Pizza */}
             <div className={styles.promoBanner}>
               <div className={styles.promoBannerText}>
-                <span className={styles.promoBannerLabel}>Signature Pizza</span>
+                <span className={styles.promoBannerLabel}>{t.home.banner1Label}</span>
                 <h3 className={styles.promoBannerTitle}>La<br />Pavorosa</h3>
                 <a href={WA_ORDER('La Pavorosa')} className={styles.heroCtaDark} target="_blank" rel="noopener noreferrer">
-                  Order Now <ArrowRight size={14} />
+                  {t.home.banner1Cta} <ArrowRight size={14} />
                 </a>
               </div>
               <img
@@ -390,7 +390,7 @@ export default function Home() {
                 className={styles.promoBannerImg}
               />
               <div className={styles.promoBadge}>
-                <strong>Best Seller</strong>
+                <strong>{t.home.bestSeller}</strong>
                 <span>2024</span>
               </div>
               <span className={styles.promoBannerBg}>PIZZA</span>
@@ -399,10 +399,10 @@ export default function Home() {
             {/* Banner 2 — Events */}
             <div className={styles.promoBanner}>
               <div className={styles.promoBannerText}>
-                <span className={styles.promoBannerLabel}>Every Weekend</span>
-                <h3 className={styles.promoBannerTitle}>Live<br />DJ Night</h3>
+                <span className={styles.promoBannerLabel}>{t.home.banner2Label}</span>
+                <h3 className={styles.promoBannerTitle}>{t.home.banner2Title}</h3>
                 <Link href="/events" className={styles.heroCtaDark}>
-                  See Events <ArrowRight size={14} />
+                  {t.home.banner2Cta} <ArrowRight size={14} />
                 </Link>
               </div>
               <img
@@ -411,8 +411,8 @@ export default function Home() {
                 className={styles.promoBannerImg}
               />
               <div className={styles.promoBadge}>
-                <strong>Fri &amp; Sat</strong>
-                <span>Night</span>
+                <strong>{t.home.friSat}</strong>
+                <span>{t.home.night}</span>
               </div>
               <span className={styles.promoBannerBg}>PARTY</span>
             </div>
