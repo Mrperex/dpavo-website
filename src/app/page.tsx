@@ -7,6 +7,7 @@ import {
   Pizza, Fish, Music, Utensils, Camera, Calendar,
   MapPin, Zap, Heart, Waves, ChefHat, GlassWater,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL, WA_ORDER } from '@/content/config';
@@ -21,6 +22,59 @@ function AnimSection({ children, className }: { children: React.ReactNode; class
   return (
     <section ref={ref} className={`${className ?? ''} animate-in ${inView ? 'visible' : ''}`}>
       {children}
+    </section>
+  );
+}
+
+function CountUp({ target, active }: { target: number; active: boolean }) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    let cur = 0;
+    const interval = setInterval(() => {
+      cur += 1;
+      setCount(cur);
+      if (cur >= target) clearInterval(interval);
+    }, Math.max(20, Math.round(900 / target)));
+    return () => clearInterval(interval);
+  }, [active, target]);
+  return <>{count}</>;
+}
+
+const CAT_ITEMS = [
+  { label: 'Pizzas',    href: '/menu',    icon: (s: number) => <Pizza      size={s} strokeWidth={1.2} />, count: 8 },
+  { label: 'Mariscos', href: '/menu',    icon: (s: number) => <Fish       size={s} strokeWidth={1.2} />, count: 1 },
+  { label: 'Picaderas',href: '/menu',    icon: (s: number) => <Utensils   size={s} strokeWidth={1.2} />, count: 2 },
+  { label: 'Drinks',   href: '/menu',    icon: (s: number) => <GlassWater size={s} strokeWidth={1.2} />, count: 1 },
+  { label: 'Events',   href: '/events',  icon: (s: number) => <Calendar   size={s} strokeWidth={1.2} />, count: 4 },
+  { label: 'Gallery',  href: '/gallery', icon: (s: number) => <Camera     size={s} strokeWidth={1.2} />, count: 10 },
+];
+
+function CategoriesSection({ title }: { title: string }) {
+  const [ref, inView] = useInView<HTMLElement>();
+  return (
+    <section ref={ref} className={`${styles.categoriesSection} animate-in ${inView ? 'visible' : ''}`}>
+      <div className="container">
+        <p className={styles.catTitle}>{title}</p>
+        <div className={styles.catGrid}>
+          {CAT_ITEMS.map((cat, i) => (
+            <Link
+              key={cat.label}
+              href={cat.href}
+              className={`${styles.catItem} ${inView ? styles.catItemVisible : ''}`}
+              style={{ animationDelay: `${i * 0.07}s` }}
+            >
+              <div className={styles.catIconWrap}>
+                <div className={styles.catIcon}>{cat.icon(40)}</div>
+                <span className={styles.catCount}>
+                  <CountUp target={cat.count} active={inView} />
+                </span>
+              </div>
+              <span className={styles.catLabel}>{cat.label}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
@@ -43,7 +97,6 @@ export default function Home() {
           <h1 className={styles.heroTitle}>
             D&apos;<span>P</span>avo
           </h1>
-          <p className={styles.heroSub}>{t.hero.subtitle}</p>
           <div className={styles.heroCtas}>
             <Link href="/menu" className={styles.heroCtaDark}>
               {t.hero.cta1} <ArrowRight size={15} />
@@ -54,7 +107,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Pizza image + TODAY badge */}
+        {/* Pizza image + badges */}
         <div className={styles.heroImageArea}>
           <div className={styles.heroImageWrap}>
             <img
@@ -63,6 +116,12 @@ export default function Home() {
               className={styles.heroImg}
             />
           </div>
+          <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.ordenaBtn}>
+            <span className={styles.ordenaPulse} />
+            <span className={styles.ordenaPulse2} />
+            <strong>Ordena</strong>
+            <span>Tu Pizza</span>
+          </a>
           <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.todayBadge}>
             <strong>Today&apos;s</strong>
             <span>Special</span>
@@ -80,26 +139,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           CATEGORIES
       ══════════════════════════════════════ */}
-      <AnimSection className={styles.categoriesSection}>
-        <div className="container">
-          <p className={styles.catTitle}>What are you craving?</p>
-          <div className={styles.catGrid}>
-            {[
-              { label: 'Pizzas',    href: '/menu',    icon: <Pizza    size={40} strokeWidth={1.2} /> },
-              { label: 'Mariscos', href: '/menu',    icon: <Fish     size={40} strokeWidth={1.2} /> },
-              { label: 'Picaderas',href: '/menu',    icon: <Utensils size={40} strokeWidth={1.2} /> },
-              { label: 'Drinks',   href: '/menu',    icon: <GlassWater size={40} strokeWidth={1.2} /> },
-              { label: 'Events',   href: '/events',  icon: <Calendar size={40} strokeWidth={1.2} /> },
-              { label: 'Gallery',  href: '/gallery', icon: <Camera   size={40} strokeWidth={1.2} /> },
-            ].map((cat) => (
-              <Link key={cat.label} href={cat.href} className={styles.catItem}>
-                <div className={styles.catIcon}>{cat.icon}</div>
-                <span className={styles.catLabel}>{cat.label}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </AnimSection>
+      <CategoriesSection title="What are you craving?" />
 
       {/* ══════════════════════════════════════
           ABOUT
@@ -111,10 +151,14 @@ export default function Home() {
             {/* Image side */}
             <div className={styles.aboutImageSide}>
               <span className={styles.verticalText}>SIGNATURE</span>
+              <span className={styles.aboutDelicious} aria-hidden="true">
+                <span>DELI</span>
+                <span>CIOUS</span>
+              </span>
               <div className={styles.aboutImgWrap}>
                 <img
-                  src="/media/dpavo-food-1.jpg"
-                  alt="D'Pavo signature food"
+                  src="/media/pizza-pepperoni.png"
+                  alt="D'Pavo signature pizza"
                 />
               </div>
               <div className={styles.authenticBadge}>
@@ -281,7 +325,7 @@ export default function Home() {
                   <p className={styles.menuListDesc}>{item.description}</p>
                 </div>
                 <p className={styles.menuListPrice}>
-                  <sup>$</sup>{item.price.replace('$', '')}
+                  {item.price}
                 </p>
               </a>
             ))}

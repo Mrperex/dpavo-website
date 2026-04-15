@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Antonio, Schibsted_Grotesk, Dancing_Script } from 'next/font/google';
+import { Antonio, Schibsted_Grotesk, Dancing_Script, Anton } from 'next/font/google';
 import { Providers } from './providers';
 import './globals.css';
 
@@ -24,6 +24,13 @@ const dancing = Dancing_Script({
   display: 'swap',
 });
 
+const anton = Anton({
+  variable: '--font-anton',
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: "D'Pavo Pizza | Pizzería Urbana Tropical — Verón, Punta Cana",
   description: 'Pizza, mariscos y vida nocturna en Verón, Punta Cana. Ordena por WhatsApp.',
@@ -32,7 +39,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className={`${antonio.variable} ${schibsted.variable} ${dancing.variable}`}>
+      <body className={`${antonio.variable} ${schibsted.variable} ${dancing.variable} ${anton.variable}`}>
         <Providers>{children}</Providers>
       </body>
     </html>

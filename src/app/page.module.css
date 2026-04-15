@@ -17,9 +17,25 @@
   overflow: visible;
 }
 
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, transparent 30%, rgba(189,31,23,0.5) 75%, rgba(189,31,23,0.85) 100%),
+    linear-gradient(180deg,
+      rgba(0,0,0,0.1) 0%,
+      transparent 30%,
+      transparent 60%,
+      rgba(189,31,23,0.9) 100%
+    );
+  z-index: 1;
+  pointer-events: none;
+}
+
 .heroInner {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   text-align: center;
   width: 100%;
   padding: 0 24px;
@@ -153,6 +169,35 @@
   height: clamp(50px, 7vw, 100px);
 }
 
+/* "DELICIOUS" watermark behind about-section pizza */
+.aboutDelicious {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(480px, 100%);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 0;
+  padding: 8px 0;
+}
+
+.aboutDelicious span {
+  font-family: var(--font-anton), sans-serif;
+  font-size: clamp(100px, 26vw, 155px);
+  font-weight: 400;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  display: block;
+}
+
 /* Pizza image area */
 .heroImageArea {
   position: relative;
@@ -166,6 +211,7 @@
 
 .heroImageWrap {
   position: relative;
+  z-index: 2;
   width: clamp(540px, 80vw, 920px);
   aspect-ratio: 1;
   filter: drop-shadow(0 30px 80px rgba(0,0,0,0.45));
@@ -183,6 +229,63 @@
 @keyframes pizzaSpin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
+}
+
+/* ORDENA TU PIZZA — pulsing circle */
+.ordenaBtn {
+  position: absolute;
+  left: clamp(20px, 8vw, 120px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--primary, #BD1F17);
+  border: 3px solid rgba(255,255,255,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 5;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 8px;
+  transition: background 0.2s ease;
+}
+.ordenaBtn:hover { background: var(--gold); }
+.ordenaBtn strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1;
+}
+.ordenaBtn span:not(.ordenaPulse):not(.ordenaPulse2) {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.85);
+}
+
+.ordenaPulse,
+.ordenaPulse2 {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.5);
+  animation: ordenaRing 2.2s ease-out infinite;
+  pointer-events: none;
+}
+.ordenaPulse2 { animation-delay: 1.1s; }
+
+@keyframes ordenaRing {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
 }
 
 /* TODAY OFFER badge */
@@ -268,9 +371,28 @@
   transition: background 0.2s ease;
   position: relative;
   text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px);
 }
 .catItem:last-child { border-right: none; }
 .catItem:hover { background: #fafafa; }
+
+/* Staggered entrance — triggered by catItemVisible class */
+.catItemVisible {
+  animation: catSlideUp 0.5s cubic-bezier(0.37, 0, 0.63, 1) both;
+}
+
+@keyframes catSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Icon wrap holds icon + count badge */
+.catIconWrap {
+  position: relative;
+  width: 56px;
+  height: 56px;
+}
 
 .catIcon {
   width: 56px;
@@ -282,6 +404,27 @@
   transition: transform 350ms cubic-bezier(0.37, 0, 0.63, 1);
 }
 .catItem:hover .catIcon { transform: translateY(-8px); }
+
+/* Count badge */
+.catCount {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 99px;
+  background: var(--dark);
+  color: #fff;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  line-height: 1;
+  pointer-events: none;
+}
 
 .catLabel {
   font-family: var(--font-display), sans-serif;
@@ -334,6 +477,7 @@
 
 .aboutImgWrap {
   position: relative;
+  z-index: 1;
   border-radius: 50%;
   overflow: hidden;
   aspect-ratio: 1;
@@ -344,7 +488,7 @@
 .aboutImgWrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -1067,7 +1211,7 @@
 }
 
 @media (max-width: 768px) {
-  .hero { padding-top: 120px; }
+  .hero { padding-top: 100px; min-height: auto; padding-bottom: 40px; }
   .heroTitle { font-size: clamp(5rem, 20vw, 8rem); }
   .heroFloat1, .heroFloat2 { display: none; }
   .aboutGrid { grid-template-columns: 1fr; }
@@ -1078,8 +1222,11 @@
   .pickImgWrap { width: 150px; height: 150px; }
   .promoBanners { grid-template-columns: 1fr; }
   .promoBannerImg { width: 150px; height: 150px; }
-  .heroImageWrap { width: min(80vw, 400px); }
-  .todayBadge { right: 12px; width: 90px; height: 90px; }
+  .heroImageArea { margin-top: -10px; margin-bottom: -180px; }
+  .heroImageWrap { width: min(92vw, 420px); }
+  .todayBadge { right: 8px; width: 84px; height: 84px; }
+  .ordenaBtn { left: 8px; width: 84px; height: 84px; }
+  .ordenaBtn strong { font-size: 0.85rem; }
 }
 
 @media (max-width: 480px) {
@@ -1088,4 +1235,6 @@
   .polaroid { max-width: 180px; }
   .testimonialLayout { grid-template-columns: 1fr; }
   .heroScript { font-size: 2rem; }
+  .heroImageArea { margin-bottom: -160px; }
+  .heroImageWrap { width: min(95vw, 340px); }
 }
