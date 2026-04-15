@@ -116,12 +116,6 @@ export default function Home() {
               className={styles.heroImg}
             />
           </div>
-          <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.ordenaBtn}>
-            <span className={styles.ordenaPulse} />
-            <span className={styles.ordenaPulse2} />
-            <strong>Ordena</strong>
-            <span>Tu Pizza</span>
-          </a>
           <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.todayBadge}>
             <strong>Today&apos;s</strong>
             <span>Special</span>
@@ -134,6 +128,14 @@ export default function Home() {
             <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" fill="#ffffff" />
           </svg>
         </div>
+
+        {/* Order button — straddles hero / next section boundary */}
+        <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.ordenaBtn}>
+          <span className={styles.ordenaPulse} />
+          <span className={styles.ordenaPulse2} />
+          <strong>Ordena</strong>
+          <span>Tu Pizza</span>
+        </a>
       </section>
 
       {/* ══════════════════════════════════════
