@@ -35,19 +35,23 @@ export default function MenuPage() {
         title={<>{t.menuPage.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={t.menuPage.subtitle}
         tone="default"
-      >
-        <div className={styles.cats}>
-          {cats.map((cat) => (
-            <button
-              key={cat}
-              className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
-              onClick={() => setActive(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+      />
+
+      <div className={styles.catsBar}>
+        <div className="container">
+          <div className={styles.cats}>
+            {cats.map((cat) => (
+              <button
+                key={cat}
+                className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
+                onClick={() => setActive(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
-      </PageHero>
+      </div>
 
       <section className={styles.featured}>
         <div className="container">
