@@ -4,8 +4,6 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Splitting from 'splitting';
-import 'splitting/dist/splitting.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,20 +41,24 @@ export function SplitReveal({
     if (!el) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const [result] = Splitting({ target: el, by });
-    const targets = by === 'chars' ? result.chars! : result.words!;
+    void (async () => {
+      const { default: Splitting } = await import('splitting');
+      await import('splitting/dist/splitting.css');
+      const [result] = Splitting({ target: el, by });
+      const targets = by === 'chars' ? result.chars! : result.words!;
 
-    gsap.from(targets, {
-      y,
-      opacity: 0,
-      stagger,
-      duration,
-      ease,
-      scrollTrigger: {
-        trigger: el,
-        start,
-      },
-    });
+      gsap.from(targets, {
+        y,
+        opacity: 0,
+        stagger,
+        duration,
+        ease,
+        scrollTrigger: {
+          trigger: el,
+          start,
+        },
+      });
+    })();
   }, { scope: ref });
 
   return (
