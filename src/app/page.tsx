@@ -7,7 +7,7 @@ import {
   Pizza, Fish, Music, Utensils, Camera, Calendar,
   MapPin, Zap, Heart, Waves, ChefHat, GlassWater,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL, WA_ORDER } from '@/content/config';
@@ -15,6 +15,10 @@ import { MENU_ITEMS } from '@/content/menu';
 import { REVIEWS } from '@/content/reviews';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitReveal, ParallaxLayer, StaggerGrid } from '@/components/animations';
 import styles from './page.module.css';
 
 function AnimSection({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -84,6 +88,29 @@ export default function Home() {
   const featured = MENU_ITEMS.filter((i) => i.featured);
   const allItems = MENU_ITEMS;
 
+  const aboutRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    const section = aboutRef.current;
+    if (!section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const imageSide = section.querySelector(`.${styles.aboutImageSide}`);
+    const textSide = section.querySelector(`.${styles.aboutText}`);
+
+    gsap.set(imageSide, { opacity: 0, x: -40 });
+    gsap.set(textSide, { opacity: 0, x: 40 });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 60%',
+      },
+    })
+      .to(imageSide, { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' }, 0)
+      .to(textSide, { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' }, 0.15);
+  }, { scope: aboutRef });
+
   return (
     <main>
       <Navbar />
@@ -94,9 +121,9 @@ export default function Home() {
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <span className={styles.heroScript}>{t.home.heroScript}</span>
-          <h1 className={styles.heroTitle}>
+          <SplitReveal as="h1" by="chars" stagger={0.04} y={80} className={styles.heroTitle}>
             D&apos;<span>P</span>avo
-          </h1>
+          </SplitReveal>
           <div className={styles.heroCtas}>
             <Link href="/menu" className={styles.heroCtaDark}>
               {t.hero.cta1} <ArrowRight size={15} />
@@ -110,11 +137,13 @@ export default function Home() {
         {/* Pizza image + badges */}
         <div className={styles.heroImageArea}>
           <div className={styles.heroImageWrap}>
-            <img
-              src="/media/pizza-hero.png"
-              alt="La Pavorosa - D'Pavo signature pizza"
-              className={styles.heroImg}
-            />
+            <ParallaxLayer speed={0.35}>
+              <img
+                src="/media/pizza-hero.png"
+                alt="La Pavorosa - D'Pavo signature pizza"
+                className={styles.heroImg}
+              />
+            </ParallaxLayer>
           </div>
           <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.todayBadge}>
             <strong>Today&apos;s</strong>
@@ -146,7 +175,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           ABOUT
       ══════════════════════════════════════ */}
-      <AnimSection className={styles.aboutSection}>
+      <section ref={aboutRef} className={`${styles.aboutSection} animate-in`}>
         <div className="container">
           <div className={styles.aboutGrid}>
 
@@ -172,9 +201,9 @@ export default function Home() {
 
             {/* Text side */}
             <div className={styles.aboutText}>
-              <h2 className={styles.aboutHeading}>
-                {t.home.aboutHeading1}<br />{t.home.aboutHeading2}
-              </h2>
+              <SplitReveal as="h2" by="words" stagger={0.06} y={50} className={styles.aboutHeading}>
+                {t.home.aboutHeading1} {t.home.aboutHeading2}
+              </SplitReveal>
               <p className={styles.aboutPara}>
                 {t.aboutPage.storyBody[0]}
               </p>
@@ -204,7 +233,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </AnimSection>
+      </section>
 
       {/* ══════════════════════════════════════
           POPULAR PICKS
@@ -218,7 +247,7 @@ export default function Home() {
             <h2 className={styles.sectionHeaderTitle}>{t.home.picksTitle}</h2>
           </div>
 
-          <div className={styles.picksGrid}>
+          <StaggerGrid className={styles.picksGrid} stagger={0.1} y={40} scale={0.93}>
             {featured.map((item) => (
               <a
                 key={item.id}
@@ -273,7 +302,7 @@ export default function Home() {
                 </a>
               );
             })()}
-          </div>
+          </StaggerGrid>
 
           <div className={styles.exploreCircleWrap}>
             <Link href="/menu" className={styles.exploreCircle}>
@@ -347,7 +376,7 @@ export default function Home() {
             <h2 className={styles.sectionHeaderTitle}>The Difference</h2>
           </div>
 
-          <div className={styles.whyGrid}>
+          <StaggerGrid className={styles.whyGrid} stagger={0.07} y={30} scale={0.96} start="top 88%">
             {[
               { icon: <Pizza  size={24} strokeWidth={1.4} />, title: 'Artisan Pizzas',       desc: 'Made fresh daily with premium imported and local ingredients.' },
               { icon: <Fish   size={24} strokeWidth={1.4} />, title: 'Fresh Mariscos',       desc: 'Caribbean seafood sourced daily — shrimp, calamari and more.' },
@@ -364,7 +393,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </AnimSection>
 
