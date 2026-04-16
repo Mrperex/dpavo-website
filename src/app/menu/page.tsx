@@ -52,7 +52,7 @@ export default function MenuPage() {
 
       <section className={styles.featured}>
         <div className="container">
-          <SplitReveal as="p" by="words" stagger={0.05} y={30}>
+          <SplitReveal key={t.menuPage.featured} as="p" by="words" stagger={0.05} y={30}>
             {t.menuPage.featured}
           </SplitReveal>
           <StaggerGrid className={styles.featuredGrid} stagger={0.12} y={40} scale={0.94}>
@@ -89,7 +89,7 @@ export default function MenuPage() {
 
       <section className={styles.allItems}>
         <div className="container">
-          <StaggerGrid className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
+          <StaggerGrid key={active} className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
             {filtered.map((item) => (
               <article
                 key={item.id}
