@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    line-height: 1.7;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 0;
+  }
+
+  /* ── Cover strip ── */
+  .cover {
+    background: linear-gradient(135deg, #BD1F17 0%, #8B0000 60%, #232323 100%);
+    color: white;
+    padding: 48px 56px 40px;
+    margin-bottom: 0;
+  }
+  .cover-label {
+    font-size: 9pt;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 10px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28pt;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    padding: 0;
+    margin: 0 0 8px;
+    line-height: 1.15;
+  }
+  .cover-sub {
+    font-size: 10.5pt;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.04em;
+  }
+  .gold-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #ECBA23, #f5d06a, #ECBA23);
+  }
+
+  /* ── Content area ── */
+  .content {
+    padding: 36px 56px 48px;
+  }
+
+  h1 { display: none; } /* covered by .cover */
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15pt;
+    font-weight: 700;
+    color: #BD1F17;
+    margin: 32px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #ECBA23;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 10.5pt;
+    font-weight: 600;
+    color: #232323;
+    margin: 18px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-bottom: 10px;
+    color: #222;
+  }
+
+  strong { color: #111; }
+
+  em { color: #555; font-style: italic; }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 24px 0;
+  }
+
+  blockquote {
+    border-left: 3px solid #ECBA23;
+    background: #fffbf0;
+    padding: 10px 16px;
+    margin: 8px 0 12px;
+    font-size: 10pt;
+    color: #444;
+    border-radius: 0 4px 4px 0;
+  }
+
+  ul {
+    margin: 6px 0 12px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 3px 0 3px 18px;
+    position: relative;
+    color: #333;
+  }
+
+  li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #BD1F17;
+    font-weight: 700;
+  }
+
+  li.check::before {
+    content: "";
+  }
+
+  li.check {
+    padding-left: 0;
+    color: #1a5c1a;
+    font-weight: 500;
+  }
+
+  code {
+    background: #f4f4f4;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 9pt;
+    color: #BD1F17;
+    font-family: monospace;
+  }
+
+  .action {
+    background: #f0f4ff;
+    border: 1px solid #c0cfe8;
+    border-left: 4px solid #4a7adc;
+    border-radius: 4px;
+    padding: 8px 14px;
+    margin: 10px 0;
+    font-size: 9.5pt;
+    color: #2c4a8a;
+    font-weight: 500;
+  }
+
+  /* Nota para presentadora */
+  .note-box {
+    background: #fff8e1;
+    border: 1px solid #ECBA23;
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin: 0 0 28px;
+    font-size: 9.5pt;
+    color: #5c4a00;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    padding-top: 14px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 8.5pt;
+    color: #999;
+    text-align: center;
+  }
+
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h2 { page-break-before: auto; }
+    .cover { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-label">Propuesta Comercial · Presencia Digital</div>
+  <h1>El Pitch — D'Pavo Urban Pizzería</h1>
+  <div class="cover-sub">Guión de Presentación · Sitio Web Profesional · Verón, Punta Cana</div>
+</div>
+<div class="gold-bar"></div>
+
+<div class="content">
+
+<div class="note-box">
+  <strong>Nota para la presentadora:</strong> Las secciones entre corchetes <code>[ACCIÓN]</code> indican qué hacer en ese momento. Las líneas en <em>cursiva</em> son opcionales. Respira — eres la experta en la sala.
+</div>
+
+
+
+<hr>
+<blockquote><strong>Nota para la presentadora:</strong> Este es tu guión completo. Las secciones entre corchetes <code>[ACCIÓN]</code> son indicaciones de qué hacer en ese momento. Las líneas en <em>cursiva</em> son opcionales, úsalas si la conversación fluye hacia ese tema. Respira, eres la experta en la sala.</blockquote>
+<hr>
+<h2>APERTURA</h2>
+<em>Antes de abrir el video o la pantalla. Mirarlos directo.</em>
+<hr>
+<strong>"Antes de comenzar, quiero hacerles una pregunta rápida.</strong>
+<strong>¿Cuántas veces han buscado en Google 'restaurante pizza cerca de mí' o 'dónde cenar en Punta Cana'?</strong>
+<em>[Pausa. Dejar que respondan.]</em>
+<strong>Exacto. Sus clientes hacen lo mismo — cada noche, desde su teléfono, antes de decidir dónde van a gastar su dinero.</strong>
+<strong>La pregunta es: ¿D'Pavo aparece en esa búsqueda... o aparece la competencia?"</strong>
+<hr>
+<h2>EL PROBLEMA</h2>
+<em>Hablar con calma. No como vendedora — como alguien que encontró algo importante.</em>
+<hr>
+<strong>"Hoy, si alguien escribe 'pizza Verón' o 'restaurante Punta Cana' en Google, los establecimientos que tienen página web son los primeros que aparecen. Los que no tienen, simplemente no existen para ese cliente.</strong>
+<strong>Y esto es especialmente crítico para D'Pavo, porque su ubicación es una ventaja enorme que todavía no están aprovechando al máximo."</strong>
+<hr>
+<h2>LA OPORTUNIDAD DE UBICACIÓN</h2>
+<em>Este es un punto clave. Decirlo con entusiasmo genuino.</em>
+<hr>
+<strong>"Serena Village, Ciudad del Sol, los complejos de Airbnb en la zona de Verón — ¿saben quiénes son esos huéspedes?</strong>
+<strong>Son familias americanas, europeas, canadienses. Turistas que llegan al aeropuerto de Punta Cana, se instalan en un apartamento o villa de Airbnb, y la primera cosa que hacen es sacar el teléfono y buscar: '¿dónde puedo cenar algo bueno cerca de aquí?'</strong>
+<strong>Esos clientes tienen dinero para gastar. Buscan una experiencia local auténtica. Y D'Pavo — con su ambiente, su pizza, su concepto urbano — es exactamente lo que están buscando.</strong>
+<strong>El problema es que si no tienen página web, Google no sabe que existen, y ese cliente se va a otro lugar."</strong>
+<hr>
+<h2>LA SOLUCIÓN</h2>
+<em>Aquí abres el video / la pantalla.</em>
+<hr>
+<strong>"Exactamente por eso estamos aquí hoy. Lo que les voy a mostrar no es un concepto ni un mockup — es su página web. Ya construida. Ya funcionando."</strong>
+<code><div class='action'>⚡ Reproducir el video de presentación (remotion render) o abrir dpavopizzeria.com / localhost:3000 en pantalla completa</div></code>
+<strong>"Déjenme guiarlos por lo que ven..."</strong>
+<hr>
+<h2>TOUR DEL SITIO WEB</h2>
+<em>Ir despacio. Dejar que los ojos del cliente lo procesen.</em>
+<hr>
+<h3>Página Principal (Homepage)</h3>
+<strong>"Lo primero que ve cualquier visitante es esto — la identidad de D'Pavo, inmediata, poderosa. Su logo, sus colores, su energía.</strong>
+<p>El menú de navegación está arriba: Menú, Eventos, Galería, Nosotros. Todo accesible en un clic.**</p>
+<p>Este botón de aquí — 'Ordena por WhatsApp' — es fundamental. Un cliente que está en su villa en Serena Village ve esto, le da un clic, y en segundos está hablando con ustedes por WhatsApp para hacer un pedido o una reservación. Sin complicaciones."**</p>
+<code><div class='action'>⚡ Scrollear lentamente hacia abajo</div></code>
+<strong>"Mientras scrollean, ven las categorías del menú — Pizza, Mariscos, Picaderas, Bebidas. Cada sección diseñada para que el cliente sienta hambre antes de terminar de leer.</strong>
+<p>Aquí viene la sección de historia — 'Nacido en Verón'. Esto es importante: los clientes extranjeros aman las historias auténticas. Saber que esto es un negocio local, familiar, con raíces — eso genera confianza y crea conexión emocional."**</p>
+<hr>
+<h3>Página de Menú</h3>
+<code><div class='action'>⚡ Navegar a /menu</div></code>
+<strong>"Ahora el menú — y aquí es donde la magia sucede para el cliente que está decidiendo dónde cenar.</strong>
+<p>Ven estos filtros: Pizza, Mariscos, Picaderas, Bebidas. El cliente hace clic, ve exactamente lo que busca, con foto, descripción y precio en pesos dominicanos. Transparente. Directo.**</p>
+<p>Cada ítem tiene el botón de WhatsApp. ¿Ven el botón verde? Un clic y el cliente les escribe. No hay que descargar nada, no hay que crear cuenta — es el canal que ya usan todos los dominicanos y que los turistas también entienden."**</p>
+<hr>
+<h2>LOS COMPONENTES TÉCNICOS</h2>
+<em>Explicarlo en lenguaje de beneficios, no de tecnología.</em>
+<hr>
+<strong>"Ahora, déjenme explicarles brevemente por qué esta página no es como cualquier página web — y por qué eso importa para su negocio."</strong>
+<h3>Velocidad — Next.js</h3>
+<strong>"El sitio está construido con Next.js, la misma tecnología que usan empresas como Netflix y TikTok. ¿Qué significa eso para ustedes? Que la página carga en menos de un segundo.</strong>
+<p>Esto es crítico: Google penaliza las páginas lentas y no las muestra primero en las búsquedas. Además, un cliente que espera más de 3 segundos cierra la pestaña. Con esta tecnología, eso no ocurre."**</p>
+<h3>Diseñada para el Teléfono — Responsive</h3>
+<strong>"El 90% de sus visitantes van a entrar desde un celular. Desde el teléfono de su villa de Airbnb, desde la playa, desde el lobby del hotel.</strong>
+<p>Esta página se adapta perfectamente a cualquier pantalla — teléfono, tablet, computadora — sin perder calidad ni funcionalidad."**</p>
+<h3>Google Analytics — Usted Sabe Quién Visita</h3>
+<strong>"Incluimos Google Analytics. ¿Qué es eso? Es su panel de control del negocio digital.</strong>
+<p>Usted va a poder ver: cuántas personas visitaron la página esta semana, de qué país son, qué sección del menú miraron más, desde qué dispositivo entraron, y a qué hora hay más tráfico.**</p>
+<p>Esa información vale oro. Si ve que los martes hay 200 visitas pero pocas reservas, sabe que tiene que hacer una promoción para ese día."**</p>
+<h3>Segura y Confiable — HTTPS</h3>
+<strong>"La página tiene certificado de seguridad (el candadito verde en el navegador). Esto es indispensable para que Google la clasifique bien y para que los clientes confíen en la información que ven."</strong>
+<hr>
+<h2>CÓMO SE TRADUCE EN INGRESOS</h2>
+<em>Aquí hablas de números. Concreto.</em>
+<hr>
+<strong>"Seamos directos en cómo esto impacta sus ingresos:</strong>
+<strong>Primero — Clientes que los encuentran en Google.</strong> Cada semana, cientos de personas en la zona buscan dónde cenar. Con esta página, empiezan a aparecer en esas búsquedas. Eso es tráfico nuevo, clientes que no los conocían, entrando por la puerta.
+<strong>Segundo — El WhatsApp es su línea directa de ventas.</strong> Un cliente que hace clic en 'Ordenar por WhatsApp' a las 6pm ya está decidido. No está comparando — ya eligió D'Pavo. Solo necesita confirmar el pedido o la mesa.
+<strong>Tercero — La página trabaja las 24 horas.</strong> A las 11pm, cuando el restaurante está cerrando, alguien en Serena Village está planeando su cena de mañana. Ve el menú, ve los precios, se enamora de la pizza — y mañana llega como cliente nuevo."**
+<hr>
+<h2>EL FUTURO — LA APLICACIÓN MÓVIL</h2>
+<em>Plantar la semilla. No vender esto hoy — solo que sepan que existe.</em>
+<hr>
+<strong>"Una última cosa, y esto lo mencionamos porque queremos que piensen a largo plazo.</strong>
+<p>La página web es el primer paso — y el más importante. Pero una vez que su marca esté establecida digitalmente, el siguiente nivel es una aplicación móvil.**</p>
+<p>Una app para Android y para iPhone donde los clientes de D'Pavo puedan:** <ul><li><strong>Ver el menú actualizado en tiempo real</strong></li> <li><strong>Hacer pedidos directamente desde el teléfono</strong></li> <li><strong>Recibir notificaciones de promociones especiales</strong></li> <li><strong>Acumular puntos de lealtad</strong></li> </ul> <strong>Eso convierte a un cliente casual en un cliente frecuente. Convierte una visita en una relación.</strong></p>
+<p>No estamos hablando de hacer eso hoy — la página web es el paso uno y es lo correcto ahora mismo. Pero quiero que sepan que cuando estén listos, ya tenemos el camino trazado."**</p>
+<hr>
+<h2>CIERRE — LLAMADO A LA ACCIÓN</h2>
+<em>Decirlo con seguridad. Sin presión, pero con claridad.</em>
+<hr>
+<strong>"Entonces, para resumir lo que vieron hoy:</strong>
+<ul><li class='check'>✓ Una página web profesional, rápida y elegante que representa la calidad de D'Pavo  </li>
+<li class='check'>✓ Diseñada para captar clientes locales y turistas extranjeros que buscan en Google  </li>
+<li class='check'>✓ Con el menú completo, fotos y conexión directa por WhatsApp  </li>
+<li class='check'>✓ Que funciona perfectamente en teléfono, tablet y computadora  </li>
+<li class='check'>✓ Con Google Analytics para que usted sepa exactamente qué está pasando  </li>
+<li class='check'>✓ Y la base tecnológica para crecer hacia una app móvil cuando estén listos</li>
+</ul>
+<strong>Lo que necesitamos de su parte para lanzarla es sencillo:</strong>
+<ul><li>Su aprobación del diseño</li>
+<li>Su logo en alta resolución</li>
+<li>Las fotos de sus platos (o coordinamos una sesión fotográfica)</li>
+<li>La información de contacto actualizada</li>
+</ul>
+<strong>El sitio está listo. Solo esperamos su luz verde.</strong>
+<p>¿Qué preguntas tienen?"**</p>
+<hr>
+<h2>PREGUNTAS FRECUENTES</h2>
+<em>Por si preguntan algo de esto durante la reunión.</em>
+<hr>
+<strong>¿Cuánto tiempo tarda en estar lista?</strong>
+<blockquote>"Dado que el diseño ya está hecho, una vez que nos den los assets (logo, fotos, texto), en <strong>7 a 10 días hábiles</strong> el sitio está en vivo."</blockquote>
+<strong>¿Quién actualiza el menú si cambian los precios?</strong>
+<blockquote>"Nosotros nos encargamos de los cambios. Un mensaje de WhatsApp y lo actualizamos. También podemos enseñarle a hacerlo directamente si prefieren."</blockquote>
+<strong>¿Necesito pagar hosting aparte?</strong>
+<blockquote>"Todo está incluido. Nosotros manejamos el hosting, el dominio y la seguridad."</blockquote>
+<strong>¿Funciona sin internet en el restaurante?</strong>
+<blockquote>"La página está en la nube — los clientes la ven desde cualquier internet. No depende del internet del local."</blockquote>
+<strong>¿Pueden agregar reservaciones online?</strong>
+<blockquote>"Absolutamente. Eso es una funcionalidad que podemos activar. Por ahora el WhatsApp sirve perfectamente para reservas, pero si prefieren un sistema formal, lo integramos."</blockquote>
+<hr>
+<em>Documento preparado para la presentación de la propuesta de D'Pavo Urban Pizzería · Verón, Punta Cana.</em>  
+<em>Diseño web: Pablo · Presentación: [Tu nombre]</em>
+
+<div class="footer">
+  Propuesta preparada para D'Pavo Urban Pizzería · Verón, Punta Cana · Abril 2026
+</div>
+
+</div>
+</body>
+</html>

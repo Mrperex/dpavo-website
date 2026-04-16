@@ -1132,16 +1132,21 @@
   margin-bottom: 20px;
   letter-spacing: -0.02em;
 }
+.promoBannerText {
+  max-width: calc(100% - 220px);
+  flex-shrink: 0;
+}
+
 .promoBannerImg {
   position: absolute;
-  right: -20px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   width: 200px;
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 .promoBadge {
   position: absolute;

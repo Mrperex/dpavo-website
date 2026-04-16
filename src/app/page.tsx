@@ -385,7 +385,7 @@ export default function Home() {
                 </a>
               </div>
               <img
-                src="/media/pizza-pavorosa.jpg"
+                src="/media/pizza-ham-and-pepperonni.png"
                 alt="La Pavorosa"
                 className={styles.promoBannerImg}
               />
