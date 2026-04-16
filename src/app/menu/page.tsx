@@ -4,11 +4,10 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { PageHero } from '@/components/layout/PageHero/PageHero';
-import { SectionHeader } from '@/components/ui/SectionHeader/SectionHeader';
 import { Badge } from '@/components/ui/Badge/Badge';
 import { useLanguage } from '@/context/LanguageContext';
-import { useInView } from '@/hooks/useInView';
 import { WA_ORDER, WA_GENERAL } from '@/content/config';
+import { SplitReveal, StaggerGrid } from '@/components/animations';
 import { MENU_ITEMS } from '@/content/menu';
 import { MessageCircle, Flame } from 'lucide-react';
 import styles from './menu.module.css';
@@ -16,8 +15,6 @@ import styles from './menu.module.css';
 export default function MenuPage() {
   const { t } = useLanguage();
   const [active, setActive] = useState<string>('All');
-  const [gridRef, gridInView] = useInView<HTMLDivElement>();
-
   const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks']; // internal filter keys
 
   const filtered = active === 'All'
@@ -55,13 +52,14 @@ export default function MenuPage() {
 
       <section className={styles.featured}>
         <div className="container">
-          <SectionHeader label={t.menuPage.featured} title="" />
-          <div className={styles.featuredGrid}>
-            {featured.map((item, i) => (
+          <SplitReveal as="p" by="words" stagger={0.05} y={30}>
+            {t.menuPage.featured}
+          </SplitReveal>
+          <StaggerGrid className={styles.featuredGrid} stagger={0.12} y={40} scale={0.94}>
+            {featured.map((item) => (
               <article
                 key={item.id}
-                className={`${styles.featCard} animate-in visible`}
-                style={{ '--index': i } as React.CSSProperties}
+                className={styles.featCard}
               >
                 <div className={styles.featVisual}>
                   {item.image
@@ -85,21 +83,17 @@ export default function MenuPage() {
                 </div>
               </article>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </section>
 
       <section className={styles.allItems}>
         <div className="container">
-          <div
-            ref={gridRef}
-            className={`${styles.listGrid} animate-in ${gridInView ? 'visible' : ''}`}
-          >
-            {filtered.map((item, i) => (
+          <StaggerGrid className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
+            {filtered.map((item) => (
               <article
                 key={item.id}
-                className={`${styles.listCard} surface-low animate-in visible`}
-                style={{ '--index': i } as React.CSSProperties}
+                className={`${styles.listCard} surface-low`}
               >
                 <div className={styles.listTop}>
                   <Badge>{item.category}</Badge>
@@ -112,7 +106,7 @@ export default function MenuPage() {
                 </a>
               </article>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </section>
 
