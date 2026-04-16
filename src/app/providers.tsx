@@ -26,6 +26,7 @@ export function Providers({ children }: { children: ReactNode }) {
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      lenis.off('scroll', ScrollTrigger.update);
       lenis.destroy();
       gsap.ticker.remove(onRaf);
     };
