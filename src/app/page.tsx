@@ -89,6 +89,33 @@ export default function Home() {
   const allItems = MENU_ITEMS;
 
   const aboutRef = useRef<HTMLElement>(null);
+  const todayBadgeRef = useRef<HTMLAnchorElement>(null);
+  const authenticBadgeRef = useRef<HTMLDivElement>(null);
+
+  // Continuous floating animation for the two badge elements
+  useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (todayBadgeRef.current && !prefersReducedMotion) {
+      gsap.to(todayBadgeRef.current, {
+        y: -8,
+        duration: 3,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      });
+    }
+
+    if (authenticBadgeRef.current && !prefersReducedMotion) {
+      gsap.to(authenticBadgeRef.current, {
+        y: -8,
+        duration: 3,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      });
+    }
+  });
 
   useGSAP(() => {
     const section = aboutRef.current;
@@ -146,7 +173,7 @@ export default function Home() {
               />
             </ParallaxLayer>
           </div>
-          <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.todayBadge}>
+          <a ref={todayBadgeRef} href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.todayBadge}>
             <strong>Today&apos;s</strong>
             <span>Special</span>
           </a>
@@ -193,7 +220,7 @@ export default function Home() {
                   alt="D'Pavo signature pizza"
                 />
               </div>
-              <div className={styles.authenticBadge}>
+              <div ref={authenticBadgeRef} className={styles.authenticBadge}>
                 <span>100%</span>
                 <strong>Authentic</strong>
                 <span>Flavor</span>
