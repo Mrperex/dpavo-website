@@ -94,7 +94,6 @@ function CategoriesSection({ title }: { title: string }) {
               key={cat.label}
               href={cat.href}
               className={styles.catItem}
-              style={{ animationDelay: `${i * 0.07}s` }}
             >
               <div className={styles.catIconWrap}>
                 <div className={styles.catIcon}>{cat.icon(40)}</div>

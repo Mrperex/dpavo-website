@@ -413,21 +413,9 @@
   transition: background 0.2s ease;
   position: relative;
   text-decoration: none;
-  opacity: 0;
-  transform: translateY(20px);
 }
 .catItem:last-child { border-right: none; }
 .catItem:hover { background: #fafafa; }
-
-/* Staggered entrance — triggered by catItemVisible class */
-.catItemVisible {
-  animation: catSlideUp 0.5s cubic-bezier(0.37, 0, 0.63, 1) both;
-}
-
-@keyframes catSlideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 
 /* Icon wrap holds icon + count badge */
 .catIconWrap {
