@@ -25,7 +25,16 @@ export function Providers({ children }: { children: ReactNode }) {
     gsap.ticker.add(onRaf);
     gsap.ticker.lagSmoothing(0);
 
+    const onLoad = () => ScrollTrigger.refresh();
+    if (document.readyState === 'complete') {
+      onLoad();
+    } else {
+      window.addEventListener('load', onLoad);
+    }
+    void document.fonts?.ready.then(onLoad);
+
     return () => {
+      window.removeEventListener('load', onLoad);
       lenis.off('scroll', ScrollTrigger.update);
       lenis.destroy();
       gsap.ticker.remove(onRaf);
