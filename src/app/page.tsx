@@ -89,6 +89,7 @@ export default function Home() {
   const allItems = MENU_ITEMS;
 
   const aboutRef = useRef<HTMLElement>(null);
+  const heroInnerRef = useRef<HTMLDivElement>(null);
   const todayBadgeRef = useRef<HTMLAnchorElement>(null);
   const authenticBadgeRef = useRef<HTMLDivElement>(null);
 
@@ -113,6 +114,24 @@ export default function Home() {
         ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
+      });
+    }
+  });
+
+  // Hero text parallax — moves at a different speed than the pizza image
+  useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (heroInnerRef.current && !prefersReducedMotion) {
+      gsap.to(heroInnerRef.current, {
+        yPercent: -12,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroInnerRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
       });
     }
   });
@@ -147,7 +166,7 @@ export default function Home() {
           HERO
       ══════════════════════════════════════ */}
       <section className={styles.hero}>
-        <div className={styles.heroInner}>
+        <div ref={heroInnerRef} className={styles.heroInner}>
           <span className={styles.heroScript}>{t.home.heroScript}</span>
           <SplitReveal as="h1" by="chars" stagger={0.04} y={80} className={styles.heroTitle}>
             D&apos;<span>P</span>avo
