@@ -29,7 +29,12 @@ export default function MenuPage() {
 
       <PageHero
         label={t.menuPage.label}
-        title={<>{t.menuPage.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
+        title={
+          <>
+            <span style={{ color: 'var(--gold)' }}>{t.menuPage.title.replace('.', '')}</span>
+            {' '}<span style={{ color: 'var(--primary)' }}>.</span>
+          </>
+        }
         subtitle={t.menuPage.subtitle}
         tone="default"
       />
