@@ -11,6 +11,7 @@ interface StaggerGridProps {
   children: React.ReactNode;
   stagger?: number;
   y?: number;
+  x?: number;
   scale?: number;
   duration?: number;
   start?: string;
@@ -22,8 +23,9 @@ interface StaggerGridProps {
 
 export function StaggerGrid({
   children,
-  stagger = 0.08,
+  stagger = 0.06,
   y = 40,
+  x = 0,
   scale = 0.92,
   duration = 0.6,
   start = 'top 85%',
@@ -43,11 +45,12 @@ export function StaggerGrid({
 
     gsap.from(items, {
       y,
+      x,
       opacity: 0,
       scale,
       stagger,
       duration,
-      ease: 'power2.out',
+      ease: 'back.out(1.4)',
       scrollTrigger: {
         trigger: container,
         start,
