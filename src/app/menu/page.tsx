@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { PageHero } from '@/components/layout/PageHero/PageHero';
@@ -17,6 +19,22 @@ export default function MenuPage() {
   const { t } = useLanguage();
   const [active, setActive] = useState<string>('All');
   const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks']; // internal filter keys
+  const catsRef = useRef<HTMLDivElement>(null);
+
+  // Filter pills bounce-in on mount
+  useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pills = catsRef.current?.querySelectorAll('[data-filter-pill]');
+    if (pills && pills.length && !prefersReducedMotion) {
+      gsap.from(pills, {
+        x: -10,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.55,
+        ease: 'back.out(1.4)',
+      });
+    }
+  }, { scope: catsRef });
 
   const filtered = active === 'All'
     ? MENU_ITEMS
@@ -42,10 +60,11 @@ export default function MenuPage() {
 
       <div className={styles.catsBar}>
         <div className="container">
-          <div className={styles.cats}>
+          <div ref={catsRef} className={styles.cats}>
             {cats.map((cat, i) => (
               <button
                 key={cat}
+                data-filter-pill
                 className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
                 onClick={() => setActive(cat)}
               >

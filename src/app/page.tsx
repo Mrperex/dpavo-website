@@ -403,7 +403,7 @@ export default function Home() {
             <h2 className={styles.sectionHeaderTitle}>Our Menu</h2>
           </div>
 
-          <div className={styles.menuListGrid}>
+          <StaggerGrid className={styles.menuListGrid} stagger={0.05} y={20} x={-20} scale={0.97} start="top 90%">
             {allItems.map((item) => (
               <a
                 key={item.id}
@@ -439,7 +439,7 @@ export default function Home() {
                 </p>
               </a>
             ))}
-          </div>
+          </StaggerGrid>
         </div>
       </AnimSection>
 
