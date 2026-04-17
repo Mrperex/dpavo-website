@@ -238,7 +238,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           POPULAR PICKS
       ══════════════════════════════════════ */}
-      <AnimSection className={styles.picksSection}>
+      <section className={styles.picksSection}>
         <span className={styles.picksWatermark}>DELICIOSO</span>
         <div className="container">
           <div className={styles.sectionHeader}>
@@ -311,7 +311,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </AnimSection>
+      </section>
 
       {/* ══════════════════════════════════════
           EXCLUSIVE MENU LIST
@@ -368,7 +368,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           WHY CHOOSE US
       ══════════════════════════════════════ */}
-      <AnimSection className={styles.whySection}>
+      <section className={styles.whySection}>
         <div className="container">
           <div className={styles.sectionHeader}>
             <span className={styles.sectionHeaderLabel}>Why D&apos;Pavo</span>
@@ -395,7 +395,7 @@ export default function Home() {
             ))}
           </StaggerGrid>
         </div>
-      </AnimSection>
+      </section>
 
       {/* ══════════════════════════════════════
           PROMO BANNERS
