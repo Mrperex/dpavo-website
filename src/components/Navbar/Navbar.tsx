@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useScrolled } from '@/hooks/useScrolled';
 import { WA_GENERAL } from '@/content/config';
+import { MagneticButton } from '@/components/animations/MagneticButton';
 import styles from './Navbar.module.css';
 
 const WA_ICON = (
@@ -57,11 +58,13 @@ export default function Navbar() {
             <a href={WA_GENERAL} className={styles.waPhone} target="_blank" rel="noopener noreferrer">
               <Phone size={13} /> (829) 753-1995
             </a>
-            <a href={WA_GENERAL} className={styles.orderBtn} target="_blank" rel="noopener noreferrer">
-              <span className={styles.orderBtnPulse} />
-              <span className={styles.orderBtnPulse2} />
-              {WA_ICON} {t.nav.order}
-            </a>
+            <MagneticButton>
+              <a href={WA_GENERAL} className={styles.orderBtn} target="_blank" rel="noopener noreferrer">
+                <span className={styles.orderBtnPulse} />
+                <span className={styles.orderBtnPulse2} />
+                {WA_ICON} {t.nav.order}
+              </a>
+            </MagneticButton>
             <button className={styles.langBtn} onClick={toggle} aria-label="Toggle language">
               {t.nav.lang}
             </button>
@@ -102,9 +105,11 @@ export default function Navbar() {
         </ul>
         <div className={styles.drawerActions}>
           <button className={styles.langBtn} onClick={toggle}>{t.nav.lang}</button>
-          <a href={WA_GENERAL} className={styles.orderBtn} target="_blank" rel="noopener noreferrer">
-            {WA_ICON} {t.nav.order}
-          </a>
+          <MagneticButton>
+            <a href={WA_GENERAL} className={styles.orderBtn} target="_blank" rel="noopener noreferrer">
+              {WA_ICON} {t.nav.order}
+            </a>
+          </MagneticButton>
         </div>
       </div>
 

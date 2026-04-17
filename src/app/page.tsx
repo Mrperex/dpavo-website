@@ -19,6 +19,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitReveal, ParallaxLayer, StaggerGrid } from '@/components/animations';
+import { MagneticButton } from '@/components/animations/MagneticButton';
 import styles from './page.module.css';
 
 function AnimSection({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -199,12 +200,16 @@ export default function Home() {
             D&apos;<span>P</span>avo
           </SplitReveal>
           <div className={styles.heroCtas}>
-            <Link href="/menu" className={styles.heroCtaDark}>
-              {t.hero.cta1} <ArrowRight size={15} />
-            </Link>
-            <Link href="/events" className={styles.heroCtaOutline}>
-              {t.hero.cta2}
-            </Link>
+            <MagneticButton>
+              <Link href="/menu" className={styles.heroCtaDark}>
+                {t.hero.cta1} <ArrowRight size={15} />
+              </Link>
+            </MagneticButton>
+            <MagneticButton>
+              <Link href="/events" className={styles.heroCtaOutline}>
+                {t.hero.cta2}
+              </Link>
+            </MagneticButton>
           </div>
         </div>
 

@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/Badge/Badge';
 import { useLanguage } from '@/context/LanguageContext';
 import { WA_ORDER, WA_GENERAL } from '@/content/config';
 import { SplitReveal, StaggerGrid } from '@/components/animations';
+import { MagneticButton } from '@/components/animations/MagneticButton';
 import { MENU_ITEMS } from '@/content/menu';
 import { MessageCircle, Flame } from 'lucide-react';
 import styles from './menu.module.css';
@@ -82,9 +83,11 @@ export default function MenuPage() {
                     <span className={styles.price}>{item.price}</span>
                   </div>
                   <p>{item.description}</p>
-                  <a href={WA_ORDER(item.name)} className="btn-primary" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle size={15} /> {t.menuPage.order}
-                  </a>
+                  <MagneticButton>
+                    <a href={WA_ORDER(item.name)} className="btn-primary" target="_blank" rel="noopener noreferrer">
+                      <MessageCircle size={15} /> {t.menuPage.order}
+                    </a>
+                  </MagneticButton>
                 </div>
               </article>
             ))}
