@@ -1,0 +1,92 @@
+<h2>Full Pipeline — Design Overview</h2>
+<p class="subtitle">4 phases, each building on the last. Does this structure look right?</p>
+
+<div style="display:flex;flex-direction:column;gap:16px;margin-top:24px">
+
+  <!-- Phase 1 -->
+  <div style="border:2px solid #2a9d8f;border-radius:12px;padding:20px;background:rgba(42,157,143,.07)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <span style="background:#2a9d8f;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">1</span>
+      <h3 style="margin:0">Install Tools &amp; Packages</h3>
+      <span style="margin-left:auto;opacity:.5;font-size:.8em">~5 min</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:.9em">
+      <div><strong>In DPAVO (npm):</strong><br><code>gsap</code> · <code>@gsap/react</code> · <code>lenis</code> · <code>splitting</code> · <code>embla-carousel</code></div>
+      <div><strong>System (pip):</strong><br><code>mitmproxy</code> — TLS proxy to intercept &amp; capture assets<br><em>Playwright already in DPAVO devDeps ✓</em></div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div style="border:2px solid #e76f51;border-radius:12px;padding:20px;background:rgba(231,111,81,.07)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <span style="background:#e76f51;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">2</span>
+      <h3 style="margin:0">Full Site Scan — incredifulls.com</h3>
+      <span style="margin-left:auto;opacity:.5;font-size:.8em">~20 min automated</span>
+    </div>
+    <p style="margin:0;font-size:.9em">A Playwright script crawls <strong>every page</strong> of incredifulls.com — homepage, product pages, store finder, about. It:</p>
+    <ul style="font-size:.9em;margin-top:8px">
+      <li>Downloads all JS/CSS assets (gsap.min.js, ScrollTrigger.min.js, lenis.min.js, landing.css, shark.css…)</li>
+      <li>Extracts <strong>all GSAP timeline/ScrollTrigger calls</strong> from global.js via JS evaluation</li>
+      <li>Screenshots every scroll position on every page</li>
+      <li>Records all animation config values (duration, ease, stagger, scrub settings)</li>
+      <li>Saves everything to <code>Projects/Reverse-Engineer-Website/</code></li>
+    </ul>
+  </div>
+
+  <!-- Phase 3 -->
+  <div style="border:2px solid #457b9d;border-radius:12px;padding:20px;background:rgba(69,123,157,.07)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <span style="background:#457b9d;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">3</span>
+      <h3 style="margin:0">Analyze + Create Reusable Skill</h3>
+      <span style="margin-left:auto;opacity:.5;font-size:.8em">permanent</span>
+    </div>
+    <p style="margin:0;font-size:.9em">From the scan output, I build a <strong>Claude Code skill</strong> that lives permanently in your <code>~/.claude/</code> setup. The skill contains:</p>
+    <ul style="font-size:.9em;margin-top:8px">
+      <li>Installation recipes for every animation package</li>
+      <li>Copy-paste code templates for all 6 animation types</li>
+      <li>Exact config values extracted from incredifulls (easing curves, durations, stagger values)</li>
+      <li>React/Next.js specific patterns (SSR safety, <code>useGSAP</code> hook, cleanup)</li>
+      <li>Invoke with <code>/pizza-animations</code> on any future project</li>
+    </ul>
+  </div>
+
+  <!-- Phase 4 -->
+  <div style="border:2px solid #f4a261;border-radius:12px;padding:20px;background:rgba(244,162,97,.07)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+      <span style="background:#f4a261;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">4</span>
+      <h3 style="margin:0">Implement in D'Pavo — Home + Menu</h3>
+      <span style="margin-left:auto;opacity:.5;font-size:.8em">main deliverable</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:.9em">
+      <div>
+        <strong>Home page gets:</strong>
+        <ul style="margin-top:4px">
+          <li>Lenis smooth scroll (global)</li>
+          <li>Hero parallax on pizza image</li>
+          <li>Splitting.js text reveals on headings</li>
+          <li>Staggered card entrance on Popular Picks</li>
+          <li>Upgraded Marquee (CSS infinite loop)</li>
+          <li>ScrollTrigger on "Why D'Pavo" grid</li>
+        </ul>
+      </div>
+      <div>
+        <strong>Menu page gets:</strong>
+        <ul style="margin-top:4px">
+          <li>Lenis smooth scroll</li>
+          <li>Staggered card entrance per category</li>
+          <li>Text reveals on section headers</li>
+        </ul>
+        <br>
+        <strong>New shared components:</strong>
+        <ul style="margin-top:4px">
+          <li><code>hooks/useGSAP.ts</code></li>
+          <li><code>hooks/useLenis.ts</code></li>
+          <li><code>components/animations/</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:24px">Does this structure look right? Tell me in the terminal — any changes before I write the full spec?</p>

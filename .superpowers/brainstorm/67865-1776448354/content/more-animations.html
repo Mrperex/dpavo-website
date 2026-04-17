@@ -1,0 +1,79 @@
+<h2>Which animation layers do you want added?</h2>
+<p class="subtitle">Select all that appeal to you — these go on top of everything already planned. (Multi-select)</p>
+
+<div class="options" data-multiselect>
+
+  <div class="option" data-choice="marquee" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>Scrolling ticker strip</h3>
+      <p>A continuously looping marquee band between sections — "PIZZA • MARISCOS • PUNTA CANA • VERÓN •" in large bold text. Infinite horizontal scroll. Gives energy between content blocks.</p>
+      <div style="margin-top:12px;overflow:hidden;white-space:nowrap;background:#BD1F17;padding:10px 0;border-radius:6px;font-family:serif;font-weight:700;letter-spacing:0.1em;color:#ECBA23;font-size:1rem;">
+        <span style="display:inline-block;animation:ticker 4s linear infinite">PIZZA &nbsp;•&nbsp; MARISCOS &nbsp;•&nbsp; PUNTA CANA &nbsp;•&nbsp; VERÓN &nbsp;•&nbsp; PIZZA &nbsp;•&nbsp; MARISCOS &nbsp;•&nbsp;</span>
+      </div>
+      <style>@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}</style>
+    </div>
+  </div>
+
+  <div class="option" data-choice="clip-reveal" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>Clip-path wipe reveals</h3>
+      <p>Section headings and images wipe in from left using a clip-path mask — like a curtain being pulled. Much more dramatic than the current fade+slide. Especially good for the About pizza image and section titles.</p>
+      <div style="margin-top:12px;display:flex;gap:16px;align-items:center">
+        <div style="background:#ECBA23;height:48px;width:160px;border-radius:4px;clip-path:inset(0 60% 0 0);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;color:#232323;">LOS FAVORITOS</div>
+        <span style="font-size:0.75rem;opacity:0.5;">→ wipes in from left</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="magnetic" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>Magnetic buttons</h3>
+      <p>Primary CTA buttons ("ORDENA", "VER MENÚ") subtly pull toward the cursor as it approaches. Feels premium and interactive — the button moves ~12px max to follow the mouse. Very modern UX pattern.</p>
+      <div style="margin-top:10px;font-size:0.8rem;opacity:0.55;">Works on: ORDENA, VER MENÚ, ORDENAR AHORA, WhatsApp buttons</div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="counter" onclick="toggleSelect(this)">
+    <div class="letter">4</div>
+    <div class="content">
+      <h3>Number counters on category icons</h3>
+      <p>The badges on the "¿QUÉ SE TE ANTOJA?" category icons (8 pizzas, 4 drinks, etc.) count up from 0 when they scroll into view. Adds life to what are currently static numbers.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="cursor-pizza" onclick="toggleSelect(this)">
+    <div class="letter">5</div>
+    <div class="content">
+      <h3>Hero pizza follows cursor</h3>
+      <p>The big pizza image in the hero subtly rotates and shifts (±15px, ±5deg) as the mouse moves — like it's floating in space. Gives the hero a 3D-alive feel without being distracting.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="stagger-elastic" onclick="toggleSelect(this)">
+    <div class="letter">6</div>
+    <div class="content">
+      <h3>Elastic/overshoot easing on cards</h3>
+      <p>Replace current smooth `power3.out` stagger on Picks + Why cards with `back.out(1.4)` — cards overshoot slightly and snap back. Much bouncier, more street-energy feel.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="floating-badge" onclick="toggleSelect(this)">
+    <div class="letter">7</div>
+    <div class="content">
+      <h3>Continuous floating elements</h3>
+      <p>The "AUTHENTIC Flavor" badge on the About section + the "Today's Special" badge in the hero gently float up/down on a continuous 3s loop. Small but makes the page feel alive even when not scrolling.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="parallax-hero" onclick="toggleSelect(this)">
+    <div class="letter">8</div>
+    <div class="content">
+      <h3>Multi-layer parallax on hero</h3>
+      <p>The red background texture, pizza image, and text move at different speeds as you scroll down — creating a real depth illusion. The pizza stays in frame longer before disappearing.</p>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,50 @@
+<h2>How should we learn and implement?</h2>
+<p class="subtitle">You said "learn from scratch" — pick the approach that fits best.</p>
+
+<div class="options">
+
+  <div class="option" data-choice="pipeline" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Full Pipeline <span style="background:#2a9d8f;color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em;margin-left:6px">Recommended</span></h3>
+      <p><strong>Install tools → Scan ALL incredifulls pages → Extract + study animation code → Create a reusable skill → Implement in D'Pavo Home + Menu</strong></p>
+      <br>
+      <p>Best for learning. The skill lives in Claude Code permanently — future projects can reuse it. Scan covers every page of incredifulls, not just homepage. Takes a bit longer upfront but you end up with a proper animation system <em>and</em> a skill you can invoke any time.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>Deep understanding of every pattern</li><li>Reusable skill for all future projects</li><li>Full site scan = nothing missed</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Longer before you see animations in D'Pavo</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="direct" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Direct Implementation</h3>
+      <p><strong>Install tools → Study incredifulls homepage as reference → Implement in D'Pavo immediately</strong></p>
+      <br>
+      <p>Fastest path to seeing animations in D'Pavo. No skill file created — just install GSAP, Lenis, Splitting.js and build. Good if you want to see results today and don't care about the reusable skill.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>Fastest — animations in D'Pavo today</li><li>Less overhead</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>No skill file for future projects</li><li>Shallower scan of incredifulls</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="parallel" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Parallel: Build + Learn Together</h3>
+      <p><strong>Install tools + start D'Pavo implementation simultaneously → Full site scan runs in background → Skill created from findings → Applied back to D'Pavo iteratively</strong></p>
+      <br>
+      <p>Best of both — you see animations in D'Pavo quickly AND end up with a deep skill. The scan agent runs in parallel while implementation starts. Iterates as discoveries come in.</p>
+      <div class="pros-cons" style="margin-top:12px">
+        <div class="pros"><h4>Pros</h4><ul><li>Fast AND thorough</li><li>Skill created from real scan</li><li>Incremental improvements</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>More complex to coordinate</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:24px">Pick one and let me know in the terminal.</p>
