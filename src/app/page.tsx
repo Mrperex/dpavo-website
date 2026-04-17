@@ -175,7 +175,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           ABOUT
       ══════════════════════════════════════ */}
-      <section ref={aboutRef} className={`${styles.aboutSection} animate-in`}>
+      <section ref={aboutRef} className={styles.aboutSection}>
         <div className="container">
           <div className={styles.aboutGrid}>
 
