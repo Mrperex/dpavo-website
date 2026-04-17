@@ -73,6 +73,22 @@
 }
 .links li a:hover { color: #fff; }
 
+/* Active-page underline */
+.navLink {
+  position: relative;
+}
+
+.navLink.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+}
+
 /* Actions — right */
 .actions {
   display: flex;

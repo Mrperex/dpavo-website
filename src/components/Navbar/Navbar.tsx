@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Phone } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useScrolled } from '@/hooks/useScrolled';
 import { WA_GENERAL } from '@/content/config';
@@ -18,6 +19,7 @@ export default function Navbar() {
   const { t, toggle } = useLanguage();
   const scrolled = useScrolled(40);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
@@ -32,11 +34,22 @@ export default function Navbar() {
 
           {/* Nav links — center */}
           <ul className={styles.links}>
-            <li><Link href="/">{t.nav.home}</Link></li>
-            <li><Link href="/menu">{t.nav.menu}</Link></li>
-            <li><Link href="/events">{t.nav.events}</Link></li>
-            <li><Link href="/about">{t.nav.about}</Link></li>
-            <li><Link href="/gallery">{t.nav.gallery}</Link></li>
+            {([
+              ['/', t.nav.home],
+              ['/menu', t.nav.menu],
+              ['/events', t.nav.events],
+              ['/about', t.nav.about],
+              ['/gallery', t.nav.gallery],
+            ] as [string, string][]).map(([href, label]) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`${styles.navLink} ${pathname === href ? styles.active : ''}`}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
 
           {/* Actions — right */}
@@ -77,7 +90,13 @@ export default function Navbar() {
             ['/gallery', t.nav.gallery],
           ] as [string, string][]).map(([href, label]) => (
             <li key={href}>
-              <Link href={href} onClick={() => setOpen(false)}>{label}</Link>
+              <Link
+                href={href}
+                className={`${styles.navLink} ${pathname === href ? styles.active : ''}`}
+                onClick={() => setOpen(false)}
+              >
+                {label}
+              </Link>
             </li>
           ))}
         </ul>
