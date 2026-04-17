@@ -97,6 +97,7 @@ export default function Home() {
 
     const imageSide = section.querySelector(`.${styles.aboutImageSide}`);
     const textSide = section.querySelector(`.${styles.aboutText}`);
+    if (!imageSide || !textSide) return;
 
     gsap.set(imageSide, { opacity: 0, x: -40 });
     gsap.set(textSide, { opacity: 0, x: 40 });
