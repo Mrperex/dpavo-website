@@ -56,16 +56,44 @@ const CAT_ITEMS = [
 
 function CategoriesSection({ title }: { title: string }) {
   const [ref, inView] = useInView<HTMLElement>();
+  const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const iconEls = gridRef.current?.querySelectorAll(`.${styles.catItem}`);
+    if (iconEls && iconEls.length && !prefersReducedMotion) {
+      gsap.from(iconEls, {
+        y: 30,
+        scale: 0.8,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.55,
+        ease: 'back.out(1.4)',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+        },
+      });
+    }
+  }, { scope: sectionRef });
+
+  // Merge the two refs onto the section element
+  const setSectionRef = (el: HTMLElement | null) => {
+    (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+    (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+  };
+
   return (
-    <section ref={ref} className={`${styles.categoriesSection} animate-in ${inView ? 'visible' : ''}`}>
+    <section ref={setSectionRef} className={`${styles.categoriesSection} animate-in ${inView ? 'visible' : ''}`}>
       <div className="container">
         <p className={styles.catTitle}>{title}</p>
-        <div className={styles.catGrid}>
+        <div ref={gridRef} className={styles.catGrid}>
           {CAT_ITEMS.map((cat, i) => (
             <Link
               key={cat.label}
               href={cat.href}
-              className={`${styles.catItem} ${inView ? styles.catItemVisible : ''}`}
+              className={styles.catItem}
               style={{ animationDelay: `${i * 0.07}s` }}
             >
               <div className={styles.catIconWrap}>
