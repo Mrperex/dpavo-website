@@ -5,13 +5,21 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: var(--red);
-  border-bottom: 1px solid rgba(0,0,0,0.12);
-  transition: box-shadow 0.3s ease;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    backdrop-filter 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .nav.scrolled {
-  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  background: rgba(18, 18, 18, 0.78);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
 }
 
 .wrapper {
