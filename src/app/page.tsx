@@ -203,6 +203,8 @@ export default function Home() {
         start: 'top top',
         end: 'bottom bottom',
         scrub: 0.6,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
     })
       .to(p1, { opacity: 0, y: -40, duration: 0.3 })
@@ -228,6 +230,8 @@ export default function Home() {
         end: () => `+=${totalScroll}`,
         pin: true,
         scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           if (hProgressRef.current) {
             hProgressRef.current.style.width = `${self.progress * 100}%`;
