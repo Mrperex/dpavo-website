@@ -23,25 +23,13 @@
   border-bottom: 1px solid rgba(255,255,255,0.08);
   margin-bottom: 48px;
 }
-.logoName {
-  font-family: var(--font-display), sans-serif;
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 1;
+
+.logoImg {
+  max-width: clamp(220px, 40vw, 480px);
+  height: auto;
+  object-fit: contain;
   display: block;
-  margin-bottom: 4px;
-}
-.logoName span { color: var(--gold); }
-.logoSub {
-  font-family: var(--font-display), sans-serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.28em;
-  color: rgba(255,255,255,0.3);
-  text-transform: uppercase;
-  display: block;
+  margin: 0 auto;
 }
 
 /* 3-column grid */
@@ -165,10 +153,16 @@
   flex-shrink: 0;
 }
 
-/* Copyright */
-.copyright {
-  text-align: center;
+/* Copyright + attribution row */
+.copyrightRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 24px 0 32px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.copyright {
   color: rgba(255,255,255,0.2);
   font-size: 0.78rem;
 }
@@ -179,6 +173,31 @@
 }
 .copyright a:hover { color: var(--gold); }
 
+/* Developer attribution */
+.madeBy {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.2);
+  white-space: nowrap;
+}
+.madeByLink {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.25s ease;
+}
+.madeByLink::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.madeByLink:hover { color: var(--gold); }
+.madeByLink:hover::after { width: 100%; }
+
 /* ── Responsive ────────────────────────────────── */
 @media (max-width: 900px) {
   .grid { grid-template-columns: 1fr 1fr; }
@@ -186,4 +205,6 @@
 @media (max-width: 600px) {
   .grid { grid-template-columns: 1fr; gap: 32px; }
   .footerNav { gap: 4px; }
+  .copyrightRow { flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+  .madeBy { white-space: normal; }
 }

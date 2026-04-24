@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock3, MapPin } from 'lucide-react';
 import styles from './Footer.module.css';
 
@@ -27,8 +28,7 @@ export default function Footer({
           {/* Centered logo */}
           <div className={styles.logoCenter}>
             <Link href="/">
-              <span className={styles.logoName}>D&apos;<span>P</span>avo</span>
-              <span className={styles.logoSub}>Verón · Punta Cana</span>
+              <Image src="/media/Logo Pavo Hero.svg" alt="D'Pavo Pizza" width={966} height={386} className={styles.logoImg} />
             </Link>
           </div>
 
@@ -106,10 +106,23 @@ export default function Footer({
             <Link href="/gallery">{navLabels.gallery}</Link>
           </nav>
 
-          {/* Copyright */}
-          <p className={styles.copyright}>
-            © {year} {rights} All rights reserved.
-          </p>
+          {/* Copyright + attribution row */}
+          <div className={styles.copyrightRow}>
+            <p className={styles.copyright}>
+              © {year} {rights} All rights reserved.
+            </p>
+            <p className={styles.madeBy}>
+              Website by{' '}
+              <a
+                href="https://wa.me/18295230782"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.madeByLink}
+              >
+                Pablo Pérez
+              </a>
+            </p>
+          </div>
 
         </div>
       </footer>

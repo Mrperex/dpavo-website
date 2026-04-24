@@ -257,7 +257,7 @@ export const Scene4Close: React.FC = () => {
           }}
         >
           <Img
-            src={staticFile("media/dpavo-logo.jpg")}
+            src={staticFile("media/logo-pavo-pizza.png")}
             style={{
               width: 150,
               height: 150,

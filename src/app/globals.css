@@ -57,7 +57,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior removed — Lenis owns all scroll interpolation */
   overflow-x: hidden;
 }
 

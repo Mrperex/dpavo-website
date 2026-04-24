@@ -196,9 +196,9 @@ export default function Home() {
       <section className={styles.hero}>
         <div ref={heroInnerRef} className={styles.heroInner}>
           <span className={styles.heroScript}>{t.home.heroScript}</span>
-          <SplitReveal as="h1" by="chars" stagger={0.04} y={80} className={styles.heroTitle}>
-            D&apos;<span>P</span>avo
-          </SplitReveal>
+          <h1 className={styles.heroTitleWrap}>
+            <img src="/media/Logo Pavo Hero.svg" alt="D'Pavo" className={styles.heroTitleImg} />
+          </h1>
           <div className={styles.heroCtas}>
             <MagneticButton>
               <Link href="/menu" className={styles.heroCtaDark}>

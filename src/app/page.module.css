@@ -67,6 +67,17 @@
 
 .heroTitle span { color: var(--gold); }
 
+.heroTitleWrap {
+  margin-bottom: 24px;
+}
+
+.heroTitleImg {
+  max-width: clamp(280px, 55vw, 750px);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 .heroSub {
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   color: rgba(255,255,255,0.7);

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Phone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -29,8 +30,7 @@ export default function Navbar() {
 
           {/* Logo — left */}
           <Link href="/" className={styles.logo} onClick={() => setOpen(false)}>
-            <span className={styles.logoName}>D&apos;<span>P</span>avo</span>
-            <span className={styles.logoSub}>Verón · Punta Cana</span>
+            <Image src="/media/Logo Pavo Nav Bar.svg" alt="D'Pavo Pizza" width={966} height={386} className={styles.logoImg} />
           </Link>
 
           {/* Nav links — center */}
