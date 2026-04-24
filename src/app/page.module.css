@@ -1375,3 +1375,189 @@
   .storyPanelStack { padding: 32px; }
   .storyPanel { left: 32px; right: 32px; }
 }
+
+/* ═══════════════════════════════════════
+   HORIZONTAL SCROLL SHOWCASE (A7)
+═══════════════════════════════════════ */
+.hSection {
+  background: var(--dark);
+  overflow: hidden;
+}
+
+.hSticky {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 56px 0 36px;
+  overflow: hidden;
+}
+
+.hHeader {
+  padding: 0 60px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.hLabel {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hTitle {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1;
+}
+
+.hTrack {
+  display: flex;
+  gap: 20px;
+  padding: 0 60px;
+  flex: 1;
+  align-items: stretch;
+  will-change: transform;
+  min-width: max-content;
+}
+
+.hCard {
+  flex: 0 0 280px;
+  background: var(--surface-low);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.hCard:hover {
+  border-color: rgba(236,186,35,0.35);
+  transform: translateY(-6px);
+}
+
+.hCardImg {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-high);
+}
+
+.hCardImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.hCard:hover .hCardImg img {
+  transform: scale(1.06);
+}
+
+.hCardBody {
+  padding: 20px 22px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.hCardNum {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.22);
+  margin-bottom: 5px;
+}
+
+.hCardName {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hCardPrice {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.hFooter {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 60px 0;
+}
+
+.hProgress {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.hProgressBar {
+  height: 100%;
+  background: var(--gold);
+  width: 0%;
+  border-radius: 1px;
+}
+
+.hMenuLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+.hMenuLink:hover { color: var(--gold); }
+
+/* Mobile: native touch scroll, no GSAP pin */
+@media (max-width: 768px) {
+  .hSticky {
+    height: auto;
+    padding: 56px 0 40px;
+  }
+  .hHeader { padding: 0 20px; }
+  .hTrack {
+    padding: 0 20px;
+    min-width: unset;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    flex: unset;
+  }
+  .hCard {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+    height: 320px;
+  }
+  .hFooter { padding: 20px 20px 0; }
+}

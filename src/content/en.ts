@@ -20,6 +20,11 @@ export const en = {
     banner2Cta: 'See Events',
     friSat: 'Fri & Sat',
     night: 'Night',
+    storyPin: [
+      { title: 'Artisan Dough', body: 'Made fresh daily — fermented 48 hours for a crust that bites back.' },
+      { title: 'Premium Toppings', body: 'Local mariscos, imported cheeses, hand-crushed tomato. Nothing comes from a can.' },
+      { title: 'Caribbean Soul', body: "Born in Verón. Every slice carries the energy of Punta Cana's boldest neighborhood." },
+    ],
   },
   nav: {
     home: 'Home',

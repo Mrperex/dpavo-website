@@ -23,6 +23,11 @@ export const es: Content = {
     banner2Cta: 'Ver Eventos',
     friSat: 'Vie & Sáb',
     night: 'Noche',
+    storyPin: [
+      { title: 'Masa Artesanal', body: 'Hecha diariamente — fermentada 48 horas para una corteza que lo dice todo.' },
+      { title: 'Ingredientes Premium', body: 'Mariscos locales, quesos importados, tomate triturado a mano. Nada viene de lata.' },
+      { title: 'Alma Caribeña', body: 'Nacido en Verón. Cada rebanada lleva la energía del barrio más auténtico de Punta Cana.' },
+    ],
   },
   nav: {
     home: 'Inicio',
