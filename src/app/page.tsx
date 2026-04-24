@@ -298,8 +298,8 @@ export default function Home() {
             </ParallaxLayer>
           </div>
           <a ref={todayBadgeRef} href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.todayBadge}>
-            <strong>Today&apos;s</strong>
-            <span>Special</span>
+            <strong>{t.home.todaysSpecialLine1}</strong>
+            <span>{t.home.todaysSpecialLine2}</span>
           </a>
         </div>
 
@@ -314,8 +314,8 @@ export default function Home() {
         <a href={WA_ORDER('La Pavorosa')} target="_blank" rel="noopener noreferrer" className={styles.ordenaBtn}>
           <span className={styles.ordenaPulse} />
           <span className={styles.ordenaPulse2} />
-          <strong>Ordena</strong>
-          <span>Tu Pizza</span>
+          <strong>{t.home.heroOrderTitle}</strong>
+          <span>{t.home.heroOrderSub}</span>
         </a>
       </section>
 
@@ -530,7 +530,7 @@ export default function Home() {
           <div className={styles.exploreCircleWrap}>
             <Link href="/menu" className={styles.exploreCircle}>
               <ArrowRight size={18} />
-              Full<br />Menu
+              {t.home.fullMenu.split(' ')[0]}<br />{t.home.fullMenu.split(' ').slice(1).join(' ')}
             </Link>
           </div>
         </div>
@@ -542,9 +542,9 @@ export default function Home() {
       <AnimSection className={styles.menuListSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionHeaderLabel}>Exclusive</span>
+            <span className={styles.sectionHeaderLabel}>{t.home.exclusiveLabel}</span>
             <span className={styles.sectionHeaderDivider} />
-            <h2 className={styles.sectionHeaderTitle}>Our Menu</h2>
+            <h2 className={styles.sectionHeaderTitle}>{t.home.exclusiveTitle}</h2>
           </div>
 
           <StaggerGrid className={styles.menuListGrid} stagger={0.05} y={20} x={-20} scale={0.97} start="top 90%">
@@ -594,28 +594,33 @@ export default function Home() {
       <section className={styles.whySection}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <span className={styles.sectionHeaderLabel}>Why D&apos;Pavo</span>
+            <span className={styles.sectionHeaderLabel}>{t.home.whyLabel}</span>
             <span className={styles.sectionHeaderDivider} />
-            <h2 className={styles.sectionHeaderTitle}>The Difference</h2>
+            <h2 className={styles.sectionHeaderTitle}>{t.home.whyTitle}</h2>
           </div>
 
           <StaggerGrid className={styles.whyGrid} stagger={0.07} y={30} scale={0.96} start="top 88%">
-            {[
-              { icon: <Pizza  size={24} strokeWidth={1.4} />, title: 'Artisan Pizzas',       desc: 'Made fresh daily with premium imported and local ingredients.' },
-              { icon: <Fish   size={24} strokeWidth={1.4} />, title: 'Fresh Mariscos',       desc: 'Caribbean seafood sourced daily — shrimp, calamari and more.' },
-              { icon: <Music  size={24} strokeWidth={1.4} />, title: 'Nightlife Energy',     desc: 'DJs every weekend and themed events that keep Verón moving.' },
-              { icon: <MapPin size={24} strokeWidth={1.4} />, title: 'Prime Location',       desc: "Located in Verón, the heart of Punta Cana's local culture." },
-              { icon: <Zap    size={24} strokeWidth={1.4} />, title: 'Fast WhatsApp Orders', desc: 'Order directly on WhatsApp. No apps, no waiting. Instant service.' },
-              { icon: <Heart  size={24} strokeWidth={1.4} />, title: 'Community Roots',      desc: "Born and built in Verón. We're proud of where we came from." },
-            ].map((item) => (
-              <div key={item.title} className={styles.whyItem}>
-                <div className={styles.whyIconWrap}>{item.icon}</div>
-                <div>
-                  <h4>{item.title}</h4>
-                  <p>{item.desc}</p>
+            {(
+              [
+                <Pizza  size={24} strokeWidth={1.4} key="pizza" />,
+                <Fish   size={24} strokeWidth={1.4} key="fish" />,
+                <Music  size={24} strokeWidth={1.4} key="music" />,
+                <MapPin size={24} strokeWidth={1.4} key="mappin" />,
+                <Zap    size={24} strokeWidth={1.4} key="zap" />,
+                <Heart  size={24} strokeWidth={1.4} key="heart" />,
+              ] as React.ReactElement[]
+            ).map((icon, idx) => {
+              const item = t.home.whyItems[idx];
+              return (
+                <div key={item.title} className={styles.whyItem}>
+                  <div className={styles.whyIconWrap}>{icon}</div>
+                  <div>
+                    <h4>{item.title}</h4>
+                    <p>{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </StaggerGrid>
         </div>
       </section>
@@ -680,9 +685,7 @@ export default function Home() {
         <div className="container">
           <div className={styles.ctaBannerInner}>
             <p className={styles.ctaBannerText}>
-              EXPERIENCIA GASTRONÓMICA INIGUALABLE
-              <span>·</span>
-              VERÓN, PUNTA CANA
+              {t.home.ctaBannerSlogan}
             </p>
             <a
               href={WA_GENERAL}
