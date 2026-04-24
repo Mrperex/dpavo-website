@@ -118,8 +118,23 @@ export default function Home() {
 
   const aboutRef = useRef<HTMLElement>(null);
   const heroInnerRef = useRef<HTMLDivElement>(null);
+  const heroScriptRef = useRef<HTMLSpanElement>(null);
   const todayBadgeRef = useRef<HTMLAnchorElement>(null);
   const authenticBadgeRef = useRef<HTMLDivElement>(null);
+
+  // Hero script char waterfall on mount
+  useGSAP(() => {
+    const el = heroScriptRef.current;
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    import('splitting').then(({ default: Splitting }) => {
+      const [result] = Splitting({ target: el, by: 'chars' });
+      if (!result.chars?.length) return;
+      gsap.from(result.chars, {
+        y: 80, opacity: 0, stagger: 0.03, duration: 0.8,
+        ease: 'power3.out', delay: 0.1,
+      });
+    });
+  });
 
   // Continuous floating animation for the two badge elements
   useGSAP(() => {
@@ -195,7 +210,7 @@ export default function Home() {
       ══════════════════════════════════════ */}
       <section className={styles.hero}>
         <div ref={heroInnerRef} className={styles.heroInner}>
-          <span className={styles.heroScript}>{t.home.heroScript}</span>
+          <span ref={heroScriptRef} className={styles.heroScript}>{t.home.heroScript}</span>
           <h1 className={styles.heroTitleWrap}>
             <img src="/media/Logo Pavo Hero.svg" alt="D'Pavo" className={styles.heroTitleImg} />
           </h1>

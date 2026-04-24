@@ -23,6 +23,7 @@ export default function Footer({
   return (
     <>
       <footer className={styles.footer}>
+        <div className={styles.watermark} aria-hidden="true">D&apos;PAVO</div>
         <div className="container">
 
           {/* Centered logo */}

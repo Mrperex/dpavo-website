@@ -3,6 +3,8 @@ import { Antonio, Schibsted_Grotesk, Dancing_Script, Anton } from 'next/font/goo
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { WAFab } from '@/components/ui/WAFab/WAFab';
+import { Cursor } from '@/components/ui/Cursor/Cursor';
 import { Providers } from './providers';
 import './globals.css';
 
@@ -133,6 +135,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${antonio.variable} ${schibsted.variable} ${dancing.variable} ${anton.variable}`}>
         <Providers>{children}</Providers>
+        <WAFab />
+        <Cursor />
         <Analytics />
         <SpeedInsights />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
