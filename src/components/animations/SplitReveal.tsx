@@ -19,6 +19,7 @@ interface SplitRevealProps {
   duration?: number;
   ease?: string;
   start?: string;
+  masked?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -32,6 +33,7 @@ export function SplitReveal({
   duration = 0.8,
   ease = 'power3.out',
   start = 'top 82%',
+  masked = false,
   className,
   style,
 }: SplitRevealProps) {
@@ -49,14 +51,20 @@ export function SplitReveal({
           const [result] = Splitting({ target: el, by });
           const targets = by === 'chars' ? result.chars : result.words;
           if (!targets || targets.length === 0) return;
-          gsap.from(targets, {
-            y,
-            opacity: 0,
-            stagger,
-            duration,
-            ease,
-            scrollTrigger: { trigger: el, start },
-          });
+
+          if (masked) {
+            targets.forEach((t) => {
+              const wrap = document.createElement('span');
+              wrap.style.cssText = 'overflow:hidden;display:inline-block;vertical-align:top;';
+              t.parentNode?.insertBefore(wrap, t);
+              wrap.appendChild(t);
+            });
+            gsap.from(targets, { y: '100%', stagger, duration, ease,
+              scrollTrigger: { trigger: el, start } });
+          } else {
+            gsap.from(targets, { y, opacity: 0, stagger, duration, ease,
+              scrollTrigger: { trigger: el, start } });
+          }
           ScrollTrigger.refresh();
         });
         runAnim();

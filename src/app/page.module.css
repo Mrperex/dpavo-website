@@ -1293,3 +1293,85 @@
   .heroImageArea { margin-bottom: -160px; }
   .heroImageWrap { width: min(95vw, 340px); }
 }
+
+/* ── Story Pin Section (A4) ─────────────────────── */
+.storyPin {
+  height: 300vh;
+  position: relative;
+}
+
+.storyPinSticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background: var(--dark);
+  overflow: hidden;
+}
+
+.storyPinImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+}
+
+.storyPinImage img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 64px rgba(0,0,0,0.55));
+}
+
+.storyPanelStack {
+  position: relative;
+  padding: 60px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.storyPanel {
+  position: absolute;
+  left: 60px;
+  right: 60px;
+}
+
+.storyNumber {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  color: var(--red);
+  opacity: 0.25;
+  line-height: 1;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.storyPanel h2 {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.storyPanel p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.75;
+  max-width: 380px;
+}
+
+@media (max-width: 768px) {
+  .storyPin { height: 250vh; }
+  .storyPinSticky { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+  .storyPinImage { padding: 32px; }
+  .storyPinImage img { max-width: 260px; }
+  .storyPanelStack { padding: 32px; }
+  .storyPanel { left: 32px; right: 32px; }
+}

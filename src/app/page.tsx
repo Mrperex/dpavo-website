@@ -121,6 +121,10 @@ export default function Home() {
   const heroScriptRef = useRef<HTMLSpanElement>(null);
   const todayBadgeRef = useRef<HTMLAnchorElement>(null);
   const authenticBadgeRef = useRef<HTMLDivElement>(null);
+  const storyPinRef = useRef<HTMLElement>(null);
+  const panel1Ref = useRef<HTMLDivElement>(null);
+  const panel2Ref = useRef<HTMLDivElement>(null);
+  const panel3Ref = useRef<HTMLDivElement>(null);
 
   // Hero script char waterfall on mount
   useGSAP(() => {
@@ -178,6 +182,31 @@ export default function Home() {
       });
     }
   });
+
+  // Scroll-pinned story section
+  useGSAP(() => {
+    const section = storyPinRef.current;
+    const p1 = panel1Ref.current;
+    const p2 = panel2Ref.current;
+    const p3 = panel3Ref.current;
+    if (!section || !p1 || !p2 || !p3) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.set([p2, p3], { opacity: 0, y: 40 });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.6,
+      },
+    })
+      .to(p1, { opacity: 0, y: -40, duration: 0.3 })
+      .to(p2, { opacity: 1, y: 0,   duration: 0.3 }, '-=0.15')
+      .to(p2, { opacity: 0, y: -40, duration: 0.3 })
+      .to(p3, { opacity: 1, y: 0,   duration: 0.3 }, '-=0.15');
+  }, { scope: storyPinRef });
 
   useGSAP(() => {
     const section = aboutRef.current;
@@ -259,6 +288,34 @@ export default function Home() {
           <strong>Ordena</strong>
           <span>Tu Pizza</span>
         </a>
+      </section>
+
+      {/* ══════════════════════════════════════
+          STORY PIN
+      ══════════════════════════════════════ */}
+      <section ref={storyPinRef} className={styles.storyPin}>
+        <div className={styles.storyPinSticky}>
+          <div className={styles.storyPinImage}>
+            <img src="/media/pizza-hero.png" alt="D'Pavo signature pizza" />
+          </div>
+          <div className={styles.storyPanelStack}>
+            <div ref={panel1Ref} className={styles.storyPanel}>
+              <span className={styles.storyNumber}>01</span>
+              <h2>{t.home.storyPin?.[0]?.title ?? 'Artisan Dough'}</h2>
+              <p>{t.home.storyPin?.[0]?.body ?? 'Made fresh daily — fermented 48 hours for the perfect Caribbean crust.'}</p>
+            </div>
+            <div ref={panel2Ref} className={styles.storyPanel}>
+              <span className={styles.storyNumber}>02</span>
+              <h2>{t.home.storyPin?.[1]?.title ?? 'Premium Toppings'}</h2>
+              <p>{t.home.storyPin?.[1]?.body ?? 'Local mariscos, imported cheeses, and Caribbean-sourced ingredients at their peak.'}</p>
+            </div>
+            <div ref={panel3Ref} className={styles.storyPanel}>
+              <span className={styles.storyNumber}>03</span>
+              <h2>{t.home.storyPin?.[2]?.title ?? 'Caribbean Soul'}</h2>
+              <p>{t.home.storyPin?.[2]?.body ?? 'Every bite tells the story of Punta Cana — bold flavors, tropical spirit.'}</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════

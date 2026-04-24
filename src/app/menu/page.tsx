@@ -20,6 +20,21 @@ export default function MenuPage() {
   const [active, setActive] = useState<string>('All');
   const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks']; // internal filter keys
   const catsRef = useRef<HTMLDivElement>(null);
+  const allItemsRef = useRef<HTMLElement>(null);
+
+  const handleFilter = (cat: string) => {
+    if (cat === active) return;
+    const section = allItemsRef.current;
+    if (section && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const cards = section.querySelectorAll('article');
+      gsap.to(cards, {
+        opacity: 0, y: -18, stagger: 0.02, duration: 0.18, ease: 'power2.in',
+        onComplete: () => setActive(cat),
+      });
+    } else {
+      setActive(cat);
+    }
+  };
 
   // Filter pills bounce-in on mount
   useGSAP(() => {
@@ -66,7 +81,7 @@ export default function MenuPage() {
                 key={cat}
                 data-filter-pill
                 className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
-                onClick={() => setActive(cat)}
+                onClick={() => handleFilter(cat)}
               >
                 {t.menuPage.categories[i]}
               </button>
@@ -114,7 +129,7 @@ export default function MenuPage() {
         </div>
       </section>
 
-      <section className={styles.allItems}>
+      <section ref={allItemsRef} className={styles.allItems}>
         <div className="container">
           <StaggerGrid key={active} className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
             {filtered.map((item) => (

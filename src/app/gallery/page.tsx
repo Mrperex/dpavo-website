@@ -9,6 +9,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL } from '@/content/config';
 import { GALLERY_ITEMS } from '@/content/gallery';
+import { ClipReveal } from '@/components/animations';
 import { X } from 'lucide-react';
 import styles from './gallery.module.css';
 
@@ -51,6 +52,7 @@ export default function GalleryPage() {
 
       <section className={styles.gridSection}>
         <div className="container">
+          <ClipReveal start="top 90%" duration={1.1}>
           <div ref={gridRef} className={styles.masonry}>
             {filtered.map((item, i) => (
               <div
@@ -70,6 +72,7 @@ export default function GalleryPage() {
               </div>
             ))}
           </div>
+          </ClipReveal>
         </div>
       </section>
 

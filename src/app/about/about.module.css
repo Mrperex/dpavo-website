@@ -10,6 +10,14 @@
 .storyText { display: flex; flex-direction: column; gap: 16px; }
 .storyPara { color: rgba(255,255,255,0.68); font-size: 1.02rem; line-height: 1.75; }
 
+.storyImg {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  display: block;
+}
+
 .storyPlaceholder {
   min-height: 420px;
   border-radius: var(--radius-xl);

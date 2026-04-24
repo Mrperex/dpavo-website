@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { WAFab } from '@/components/ui/WAFab/WAFab';
 import { Cursor } from '@/components/ui/Cursor/Cursor';
+import { PageTransition } from '@/components/layout/PageTransition/PageTransition';
 import { Providers } from './providers';
 import './globals.css';
 
@@ -135,6 +136,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${antonio.variable} ${schibsted.variable} ${dancing.variable} ${anton.variable}`}>
         <Providers>{children}</Providers>
+        <PageTransition />
         <WAFab />
         <Cursor />
         <Analytics />

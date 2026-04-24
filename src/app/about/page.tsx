@@ -9,6 +9,7 @@ import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL } from '@/content/config';
 import { SHOW_TEAM_SECTION, TEAM_MEMBERS } from '@/content/about';
 import { Clock3, MapPin, MessageCircle } from 'lucide-react';
+import { ClipReveal } from '@/components/animations';
 import styles from './about.module.css';
 
 export default function AboutPage() {
@@ -41,9 +42,13 @@ export default function AboutPage() {
               ))}
             </div>
             <div className={styles.storyVisual}>
-              <div className={styles.storyPlaceholder}>
-                <span className={styles.placeholderLabel}>{t.aboutPage.venuePlaceholder}</span>
-              </div>
+              <ClipReveal start="top 80%" duration={1.0}>
+                <img
+                  src="/media/pizza-venue.jpg"
+                  alt="D'Pavo Pizza venue — Verón, Punta Cana"
+                  className={styles.storyImg}
+                />
+              </ClipReveal>
             </div>
           </div>
         </div>
