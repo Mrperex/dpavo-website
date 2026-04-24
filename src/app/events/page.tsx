@@ -129,6 +129,10 @@ export default function EventsPage() {
         hoursShort={t.footer.hoursShort}
         whatsapp={t.footer.whatsapp}
         rights={t.footer.rights}
+        findUs={t.footer.findUs}
+        openingHours={t.footer.openingHours}
+        connect={t.footer.connect}
+        schedule={t.footer.schedule}
         navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery }}
         waHref={WA_GENERAL}
       />

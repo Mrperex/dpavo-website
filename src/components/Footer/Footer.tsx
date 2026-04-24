@@ -11,12 +11,17 @@ interface FooterProps {
   hoursShort: string;
   whatsapp: string;
   rights: string;
+  findUs: string;
+  openingHours: string;
+  connect: string;
+  schedule: { day: string; hours: string }[];
   navLabels: { home: string; menu: string; events: string; about: string; gallery: string };
   waHref: string;
 }
 
 export default function Footer({
   address, rights, navLabels, waHref,
+  findUs, openingHours, connect, schedule,
 }: FooterProps) {
   const year = new Date().getFullYear();
 
@@ -38,23 +43,23 @@ export default function Footer({
 
             {/* Col 1 — Find us */}
             <div className={styles.col}>
-              <h4>Find Us</h4>
+              <h4>{findUs}</h4>
               <p><MapPin size={14} /> {address}</p>
             </div>
 
             {/* Col 2 — Opening hours */}
             <div className={styles.col}>
-              <h4>Opening Hours</h4>
+              <h4>{openingHours}</h4>
               <ul className={styles.scheduleList}>
-                <li><span>Mon – Thu</span><span>11 AM – 12 AM</span></li>
-                <li><span>Fri – Sat</span><span>11 AM – 2 AM</span></li>
-                <li><span>Sunday</span><span>11 AM – 12 AM</span></li>
+                {schedule.map((s) => (
+                  <li key={s.day}><span>{s.day}</span><span>{s.hours}</span></li>
+                ))}
               </ul>
             </div>
 
             {/* Col 3 — Connect */}
             <div className={styles.col}>
-              <h4>Connect</h4>
+              <h4>{connect}</h4>
               <div className={styles.socials}>
                 <a
                   href="https://www.facebook.com"
