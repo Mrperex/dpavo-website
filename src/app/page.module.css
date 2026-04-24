@@ -1340,15 +1340,6 @@
   right: 60px;
 }
 
-.storyNumber {
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(4rem, 8vw, 7rem);
-  color: var(--red);
-  opacity: 0.25;
-  line-height: 1;
-  display: block;
-  margin-bottom: 12px;
-}
 
 .storyPanel h2 {
   font-family: var(--font-display), sans-serif;

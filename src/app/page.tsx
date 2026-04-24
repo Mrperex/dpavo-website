@@ -329,17 +329,14 @@ export default function Home() {
           </div>
           <div className={styles.storyPanelStack}>
             <div ref={panel1Ref} className={styles.storyPanel}>
-              <span className={styles.storyNumber}>01</span>
               <h2>{t.home.storyPin[0].title}</h2>
               <p>{t.home.storyPin[0].body}</p>
             </div>
             <div ref={panel2Ref} className={styles.storyPanel}>
-              <span className={styles.storyNumber}>02</span>
               <h2>{t.home.storyPin[1].title}</h2>
               <p>{t.home.storyPin[1].body}</p>
             </div>
             <div ref={panel3Ref} className={styles.storyPanel}>
-              <span className={styles.storyNumber}>03</span>
               <h2>{t.home.storyPin[2].title}</h2>
               <p>{t.home.storyPin[2].body}</p>
             </div>
