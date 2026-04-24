@@ -20,6 +20,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitReveal, ParallaxLayer, StaggerGrid } from '@/components/animations';
 import { MagneticButton } from '@/components/animations/MagneticButton';
+import { OrderModal } from '@/components/ui/OrderModal/OrderModal';
 import styles from './page.module.css';
 
 function AnimSection({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -115,6 +116,7 @@ export default function Home() {
   const { t } = useLanguage();
   const featured = MENU_ITEMS.filter((i) => i.featured);
   const allItems = MENU_ITEMS;
+  const [orderModalOpen, setOrderModalOpen] = useState(false);
 
   const aboutRef = useRef<HTMLElement>(null);
   const heroInnerRef = useRef<HTMLDivElement>(null);
@@ -278,9 +280,13 @@ export default function Home() {
           </h1>
           <div className={styles.heroCtas}>
             <MagneticButton>
-              <Link href="/menu" className={styles.heroCtaDark}>
+              <button
+                className={styles.heroCtaDark}
+                onClick={() => setOrderModalOpen(true)}
+                type="button"
+              >
                 {t.hero.cta1} <ArrowRight size={15} />
-              </Link>
+              </button>
             </MagneticButton>
             <MagneticButton>
               <Link href="/events" className={styles.heroCtaOutline}>
@@ -714,6 +720,11 @@ export default function Home() {
         schedule={t.footer.schedule}
         navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery }}
         waHref={WA_GENERAL}
+      />
+      <OrderModal
+        open={orderModalOpen}
+        onClose={() => setOrderModalOpen(false)}
+        orderLabel={t.menuPage.order}
       />
     </main>
   );
