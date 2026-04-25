@@ -123,10 +123,6 @@ export default function Home() {
   const heroScriptRef = useRef<HTMLSpanElement>(null);
   const todayBadgeRef = useRef<HTMLAnchorElement>(null);
   const authenticBadgeRef = useRef<HTMLDivElement>(null);
-  const storyPinRef = useRef<HTMLElement>(null);
-  const panel1Ref = useRef<HTMLDivElement>(null);
-  const panel2Ref = useRef<HTMLDivElement>(null);
-  const panel3Ref = useRef<HTMLDivElement>(null);
   const hSectionRef = useRef<HTMLElement>(null);
   const hTrackRef = useRef<HTMLDivElement>(null);
   const hProgressRef = useRef<HTMLDivElement>(null);
@@ -187,33 +183,6 @@ export default function Home() {
       });
     }
   });
-
-  // Scroll-pinned story section
-  useGSAP(() => {
-    const section = storyPinRef.current;
-    const p1 = panel1Ref.current;
-    const p2 = panel2Ref.current;
-    const p3 = panel3Ref.current;
-    if (!section || !p1 || !p2 || !p3) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    gsap.set([p2, p3], { opacity: 0, y: 40 });
-
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.6,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-      },
-    })
-      .to(p1, { opacity: 0, y: -40, duration: 0.3 })
-      .to(p2, { opacity: 1, y: 0,   duration: 0.3 }, '-=0.15')
-      .to(p2, { opacity: 0, y: -40, duration: 0.3 })
-      .to(p3, { opacity: 1, y: 0,   duration: 0.3 }, '-=0.15');
-  }, { scope: storyPinRef });
 
   // Horizontal scroll picks showcase (A7)
   useGSAP(() => {
@@ -329,30 +298,6 @@ export default function Home() {
         </a>
       </section>
 
-      {/* ══════════════════════════════════════
-          STORY PIN
-      ══════════════════════════════════════ */}
-      <section ref={storyPinRef} className={styles.storyPin}>
-        <div className={styles.storyPinSticky}>
-          <div className={styles.storyPinImage}>
-            <img src="/media/pizza-hero.png" alt="D'Pavo signature pizza" />
-          </div>
-          <div className={styles.storyPanelStack}>
-            <div ref={panel1Ref} className={styles.storyPanel}>
-              <h2>{t.home.storyPin[0].title}</h2>
-              <p>{t.home.storyPin[0].body}</p>
-            </div>
-            <div ref={panel2Ref} className={styles.storyPanel}>
-              <h2>{t.home.storyPin[1].title}</h2>
-              <p>{t.home.storyPin[1].body}</p>
-            </div>
-            <div ref={panel3Ref} className={styles.storyPanel}>
-              <h2>{t.home.storyPin[2].title}</h2>
-              <p>{t.home.storyPin[2].body}</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════
           CATEGORIES
