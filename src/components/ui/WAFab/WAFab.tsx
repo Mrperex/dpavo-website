@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
 import { WA_GENERAL } from '@/content/config';
 import styles from './WAFab.module.css';
 
@@ -12,17 +10,8 @@ const WA_SVG = (
 );
 
 export function WAFab() {
-  const btnRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    const el = btnRef.current;
-    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    gsap.from(el, { scale: 0, opacity: 0, duration: 0.5, ease: 'back.out(1.7)', delay: 1.2 });
-  }, []);
-
   return (
     <a
-      ref={btnRef}
       href={WA_GENERAL}
       target="_blank"
       rel="noopener noreferrer"
