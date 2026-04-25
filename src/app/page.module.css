@@ -1300,7 +1300,7 @@
 ═══════════════════════════════════════ */
 .hSection {
   background: var(--dark);
-  overflow: hidden;
+  overflow: clip;
 }
 
 .hSticky {
@@ -1308,7 +1308,7 @@
   flex-direction: column;
   height: 100vh;
   padding: 56px 0 36px;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .hHeader {
