@@ -209,15 +209,16 @@
   display: block;
 }
 
-/* Pizza image area */
+/* Pizza image area — absolutely anchored so pizza center sits at hero bottom */
 .heroImageArea {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: -200px; /* push pizza down through the wave */
-  z-index: 2;            /* below wave (z-index 5) so wave cuts across pizza */
+  z-index: 2;
 }
 
 .heroImageWrap {
@@ -391,7 +392,7 @@
 ═══════════════════════════════════════════════ */
 .categoriesSection {
   background: #fff;
-  padding: 240px 0 80px; /* extra top clears pizza overlap */
+  padding: clamp(280px, 42vw, 480px) 0 80px; /* top clears bottom half of hero pizza */
   position: relative;
   z-index: 3;
 }
@@ -1277,7 +1278,6 @@
   .pickImgWrap { width: 150px; height: 150px; }
   .promoBanners { grid-template-columns: 1fr; }
   .promoBannerImg { width: 150px; height: 150px; }
-  .heroImageArea { margin-top: -10px; margin-bottom: -180px; }
   .heroImageWrap { width: min(92vw, 420px); }
   .todayBadge { right: 8px; width: 84px; height: 84px; }
   .ordenaBtn { left: 50%; width: 84px; height: 84px; }
@@ -1290,7 +1290,6 @@
   .polaroid { max-width: 180px; }
   .testimonialLayout { grid-template-columns: 1fr; }
   .heroScript { font-size: 2rem; }
-  .heroImageArea { margin-bottom: -160px; }
   .heroImageWrap { width: min(95vw, 340px); }
 }
 

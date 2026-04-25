@@ -57,7 +57,6 @@ const CAT_ITEMS = [
 ];
 
 function CategoriesSection({ title }: { title: string }) {
-  const [ref, inView] = useInView<HTMLElement>();
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -80,14 +79,8 @@ function CategoriesSection({ title }: { title: string }) {
     }
   }, { scope: sectionRef });
 
-  // Merge the two refs onto the section element
-  const setSectionRef = (el: HTMLElement | null) => {
-    (ref as React.MutableRefObject<HTMLElement | null>).current = el;
-    (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
-  };
-
   return (
-    <section ref={setSectionRef} className={`${styles.categoriesSection} animate-in ${inView ? 'visible' : ''}`}>
+    <section ref={sectionRef} className={styles.categoriesSection}>
       <div className="container">
         <p className={styles.catTitle}>{title}</p>
         <div ref={gridRef} className={styles.catGrid}>
