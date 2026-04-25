@@ -57,6 +57,7 @@ const CAT_ITEMS = [
 ];
 
 function CategoriesSection({ title }: { title: string }) {
+  const [inViewRef, inView] = useInView<HTMLElement>();
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -79,8 +80,13 @@ function CategoriesSection({ title }: { title: string }) {
     }
   }, { scope: sectionRef });
 
+  const setSectionRef = (el: HTMLElement | null) => {
+    (inViewRef as React.MutableRefObject<HTMLElement | null>).current = el;
+    (sectionRef as React.MutableRefObject<HTMLElement | null>).current = el;
+  };
+
   return (
-    <section ref={sectionRef} className={styles.categoriesSection}>
+    <section ref={setSectionRef} className={styles.categoriesSection}>
       <div className="container">
         <p className={styles.catTitle}>{title}</p>
         <div ref={gridRef} className={styles.catGrid}>
