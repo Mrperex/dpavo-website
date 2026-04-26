@@ -392,7 +392,7 @@
 ═══════════════════════════════════════════════ */
 .categoriesSection {
   background: #fff;
-  padding: clamp(280px, 42vw, 480px) 0 80px; /* top clears bottom half of hero pizza */
+  padding: 100px 0 80px;
   position: relative;
   z-index: 3;
 }
@@ -1295,27 +1295,20 @@
 
 
 /* ═══════════════════════════════════════
-   HORIZONTAL SCROLL SHOWCASE (A7)
+   PICKS CAROUSEL — native scroll-snap (no GSAP pin)
 ═══════════════════════════════════════ */
 .hSection {
   background: var(--dark);
-  overflow: clip;
-}
-
-.hSticky {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  padding: 56px 0 36px;
-  overflow: clip;
+  padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 6vw, 72px);
 }
 
 .hHeader {
-  padding: 0 60px;
-  margin-bottom: 32px;
+  padding: 0 clamp(20px, 5vw, 60px);
+  margin-bottom: clamp(20px, 3vw, 36px);
   display: flex;
   align-items: baseline;
-  gap: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .hLabel {
@@ -1339,16 +1332,28 @@
 
 .hTrack {
   display: flex;
-  gap: 20px;
-  padding: 0 60px;
-  flex: 1;
-  align-items: stretch;
-  will-change: transform;
-  min-width: max-content;
+  gap: clamp(14px, 2vw, 22px);
+  padding: 4px clamp(20px, 5vw, 60px) 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: clamp(20px, 5vw, 60px);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.18) transparent;
 }
 
+.hTrack::-webkit-scrollbar { height: 6px; }
+.hTrack::-webkit-scrollbar-track { background: transparent; }
+.hTrack::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.14);
+  border-radius: 3px;
+}
+.hTrack::-webkit-scrollbar-thumb:hover { background: rgba(236,186,35,0.5); }
+
 .hCard {
-  flex: 0 0 280px;
+  flex: 0 0 clamp(220px, 25vw, 300px);
+  scroll-snap-align: start;
   background: var(--surface-low);
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -1365,7 +1370,7 @@
 }
 
 .hCardImg {
-  flex: 1;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -1386,7 +1391,7 @@
 }
 
 .hCardBody {
-  padding: 20px 22px;
+  padding: 16px 18px 18px;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 
@@ -1420,28 +1425,12 @@
 
 .hFooter {
   display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 20px 60px 0;
-}
-
-.hProgress {
-  flex: 1;
-  height: 2px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 1px;
-  overflow: hidden;
-}
-
-.hProgressBar {
-  height: 100%;
-  background: var(--gold);
-  width: 0%;
-  border-radius: 1px;
+  justify-content: flex-end;
+  padding: 16px clamp(20px, 5vw, 60px) 0;
 }
 
 .hMenuLink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   font-family: var(--font-display), sans-serif;
@@ -1449,7 +1438,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.55);
   text-decoration: none;
   transition: color 0.25s ease;
   white-space: nowrap;
@@ -1457,25 +1446,6 @@
 
 .hMenuLink:hover { color: var(--gold); }
 
-/* Mobile: native touch scroll, no GSAP pin */
-@media (max-width: 768px) {
-  .hSticky {
-    height: auto;
-    padding: 56px 0 40px;
-  }
-  .hHeader { padding: 0 20px; }
-  .hTrack {
-    padding: 0 20px;
-    min-width: unset;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    flex: unset;
-  }
-  .hCard {
-    flex: 0 0 240px;
-    scroll-snap-align: start;
-    height: 320px;
-  }
-  .hFooter { padding: 20px 20px 0; }
+@media (max-width: 480px) {
+  .hCard { flex: 0 0 78vw; }
 }

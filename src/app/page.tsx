@@ -122,10 +122,6 @@ export default function Home() {
   const heroScriptRef = useRef<HTMLSpanElement>(null);
   const todayBadgeRef = useRef<HTMLAnchorElement>(null);
   const authenticBadgeRef = useRef<HTMLDivElement>(null);
-  const hSectionRef = useRef<HTMLElement>(null);
-  const hTrackRef = useRef<HTMLDivElement>(null);
-  const hProgressRef = useRef<HTMLDivElement>(null);
-
   // Hero script char waterfall on mount
   useGSAP(() => {
     const el = heroScriptRef.current;
@@ -182,34 +178,6 @@ export default function Home() {
       });
     }
   });
-
-  // Horizontal scroll picks showcase (A7)
-  useGSAP(() => {
-    const section = hSectionRef.current;
-    const track = hTrackRef.current;
-    if (!section || !track) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const totalScroll = track.scrollWidth - track.clientWidth;
-    gsap.to(track, {
-      x: -totalScroll,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${totalScroll}`,
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (hProgressRef.current) {
-            hProgressRef.current.style.width = `${self.progress * 100}%`;
-          }
-        },
-      },
-    });
-  }, { scope: hSectionRef });
 
   useGSAP(() => {
     const section = aboutRef.current;
@@ -369,43 +337,38 @@ export default function Home() {
       {/* ══════════════════════════════════════
           HORIZONTAL SCROLL SHOWCASE (A7)
       ══════════════════════════════════════ */}
-      <section ref={hSectionRef} className={styles.hSection}>
-        <div className={styles.hSticky}>
-          <div className={styles.hHeader}>
-            <span className={styles.hLabel}>{t.home.picksLabel}</span>
-            <h2 className={styles.hTitle}>{t.home.picksTitle}</h2>
-          </div>
-          <div ref={hTrackRef} className={styles.hTrack}>
-            {allItems.map((item, i) => (
-              <a
-                key={item.id}
-                href={WA_ORDER(item.name)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.hCard}
-              >
-                <div className={styles.hCardImg}>
-                  {item.image
-                    ? <img src={item.image} alt={item.name} />
-                    : <Pizza size={52} strokeWidth={1.1} color="var(--red)" />
-                  }
-                </div>
-                <div className={styles.hCardBody}>
-                  <p className={styles.hCardNum}>{String(i + 1).padStart(2, '0')}</p>
-                  <p className={styles.hCardName}>{item.name}</p>
-                  <p className={styles.hCardPrice}>{item.price}</p>
-                </div>
-              </a>
-            ))}
-          </div>
-          <div className={styles.hFooter}>
-            <div className={styles.hProgress}>
-              <div ref={hProgressRef} className={styles.hProgressBar} />
-            </div>
-            <Link href="/menu" className={styles.hMenuLink}>
-              Full Menu <ArrowRight size={14} />
-            </Link>
-          </div>
+      <section className={styles.hSection}>
+        <div className={styles.hHeader}>
+          <span className={styles.hLabel}>{t.home.picksLabel}</span>
+          <h2 className={styles.hTitle}>{t.home.picksTitle}</h2>
+        </div>
+        <div className={styles.hTrack}>
+          {allItems.map((item, i) => (
+            <a
+              key={item.id}
+              href={WA_ORDER(item.name)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.hCard}
+            >
+              <div className={styles.hCardImg}>
+                {item.image
+                  ? <img src={item.image} alt={item.name} loading="lazy" />
+                  : <Pizza size={52} strokeWidth={1.1} color="var(--red)" />
+                }
+              </div>
+              <div className={styles.hCardBody}>
+                <p className={styles.hCardNum}>{String(i + 1).padStart(2, '0')}</p>
+                <p className={styles.hCardName}>{item.name}</p>
+                <p className={styles.hCardPrice}>{item.price}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div className={styles.hFooter}>
+          <Link href="/menu" className={styles.hMenuLink}>
+            Full Menu <ArrowRight size={14} />
+          </Link>
         </div>
       </section>
 
