@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
+import confetti from 'canvas-confetti';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Navbar from '@/components/Navbar/Navbar';
@@ -18,18 +19,24 @@ import styles from './menu.module.css';
 export default function MenuPage() {
   const { t } = useLanguage();
   const [active, setActive] = useState<string>('All');
+  const [isFiltering, setIsFiltering] = useState(false);
   const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks']; // internal filter keys
   const catsRef = useRef<HTMLDivElement>(null);
   const allItemsRef = useRef<HTMLElement>(null);
+
+  const fireConfetti = useCallback(() => {
+    confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 }, colors: ['#E63329', '#FFD700', '#ffffff'] });
+  }, []);
 
   const handleFilter = (cat: string) => {
     if (cat === active) return;
     const section = allItemsRef.current;
     if (section && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const cards = section.querySelectorAll('article');
+      setIsFiltering(true);
       gsap.to(cards, {
         opacity: 0, y: -18, stagger: 0.02, duration: 0.18, ease: 'power2.in',
-        onComplete: () => setActive(cat),
+        onComplete: () => { setActive(cat); setIsFiltering(false); },
       });
     } else {
       setActive(cat);
@@ -118,7 +125,7 @@ export default function MenuPage() {
                   </div>
                   <p>{item.description}</p>
                   <MagneticButton>
-                    <a href={WA_ORDER(item.name)} className="btn-primary" target="_blank" rel="noopener noreferrer">
+                    <a href={WA_ORDER(item.name)} className="btn-primary" target="_blank" rel="noopener noreferrer" onClick={fireConfetti}>
                       <MessageCircle size={15} /> {t.menuPage.order}
                     </a>
                   </MagneticButton>
@@ -131,6 +138,18 @@ export default function MenuPage() {
 
       <section ref={allItemsRef} className={styles.allItems}>
         <div className="container">
+          {isFiltering ? (
+            <div className={styles.listGrid}>
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={`skeleton-${i}`} className={`${styles.listCard} ${styles.skeleton} surface-low`} aria-hidden="true">
+                  <div className={styles.skeletonBadge} />
+                  <div className={styles.skeletonTitle} />
+                  <div className={styles.skeletonText} />
+                  <div className={styles.skeletonText} style={{ width: '60%' }} />
+                </div>
+              ))}
+            </div>
+          ) : (
           <StaggerGrid key={active} className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
             {filtered.map((item) => (
               <article
@@ -143,12 +162,13 @@ export default function MenuPage() {
                 </div>
                 <h3>{item.name} <span className={styles.listSubtitle}>{item.subtitle}</span></h3>
                 <p>{item.description}</p>
-                <a href={WA_ORDER(item.name)} className={styles.askBtn} target="_blank" rel="noopener noreferrer">
+                <a href={WA_ORDER(item.name)} className={styles.askBtn} target="_blank" rel="noopener noreferrer" onClick={fireConfetti}>
                   {t.menuPage.ask} →
                 </a>
               </article>
             ))}
           </StaggerGrid>
+          )}
         </div>
       </section>
 
@@ -164,7 +184,7 @@ export default function MenuPage() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
         waHref={WA_GENERAL}
       />
     </main>

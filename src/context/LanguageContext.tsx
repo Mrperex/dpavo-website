@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { en } from '@/content/en';
 import { es } from '@/content/es';
 import type { Content } from '@/content/en';
@@ -19,10 +19,22 @@ const LanguageContext = createContext<LanguageContextValue>({
   toggle: () => {},
 });
 
+const STORAGE_KEY = 'dpavo-lang';
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>('es');
+
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY) as Lang | null;
+    if (stored === 'en' || stored === 'es') setLang(stored);
+  }, []);
+
   const t = lang === 'en' ? en : es;
-  const toggle = () => setLang((l) => (l === 'en' ? 'es' : 'en'));
+  const toggle = () => setLang((l) => {
+    const next = l === 'en' ? 'es' : 'en';
+    localStorage.setItem(STORAGE_KEY, next);
+    return next;
+  });
 
   return (
     <LanguageContext.Provider value={{ lang, t, toggle }}>

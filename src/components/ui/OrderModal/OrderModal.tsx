@@ -10,6 +10,7 @@ interface OrderModalProps {
   open: boolean;
   onClose: () => void;
   orderLabel: string;
+  title?: string;
 }
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
@@ -19,7 +20,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   Drinks:    <GlassWater size={14} strokeWidth={1.4} />,
 };
 
-export function OrderModal({ open, onClose, orderLabel }: OrderModalProps) {
+export function OrderModal({ open, onClose, orderLabel, title = 'Our Menu' }: OrderModalProps) {
   const backdropRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,11 +44,11 @@ export function OrderModal({ open, onClose, orderLabel }: OrderModalProps) {
       onClick={(e) => { if (e.target === backdropRef.current) onClose(); }}
       role="dialog"
       aria-modal="true"
-      aria-label="Order menu"
+      aria-labelledby="order-modal-title"
     >
       <div className={styles.panel}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Our Menu</h2>
+          <h2 id="order-modal-title" className={styles.title}>{title}</h2>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <X size={18} />
           </button>

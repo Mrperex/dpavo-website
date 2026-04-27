@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { PageHero } from '@/components/layout/PageHero/PageHero';
@@ -10,7 +11,9 @@ import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL } from '@/content/config';
 import { GALLERY_ITEMS } from '@/content/gallery';
 import { ClipReveal } from '@/components/animations';
+import { InstagramEmbed } from 'react-social-media-embed';
 import { X } from 'lucide-react';
+import { INSTAGRAM_POSTS } from '@/content/instagram';
 import styles from './gallery.module.css';
 
 export default function GalleryPage() {
@@ -62,7 +65,7 @@ export default function GalleryPage() {
                 onClick={() => setLightbox(item.id)}
               >
                 {item.src
-                  ? <img src={item.src} alt={item.alt} className={styles.img} />
+                  ? <Image src={item.src} alt={item.alt} width={800} height={600} className={styles.img} />
                   : <div className={`${styles.placeholder} ${styles[item.tone]}`} />
                 }
                 <div className={styles.overlay}>
@@ -76,6 +79,20 @@ export default function GalleryPage() {
         </div>
       </section>
 
+      {/* Instagram feed */}
+      {INSTAGRAM_POSTS.some((url) => !url.includes('REPLACE_WITH')) && (
+        <section className={styles.instaSection}>
+          <div className="container">
+            <p className={styles.instaLabel}>@dpavo_pizzeria_y_restaurante</p>
+            <div className={styles.instaGrid}>
+              {INSTAGRAM_POSTS.map((url) => (
+                <InstagramEmbed key={url} url={url} width="100%" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Lightbox */}
       {lightboxItem && (
         <div className={styles.lightbox} onClick={() => setLightbox(null)}>
@@ -84,7 +101,7 @@ export default function GalleryPage() {
           </button>
           <div className={styles.lightboxInner} onClick={(e) => e.stopPropagation()}>
             {lightboxItem.src
-              ? <img src={lightboxItem.src} alt={lightboxItem.alt} className={styles.lightboxImg} />
+              ? <Image src={lightboxItem.src} alt={lightboxItem.alt} width={1200} height={900} className={styles.lightboxImg} />
               : <div className={`${styles.lightboxPlaceholder} ${styles[lightboxItem.tone]}`} />
             }
             <p className={styles.lightboxCaption}>{lightboxItem.alt}</p>
@@ -104,7 +121,7 @@ export default function GalleryPage() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
         waHref={WA_GENERAL}
       />
     </main>

@@ -175,6 +175,30 @@
 }
 .askBtn:hover { opacity: 0.75; }
 
+/* Skeleton loading */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  pointer-events: none;
+  animation: none;
+}
+
+.skeletonBadge,
+.skeletonTitle,
+.skeletonText {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.skeletonBadge { width: 60px; height: 20px; margin-bottom: 4px; }
+.skeletonTitle { width: 75%; height: 22px; margin-bottom: 4px; }
+.skeletonText  { width: 100%; height: 14px; }
+
 @media (max-width: 768px) {
   .featCard { grid-template-columns: 1fr; }
   .featVisual { min-height: 180px; }

@@ -41,6 +41,7 @@ export default function Navbar() {
               ['/events', t.nav.events],
               ['/about', t.nav.about],
               ['/gallery', t.nav.gallery],
+              ['/contact', t.nav.contact],
             ] as [string, string][]).map(([href, label]) => (
               <li key={href}>
                 <Link
@@ -91,6 +92,7 @@ export default function Navbar() {
             ['/events', t.nav.events],
             ['/about', t.nav.about],
             ['/gallery', t.nav.gallery],
+            ['/contact', t.nav.contact],
           ] as [string, string][]).map(([href, label]) => (
             <li key={href}>
               <Link

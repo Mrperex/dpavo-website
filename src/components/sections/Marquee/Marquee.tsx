@@ -24,7 +24,7 @@ export function Marquee({ items, speed = 60, direction = 'left' }: MarqueeProps)
         }}
       >
         {repeated.map((item, i) => (
-          <span key={i} className={styles.item}>
+          <span key={`${item}-${i}`} className={styles.item}>
             {item} <span className={styles.dot}>•</span>
           </span>
         ))}

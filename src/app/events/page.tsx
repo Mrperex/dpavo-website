@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { PageHero } from '@/components/layout/PageHero/PageHero';
@@ -13,7 +14,7 @@ import { Calendar, Clock3, MapPin, Mic2, Music4, MessageCircle } from 'lucide-re
 import styles from './events.module.css';
 
 export default function EventsPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [calRef, calInView] = useInView<HTMLDivElement>();
   const [vibeRef, vibeInView] = useInView<HTMLElement>();
   const featured = EVENTS.find((e) => e.featured) ?? EVENTS[1];
@@ -34,12 +35,19 @@ export default function EventsPage() {
         <div className="container">
           <div className={styles.featCard}>
             <div className={styles.featVisual}>
-              <div className={styles.liveBadge}>{t.eventsPage.featuredLabel}</div>
+              <Image
+                src="/media/dj-events.jpg"
+                alt="D'Pavo live event night"
+                fill
+                style={{ objectFit: 'cover', opacity: 0.75 }}
+                priority
+              />
+              <div className={styles.liveBadge} style={{ position: 'relative', zIndex: 1 }}>{t.eventsPage.featuredLabel}</div>
             </div>
             <div className={styles.featInfo}>
               <Badge color="red">{featured.tag}</Badge>
-              <h2>{t.nav.lang === 'EN' ? featured.titleEs : featured.titleEn}</h2>
-              <p>{t.nav.lang === 'EN' ? featured.descriptionEs : featured.descriptionEn}</p>
+              <h2>{lang === 'es' ? featured.titleEs : featured.titleEn}</h2>
+              <p>{lang === 'es' ? featured.descriptionEs : featured.descriptionEn}</p>
               <div className={styles.details}>
                 <span><Calendar size={15} /> {featured.date}</span>
                 <span><Clock3 size={15} /> {featured.time}</span>
@@ -72,8 +80,8 @@ export default function EventsPage() {
                     <Badge>{ev.tag}</Badge>
                     <span className={styles.calDate}>{ev.date}</span>
                   </div>
-                  <h3>{t.nav.lang === 'EN' ? ev.dayEs : ev.dayEn} — {t.nav.lang === 'EN' ? ev.titleEs : ev.titleEn}</h3>
-                  <p>{t.nav.lang === 'EN' ? ev.descriptionEs : ev.descriptionEn}</p>
+                  <h3>{lang === 'es' ? ev.dayEs : ev.dayEn} — {lang === 'es' ? ev.titleEs : ev.titleEn}</h3>
+                  <p>{lang === 'es' ? ev.descriptionEs : ev.descriptionEn}</p>
                   <div className={styles.calFooter}>
                     <span><Clock3 size={13} /> {ev.time}</span>
                     <a href={WA_RESERVE(ev.titleEn)} className={styles.reserveBtn} target="_blank" rel="noopener noreferrer">
@@ -94,7 +102,7 @@ export default function EventsPage() {
           <div className={styles.vibeGrid}>
             {t.eventsPage.vibes.map((v, i) => (
               <div
-                key={i}
+                key={v.title}
                 className={`${styles.vibeCard} animate-in ${vibeInView ? 'visible' : ''}`}
                 style={{ '--index': i } as React.CSSProperties}
               >
@@ -133,7 +141,7 @@ export default function EventsPage() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
         waHref={WA_GENERAL}
       />
     </main>

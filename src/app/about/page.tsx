@@ -8,6 +8,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL } from '@/content/config';
 import { SHOW_TEAM_SECTION, TEAM_MEMBERS } from '@/content/about';
+import Image from 'next/image';
 import { Clock3, MapPin, MessageCircle } from 'lucide-react';
 import { ClipReveal } from '@/components/animations';
 import styles from './about.module.css';
@@ -37,17 +38,21 @@ export default function AboutPage() {
           >
             <div className={styles.storyText}>
               <SectionHeader label={t.aboutPage.storyTitle} title="" />
-              {t.aboutPage.storyBody.map((para, i) => (
-                <p key={i} className={styles.storyPara}>{para}</p>
+              {t.aboutPage.storyBody.map((para) => (
+                <p key={para.slice(0, 24)} className={styles.storyPara}>{para}</p>
               ))}
             </div>
             <div className={styles.storyVisual}>
               <ClipReveal start="top 80%" duration={1.0}>
-                <img
-                  src="/media/pizza-venue.jpg"
-                  alt="D'Pavo Pizza venue — Verón, Punta Cana"
-                  className={styles.storyImg}
-                />
+                <div style={{ position: 'relative', height: 420, borderRadius: 'var(--radius-xl)', overflow: 'hidden' }}>
+                  <Image
+                    src="/media/pizza-venue.jpg"
+                    alt="D'Pavo Pizza venue — Verón, Punta Cana"
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
               </ClipReveal>
             </div>
           </div>
@@ -61,7 +66,7 @@ export default function AboutPage() {
           <div ref={valuesRef} className={styles.valuesGrid}>
             {t.aboutPage.values.map((v, i) => (
               <div
-                key={i}
+                key={v.title}
                 className={`${styles.valueCard} surface-low animate-scale ${valuesInView ? 'visible' : ''}`}
                 style={{ '--index': i } as React.CSSProperties}
               >
@@ -78,10 +83,10 @@ export default function AboutPage() {
       {SHOW_TEAM_SECTION && (
         <section className={styles.teamSection}>
           <div className="container">
-            <SectionHeader label="The Team" title="The people behind D'Pavo." align="center" />
+            <SectionHeader label={t.aboutPage.teamLabel} title={t.aboutPage.teamTitle} align="center" />
             <div className={styles.teamGrid}>
-              {TEAM_MEMBERS.map((member, i) => (
-                <div key={i} className={`${styles.teamCard} surface-low`}>
+              {TEAM_MEMBERS.map((member) => (
+                <div key={member.role} className={`${styles.teamCard} surface-low`}>
                   <div className={styles.teamAvatar} />
                   <h3>{member.name}</h3>
                   <p>{member.role}</p>
@@ -126,7 +131,7 @@ export default function AboutPage() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
         waHref={WA_GENERAL}
       />
     </main>

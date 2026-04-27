@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import {
   Phone, ArrowRight, Flame, Star,
   Pizza, Fish, Music, Utensils, Camera, Calendar,
@@ -12,7 +11,8 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL, WA_ORDER } from '@/content/config';
 import { MENU_ITEMS } from '@/content/menu';
-import { REVIEWS } from '@/content/reviews';
+import { EVENTS } from '@/content/events';
+import { GALLERY_ITEMS } from '@/content/gallery';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { useGSAP } from '@gsap/react';
@@ -36,24 +36,33 @@ function CountUp({ target, active }: { target: number; active: boolean }) {
   const [count, setCount] = useState(0);
   useEffect(() => {
     if (!active) return;
-    let cur = 0;
-    const interval = setInterval(() => {
-      cur += 1;
-      setCount(cur);
-      if (cur >= target) clearInterval(interval);
-    }, Math.max(20, Math.round(900 / target)));
-    return () => clearInterval(interval);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCount(target);
+      return;
+    }
+    const duration = 900;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      setCount(Math.round(progress * target));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [active, target]);
   return <>{count}</>;
 }
 
+const menuCount = (cat: string) => MENU_ITEMS.filter((i) => i.category === cat).length;
+
 const CAT_ITEMS = [
-  { label: 'Pizzas',    href: '/menu',    icon: (s: number) => <Pizza      size={s} strokeWidth={1.2} />, count: 8 },
-  { label: 'Mariscos', href: '/menu',    icon: (s: number) => <Fish       size={s} strokeWidth={1.2} />, count: 1 },
-  { label: 'Picaderas',href: '/menu',    icon: (s: number) => <Utensils   size={s} strokeWidth={1.2} />, count: 2 },
-  { label: 'Drinks',   href: '/menu',    icon: (s: number) => <GlassWater size={s} strokeWidth={1.2} />, count: 1 },
-  { label: 'Events',   href: '/events',  icon: (s: number) => <Calendar   size={s} strokeWidth={1.2} />, count: 4 },
-  { label: 'Gallery',  href: '/gallery', icon: (s: number) => <Camera     size={s} strokeWidth={1.2} />, count: 10 },
+  { label: 'Pizzas',    href: '/menu',    icon: (s: number) => <Pizza      size={s} strokeWidth={1.2} />, count: menuCount('Pizza') },
+  { label: 'Mariscos', href: '/menu',    icon: (s: number) => <Fish       size={s} strokeWidth={1.2} />, count: menuCount('Mariscos') },
+  { label: 'Picaderas',href: '/menu',    icon: (s: number) => <Utensils   size={s} strokeWidth={1.2} />, count: menuCount('Picaderas') },
+  { label: 'Drinks',   href: '/menu',    icon: (s: number) => <GlassWater size={s} strokeWidth={1.2} />, count: menuCount('Drinks') },
+  { label: 'Events',   href: '/events',  icon: (s: number) => <Calendar   size={s} strokeWidth={1.2} />, count: EVENTS.length },
+  { label: 'Gallery',  href: '/gallery', icon: (s: number) => <Camera     size={s} strokeWidth={1.2} />, count: GALLERY_ITEMS.length },
 ];
 
 function CategoriesSection({ title }: { title: string }) {
@@ -122,6 +131,8 @@ export default function Home() {
   const heroScriptRef = useRef<HTMLSpanElement>(null);
   const todayBadgeRef = useRef<HTMLAnchorElement>(null);
   const authenticBadgeRef = useRef<HTMLDivElement>(null);
+  const hSectionRef = useRef<HTMLElement>(null);
+  const hTrackRef = useRef<HTMLDivElement>(null);
   // Hero script char waterfall on mount
   useGSAP(() => {
     const el = heroScriptRef.current;
@@ -134,7 +145,7 @@ export default function Home() {
         ease: 'power3.out', delay: 0.1,
       });
     });
-  });
+  }, { scope: heroScriptRef });
 
   // Continuous floating animation for the two badge elements
   useGSAP(() => {
@@ -177,7 +188,7 @@ export default function Home() {
         },
       });
     }
-  });
+  }, { scope: heroInnerRef });
 
   useGSAP(() => {
     const section = aboutRef.current;
@@ -200,6 +211,29 @@ export default function Home() {
       .to(imageSide, { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' }, 0)
       .to(textSide, { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' }, 0.15);
   }, { scope: aboutRef });
+
+  // Pinned horizontal scroll for the menu showcase
+  useGSAP(() => {
+    const section = hSectionRef.current;
+    const track = hTrackRef.current;
+    if (!section || !track) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const totalScroll = track.scrollWidth - section.offsetWidth;
+    if (totalScroll <= 0) return;
+
+    gsap.to(track, {
+      x: -totalScroll,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        pin: true,
+        scrub: 0.8,
+        end: () => `+=${totalScroll}`,
+        invalidateOnRefresh: true,
+      },
+    });
+  }, { scope: hSectionRef });
 
   return (
     <main>
@@ -280,7 +314,7 @@ export default function Home() {
 
             {/* Image side */}
             <div className={styles.aboutImageSide}>
-              <span className={styles.verticalText}>SIGNATURE</span>
+              <span className={styles.verticalText} aria-hidden="true">SIGNATURE</span>
               <span className={styles.aboutDelicious} aria-hidden="true">
                 <span>DELI</span>
                 <span>CIOUS</span>
@@ -337,12 +371,12 @@ export default function Home() {
       {/* ══════════════════════════════════════
           HORIZONTAL SCROLL SHOWCASE (A7)
       ══════════════════════════════════════ */}
-      <section className={styles.hSection}>
+      <section ref={hSectionRef} className={styles.hSection}>
         <div className={styles.hHeader}>
           <span className={styles.hLabel}>{t.home.picksLabel}</span>
           <h2 className={styles.hTitle}>{t.home.picksTitle}</h2>
         </div>
-        <div className={styles.hTrack}>
+        <div ref={hTrackRef} className={styles.hTrack}>
           {allItems.map((item, i) => (
             <a
               key={item.id}
@@ -367,7 +401,7 @@ export default function Home() {
         </div>
         <div className={styles.hFooter}>
           <Link href="/menu" className={styles.hMenuLink}>
-            Full Menu <ArrowRight size={14} />
+            {t.home.fullMenu} <ArrowRight size={14} />
           </Link>
         </div>
       </section>
@@ -376,7 +410,7 @@ export default function Home() {
           POPULAR PICKS
       ══════════════════════════════════════ */}
       <section className={styles.picksSection}>
-        <span className={styles.picksWatermark}>DELICIOSO</span>
+        <span className={styles.picksWatermark} aria-hidden="true">DELICIOSO</span>
         <div className="container">
           <div className={styles.sectionHeader}>
             <span className={styles.sectionHeaderLabel}>{t.home.picksLabel}</span>
@@ -625,13 +659,14 @@ export default function Home() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
         waHref={WA_GENERAL}
       />
       <OrderModal
         open={orderModalOpen}
         onClose={() => setOrderModalOpen(false)}
         orderLabel={t.menuPage.order}
+        title={t.home.exclusiveTitle}
       />
     </main>
   );

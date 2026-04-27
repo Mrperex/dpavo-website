@@ -6,6 +6,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { WAFab } from '@/components/ui/WAFab/WAFab';
 import { Cursor } from '@/components/ui/Cursor/Cursor';
 import { PageTransition } from '@/components/layout/PageTransition/PageTransition';
+import { ScrollProgress } from '@/components/ui/ScrollProgress/ScrollProgress';
+import { CookieConsent } from '@/components/ui/CookieConsent/CookieConsent';
 import { Providers } from './providers';
 import './globals.css';
 
@@ -139,6 +141,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PageTransition />
         <WAFab />
         <Cursor />
+        <ScrollProgress />
+        <CookieConsent />
         <Analytics />
         <SpeedInsights />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
@@ -146,6 +150,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
+          gtag('consent', 'default', { analytics_storage: 'denied' });
+          var consent = localStorage.getItem('dpavo-cookie-consent');
+          if (consent === 'accepted') {
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+          }
           gtag('config', '${GA_ID}', { page_path: window.location.pathname });
         `}</Script>
       </body>
