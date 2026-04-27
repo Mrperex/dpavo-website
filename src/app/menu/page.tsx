@@ -78,6 +78,7 @@ export default function MenuPage() {
         }
         subtitle={t.menuPage.subtitle}
         tone="default"
+        backgroundImage="/media/menu-hero-background-2.jpg"
       />
 
       <div className={styles.catsBar}>

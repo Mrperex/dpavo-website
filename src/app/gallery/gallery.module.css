@@ -23,7 +23,7 @@
 .active { background: var(--primary); border-color: var(--primary); color: #fff; }
 
 /* Masonry grid */
-.gridSection { padding: 80px 0 100px; }
+.gridSection { padding: 80px 0 100px; background: #0d0d0d; }
 
 .masonry {
   columns: 3 280px;
@@ -37,7 +37,7 @@
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  background: var(--surface-high);
+  background: #1e1e1e;
 }
 
 .item:hover .overlay { opacity: 1; }
@@ -140,6 +140,7 @@
 /* Instagram feed */
 .instaSection {
   padding: 0 0 80px;
+  background: #0d0d0d;
 }
 
 .instaLabel {
@@ -148,7 +149,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.5);
   margin-bottom: 28px;
 }
 

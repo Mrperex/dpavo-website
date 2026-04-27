@@ -28,6 +28,7 @@ export default function EventsPage() {
         title={<>{t.eventsPage.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={t.eventsPage.subtitle}
         tone="dark"
+        backgroundImage="/media/dj-events.jpg"
       />
 
       {/* Featured event */}

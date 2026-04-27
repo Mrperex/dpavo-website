@@ -4,18 +4,39 @@
   overflow: hidden;
 }
 
-.backdrop {
+/* Photo layer — behind the gradient overlay */
+.heroBg {
   position: absolute;
   inset: 0;
   z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Gradient overlay — sits above photo */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .default .backdrop {
   background:
     linear-gradient(180deg,
       rgba(0,0,0,0.35) 0%,
-      rgba(0,0,0,0.45) 50%,
-      rgba(0,0,0,0.78) 100%
+      rgba(0,0,0,0.5) 50%,
+      rgba(0,0,0,0.82) 100%
+    );
+}
+
+/* Fallback for default tone without a backgroundImage prop */
+.default:not(:has(.heroBg)) .backdrop {
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,0.35) 0%,
+      rgba(0,0,0,0.5) 50%,
+      rgba(0,0,0,0.82) 100%
     ),
     url('/media/menu-hero-background-2.jpg') center/cover no-repeat;
 }
@@ -24,10 +45,25 @@
   background:
     radial-gradient(circle at 30% 40%, rgba(var(--tertiary-rgb), 0.18), transparent 35%),
     radial-gradient(circle at 70% 20%, rgba(var(--primary-rgb), 0.12), transparent 30%),
+    linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.72) 100%);
+}
+
+/* Fallback for warm tone without backgroundImage */
+.warm:not(:has(.heroBg)) .backdrop {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(var(--tertiary-rgb), 0.18), transparent 35%),
+    radial-gradient(circle at 70% 20%, rgba(var(--primary-rgb), 0.12), transparent 30%),
     linear-gradient(135deg, #1a1710 0%, #111111 100%);
 }
 
 .dark .backdrop {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(var(--primary-rgb), 0.2), transparent 45%),
+    linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.72) 100%);
+}
+
+/* Fallback for dark tone without backgroundImage */
+.dark:not(:has(.heroBg)) .backdrop {
   background:
     radial-gradient(circle at 50% 30%, rgba(var(--primary-rgb), 0.15), transparent 40%),
     linear-gradient(180deg, #0e0e0e 0%, #131313 100%);
@@ -35,7 +71,7 @@
 
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 760px;
 }
 

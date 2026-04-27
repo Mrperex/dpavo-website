@@ -15,7 +15,7 @@
   padding: 32px;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255,255,255,0.07);
-  background: var(--surface-low);
+  background: #2a2a2a;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -97,7 +97,7 @@
 /* WhatsApp CTA banner */
 .ctaSection {
   padding: 80px 0;
-  background: var(--surface-low);
+  background: #111111;
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -109,7 +109,7 @@
   flex-wrap: wrap;
 }
 
-.ctaBox h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
+.ctaBox h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: #fff; }
 .ctaBox p  { color: rgba(255,255,255,0.55); margin-top: 8px; max-width: 48ch; }
 
 /* Social row */
@@ -129,7 +129,7 @@
   padding: 12px 22px;
   border-radius: var(--radius-md);
   border: 1px solid rgba(255,255,255,0.1);
-  background: var(--surface-low);
+  background: #2a2a2a;
   color: rgba(255,255,255,0.75);
   font-family: var(--font-labels), sans-serif;
   font-size: 0.72rem;
@@ -141,7 +141,7 @@
 }
 
 .socialBtn:hover {
-  background: var(--surface-high);
+  background: #333333;
   color: #fff;
   border-color: rgba(255,255,255,0.2);
 }

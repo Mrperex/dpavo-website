@@ -27,6 +27,7 @@ export default function AboutPage() {
         title={<>{t.aboutPage.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={t.aboutPage.subtitle}
         tone="warm"
+        backgroundImage="/media/pizza-venue.jpg"
       />
 
       {/* Origin story */}

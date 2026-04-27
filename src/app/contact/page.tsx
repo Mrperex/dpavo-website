@@ -10,10 +10,10 @@ import { MapPin, Clock3, Phone, MessageCircle, ArrowUpRight } from 'lucide-react
 import styles from './contact.module.css';
 
 const MAPS_EMBED =
-  'https://maps.google.com/maps?q=18.7073,-68.4538&z=15&output=embed';
+  'https://maps.google.com/maps?q=HHXG%2BJ29%2C+Punta+Cana+23000&z=16&output=embed';
 
 const MAPS_LINK =
-  'https://maps.google.com/?q=18.7073,-68.4538';
+  'https://maps.google.com/?q=HHXG%2BJ29%2C+Punta+Cana+23000';
 
 const INSTAGRAM = 'https://www.instagram.com/dpavo_pizzeria_y_restaurante';
 const FACEBOOK  = 'https://www.facebook.com';
@@ -31,6 +31,7 @@ export default function ContactPage() {
         title={<>{cp.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={cp.subtitle}
         tone="warm"
+        backgroundImage="/media/red-hero-background.jpg"
       />
 
       {/* Info + Map */}

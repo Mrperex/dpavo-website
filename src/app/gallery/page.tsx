@@ -11,9 +11,8 @@ import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL } from '@/content/config';
 import { GALLERY_ITEMS } from '@/content/gallery';
 import { ClipReveal } from '@/components/animations';
-import { InstagramEmbed } from 'react-social-media-embed';
+import { InstaGrid } from '@/components/sections/InstagramFeed/InstaGrid';
 import { X } from 'lucide-react';
-import { INSTAGRAM_POSTS } from '@/content/instagram';
 import styles from './gallery.module.css';
 
 export default function GalleryPage() {
@@ -39,6 +38,7 @@ export default function GalleryPage() {
         title={<>{t.galleryPage.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={t.galleryPage.subtitle}
         tone="dark"
+        backgroundImage="/media/nightlife.jpg"
       >
         <div className={styles.cats}>
           {cats.map((cat, i) => (
@@ -79,19 +79,13 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Instagram feed */}
-      {INSTAGRAM_POSTS.some((url) => !url.includes('REPLACE_WITH')) && (
-        <section className={styles.instaSection}>
-          <div className="container">
-            <p className={styles.instaLabel}>@dpavo_pizzeria_y_restaurante</p>
-            <div className={styles.instaGrid}>
-              {INSTAGRAM_POSTS.map((url) => (
-                <InstagramEmbed key={url} url={url} width="100%" />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Instagram feed — dynamic via API, falls back to static embeds */}
+      <section className={styles.instaSection}>
+        <div className="container">
+          <p className={styles.instaLabel}>@dpavo_pizzeria_y_restaurante</p>
+          <InstaGrid />
+        </div>
+      </section>
 
       {/* Lightbox */}
       {lightboxItem && (
