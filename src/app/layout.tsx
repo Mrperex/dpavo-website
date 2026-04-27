@@ -9,6 +9,7 @@ import { PageTransition } from '@/components/layout/PageTransition/PageTransitio
 import { ScrollProgress } from '@/components/ui/ScrollProgress/ScrollProgress';
 import { CookieConsent } from '@/components/ui/CookieConsent/CookieConsent';
 import { Providers } from './providers';
+import { CartProvider } from '@/context/CartContext';
 import './globals.css';
 
 const GA_ID = 'G-R8WQJE9BKW';
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
       'Pizza artesanal, mariscos frescos y vida nocturna en Verón, Punta Cana. Ordena por WhatsApp.',
     images: [
       {
-        url: '/media/red-hero-background.jpg',
+        url: '/media/og-image.jpg',
         width: 1200,
         height: 630,
         alt: "D'Pavo Pizza — Pizzería Urbana Tropical Verón Punta Cana",
@@ -76,7 +77,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "D'Pavo Pizza | Pizzería Urbana Tropical",
     description: 'Pizza artesanal, mariscos frescos y vida nocturna en Verón, Punta Cana.',
-    images: ['/media/red-hero-background.jpg'],
+    images: ['/media/og-image.jpg'],
   },
   alternates: {
     canonical: SITE_URL,
@@ -137,7 +138,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${antonio.variable} ${schibsted.variable} ${dancing.variable} ${anton.variable}`}>
-        <Providers>{children}</Providers>
+        <CartProvider><Providers>{children}</Providers></CartProvider>
         <PageTransition />
         <WAFab />
         <Cursor />

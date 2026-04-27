@@ -68,10 +68,9 @@ export default function AboutPage() {
             {t.aboutPage.values.map((v, i) => (
               <div
                 key={v.title}
-                className={`${styles.valueCard} surface-low animate-scale ${valuesInView ? 'visible' : ''}`}
+                className={`${styles.valueCard} animate-scale ${valuesInView ? 'visible' : ''}`}
                 style={{ '--index': i } as React.CSSProperties}
               >
-                <div className={styles.valueNum}>{String(i + 1).padStart(2, '0')}</div>
                 <h3>{v.title}</h3>
                 <p>{v.copy}</p>
               </div>
@@ -132,7 +131,7 @@ export default function AboutPage() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact, catering: t.nav.catering }}
         waHref={WA_GENERAL}
       />
     </main>

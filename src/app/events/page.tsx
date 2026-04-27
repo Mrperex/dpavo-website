@@ -11,6 +11,7 @@ import { useInView } from '@/hooks/useInView';
 import { WA_RESERVE, WA_EVENTS, WA_GENERAL } from '@/content/config';
 import { EVENTS } from '@/content/events';
 import { Calendar, Clock3, MapPin, Mic2, Music4, MessageCircle } from 'lucide-react';
+import { MusicFab } from '@/components/ui/MusicFab/MusicFab';
 import styles from './events.module.css';
 
 export default function EventsPage() {
@@ -142,9 +143,10 @@ export default function EventsPage() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact, catering: t.nav.catering }}
         waHref={WA_GENERAL}
       />
+      <MusicFab src="/media/dpavo-promo-music.mp3" />
     </main>
   );
 }

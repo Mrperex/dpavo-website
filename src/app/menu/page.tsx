@@ -9,15 +9,18 @@ import Footer from '@/components/Footer/Footer';
 import { PageHero } from '@/components/layout/PageHero/PageHero';
 import { Badge } from '@/components/ui/Badge/Badge';
 import { useLanguage } from '@/context/LanguageContext';
-import { WA_ORDER, WA_GENERAL } from '@/content/config';
+import { WA_GENERAL } from '@/content/config';
 import { SplitReveal, StaggerGrid } from '@/components/animations';
 import { MagneticButton } from '@/components/animations/MagneticButton';
 import { MENU_ITEMS } from '@/content/menu';
-import { MessageCircle, Flame } from 'lucide-react';
+import { CartDrawer } from '@/components/ui/CartDrawer/CartDrawer';
+import { useCart } from '@/context/CartContext';
+import { ShoppingCart, Flame } from 'lucide-react';
 import styles from './menu.module.css';
 
 export default function MenuPage() {
   const { t } = useLanguage();
+  const { addItem } = useCart();
   const [active, setActive] = useState<string>('All');
   const [isFiltering, setIsFiltering] = useState(false);
   const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks']; // internal filter keys
@@ -126,9 +129,13 @@ export default function MenuPage() {
                   </div>
                   <p>{item.description}</p>
                   <MagneticButton>
-                    <a href={WA_ORDER(item.name)} className="btn-primary" target="_blank" rel="noopener noreferrer" onClick={fireConfetti}>
-                      <MessageCircle size={15} /> {t.menuPage.order}
-                    </a>
+                    <button
+                      className="btn-primary"
+                      onClick={() => { addItem({ id: String(item.id), name: item.name, price: item.price, image: item.image }); fireConfetti(); }}
+                      type="button"
+                    >
+                      <ShoppingCart size={15} /> {t.menuPage.order}
+                    </button>
                   </MagneticButton>
                 </div>
               </article>
@@ -163,9 +170,13 @@ export default function MenuPage() {
                 </div>
                 <h3>{item.name} <span className={styles.listSubtitle}>{item.subtitle}</span></h3>
                 <p>{item.description}</p>
-                <a href={WA_ORDER(item.name)} className={styles.askBtn} target="_blank" rel="noopener noreferrer" onClick={fireConfetti}>
-                  {t.menuPage.ask} →
-                </a>
+                <button
+                  className={styles.addBtn}
+                  onClick={() => { addItem({ id: String(item.id), name: item.name, price: item.price, image: item.image }); fireConfetti(); }}
+                  type="button"
+                >
+                  <ShoppingCart size={13} /> {t.menuPage.ask}
+                </button>
               </article>
             ))}
           </StaggerGrid>
@@ -185,9 +196,10 @@ export default function MenuPage() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact, catering: t.nav.catering }}
         waHref={WA_GENERAL}
       />
+      <CartDrawer />
     </main>
   );
 }

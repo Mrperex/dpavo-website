@@ -15,7 +15,7 @@ interface FooterProps {
   openingHours: string;
   connect: string;
   schedule: { day: string; hours: string }[];
-  navLabels: { home: string; menu: string; events: string; about: string; gallery: string; contact: string };
+  navLabels: { home: string; menu: string; events: string; about: string; gallery: string; contact: string; catering: string };
   waHref: string;
 }
 
@@ -111,6 +111,8 @@ export default function Footer({
             <Link href="/gallery">{navLabels.gallery}</Link>
             <span className={styles.footerNavDot} />
             <Link href="/contact">{navLabels.contact}</Link>
+            <span className={styles.footerNavDot} />
+            <Link href="/catering">{navLabels.catering}</Link>
           </nav>
 
           {/* Copyright + attribution row */}

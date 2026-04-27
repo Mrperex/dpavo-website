@@ -42,6 +42,7 @@ export default function Navbar() {
               ['/about', t.nav.about],
               ['/gallery', t.nav.gallery],
               ['/contact', t.nav.contact],
+              ['/catering', t.nav.catering],
             ] as [string, string][]).map(([href, label]) => (
               <li key={href}>
                 <Link

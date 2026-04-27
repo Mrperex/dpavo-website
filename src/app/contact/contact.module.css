@@ -113,23 +113,24 @@
 .ctaBox p  { color: rgba(255,255,255,0.55); margin-top: 8px; max-width: 48ch; }
 
 /* Social row */
-.socialSection { padding: 60px 0; }
+.socialSection { padding: 60px 0; background: #0d0d0d; }
 
 .socialRow {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
 }
 
 .socialBtn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 22px;
+  padding: 14px 26px;
   border-radius: var(--radius-md);
   border: 1px solid rgba(255,255,255,0.1);
-  background: #2a2a2a;
+  background: #1e1e1e;
   color: rgba(255,255,255,0.75);
   font-family: var(--font-labels), sans-serif;
   font-size: 0.72rem;
@@ -137,16 +138,32 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  flex: 1 1 160px;
+  min-width: 160px;
+  transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.2s;
 }
 
-.socialBtn:hover {
-  background: #333333;
-  color: #fff;
-  border-color: rgba(255,255,255,0.2);
+.socialBtn:hover { color: #fff; transform: translateY(-2px); }
+
+/* Platform accent colors on hover */
+.socialBtn[href*="instagram"]:hover {
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  border-color: transparent;
+}
+.socialBtn[href*="facebook"]:hover {
+  background: #1877F2;
+  border-color: transparent;
+}
+.socialBtn[href*="wa.me"]:hover {
+  background: #25D366;
+  border-color: transparent;
 }
 
-.socialBtn svg { width: 16px; height: 16px; fill: currentColor; }
+.socialBtn svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+
+@media (max-width: 480px) {
+  .socialBtn { flex: 1 1 100%; min-width: 0; }
+}
 
 @media (max-width: 1024px) {
   .infoGrid { grid-template-columns: 1fr; }

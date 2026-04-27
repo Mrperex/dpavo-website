@@ -115,7 +115,7 @@ export default function GalleryPage() {
         openingHours={t.footer.openingHours}
         connect={t.footer.connect}
         schedule={t.footer.schedule}
-        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact }}
+        navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact, catering: t.nav.catering }}
         waHref={WA_GENERAL}
       />
     </main>

@@ -1,0 +1,192 @@
+/* Intro */
+.introSection {
+  background: #0d0d0d;
+  padding: 80px 0;
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.introText {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.introTitle {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1;
+}
+
+.introBody {
+  color: rgba(255,255,255,0.62);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 48ch;
+}
+
+.introVisual { position: relative; }
+
+.introImg {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  display: block;
+}
+
+/* Services */
+.servicesSection {
+  background: #111111;
+  padding: 80px 0;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.serviceCard {
+  padding: 36px 30px;
+  background: #1e1e1e;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+
+.serviceIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.serviceCard h3 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.serviceCard p {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* Steps */
+.stepsSection {
+  background: #0d0d0d;
+  padding: 80px 0;
+}
+
+.stepsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+  position: relative;
+}
+
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+}
+
+.stepNum {
+  font-family: var(--font-display), sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: rgba(var(--primary-rgb), 0.18);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.stepArrow {
+  display: none;
+}
+
+.stepItem h3 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.stepItem p {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* CTA */
+.ctaSection {
+  background: #111111;
+  padding: 80px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.ctaBox {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ctaBox h2 {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1;
+}
+
+.ctaBox p {
+  color: rgba(255,255,255,0.55);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 48ch;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .introGrid { grid-template-columns: 1fr; gap: 40px; }
+  .introImg  { height: 300px; }
+  .stepsRow  { grid-template-columns: 1fr; gap: 24px; }
+  .servicesGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .servicesGrid { grid-template-columns: 1fr; }
+}
