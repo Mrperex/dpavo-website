@@ -27,8 +27,8 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | null>(null);
 
 function parsePrice(price: string): number {
-  const cleaned = price.replace(/[^0-9.,]/g, '').replace(',', '.');
-  return parseFloat(cleaned) || 0;
+  // Commas are thousands separators in DR peso format (RD$1,300 = 1300)
+  return parseInt(price.replace(/[^0-9]/g, ''), 10) || 0;
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {

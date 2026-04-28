@@ -33,7 +33,7 @@ export default function CateringPage() {
         title={<>{cp.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={cp.subtitle}
         tone="dark"
-        backgroundImage="/media/dpavo-food-2.jpg"
+        backgroundImage="/media/catering-hero.jpg"
       />
 
       {/* Intro */}

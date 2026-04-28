@@ -111,10 +111,13 @@ export default function AboutPage() {
                 <MessageCircle size={15} /> {t.aboutPage.visitCta}
               </a>
             </div>
-            <div className={styles.visitMapPlaceholder}>
-              <MapPin size={40} style={{ color: 'var(--primary)', opacity: 0.6 }} />
-              <p>Plaza Verón Center</p>
-            </div>
+            <iframe
+              src="https://maps.google.com/maps?q=HHXG%2BJ29%2C+Punta+Cana+23000&z=16&output=embed"
+              className={styles.visitMap}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="D'Pavo Pizza location"
+            />
           </div>
         </div>
       </section>

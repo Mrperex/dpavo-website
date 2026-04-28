@@ -146,7 +146,7 @@ export default function EventsPage() {
         navLabels={{ home: t.nav.home, menu: t.nav.menu, events: t.nav.events, about: t.nav.about, gallery: t.nav.gallery, contact: t.nav.contact, catering: t.nav.catering }}
         waHref={WA_GENERAL}
       />
-      <MusicFab src="/media/dpavo-promo-music.mp3" />
+      <MusicFab src="/media/eoo-bad-bunny.mp3" />
     </main>
   );
 }

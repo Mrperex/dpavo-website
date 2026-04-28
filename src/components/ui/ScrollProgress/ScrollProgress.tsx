@@ -16,16 +16,20 @@ export function ScrollProgress() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(bar, {
-        scaleX: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: document.documentElement,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 0,
-        },
-      });
+      gsap.fromTo(bar,
+        { scaleX: 0, opacity: 0 },
+        {
+          scaleX: 1,
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: document.documentElement,
+            start: 'top+=80 top',
+            end: 'bottom bottom',
+            scrub: 0,
+          },
+        }
+      );
     });
 
     return () => ctx.revert();

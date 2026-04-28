@@ -19,6 +19,7 @@
 .title {
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-top: 4px;
+  color: #fff;
 }
 
 .subtitle {

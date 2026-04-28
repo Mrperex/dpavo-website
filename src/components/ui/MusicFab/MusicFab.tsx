@@ -1,40 +1,33 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { Music, VolumeX } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 import styles from './MusicFab.module.css';
 
 export function MusicFab({ src }: { src: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
-
-  useEffect(() => {
-    return () => { audioRef.current?.pause(); };
-  }, []);
+  const [muted, setMuted] = useState(true);
 
   const toggle = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (playing) {
-      audio.pause();
-      setPlaying(false);
-    } else {
-      audio.play().then(() => setPlaying(true)).catch(() => {});
-    }
+    audio.muted = !muted;
+    setMuted((m) => !m);
   };
 
   return (
     <>
-      <audio ref={audioRef} src={src} loop preload="none" />
+      {/* autoPlay + muted satisfies browser autoplay policy */}
+      <audio ref={audioRef} src={src} loop autoPlay muted />
       <button
-        className={`${styles.fab} ${playing ? styles.playing : ''}`}
+        className={`${styles.fab} ${styles.playing}`}
         onClick={toggle}
-        aria-label={playing ? 'Pausar música' : 'Reproducir música'}
+        aria-label={muted ? 'Activar música' : 'Silenciar música'}
         type="button"
       >
-        {playing && <span className={styles.ring} />}
-        {playing && <span className={styles.ring2} />}
-        {playing ? <VolumeX size={22} /> : <Music size={22} />}
+        <span className={styles.ring} />
+        <span className={styles.ring2} />
+        {muted ? <VolumeX size={22} /> : <Volume2 size={22} />}
       </button>
     </>
   );

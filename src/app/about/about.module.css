@@ -115,21 +115,13 @@
   font-size: 0.95rem;
 }
 
-.visitMapPlaceholder {
-  min-height: 280px;
+.visitMap {
+  width: 100%;
+  height: 320px;
   border-radius: var(--radius-lg);
-  background:
-    radial-gradient(circle at 50% 50%, rgba(var(--primary-rgb),0.12), transparent 60%),
-    #1e1e1e;
-  border: 1px solid rgba(255,255,255,0.07);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  border: none;
+  display: block;
 }
-
-.visitMapPlaceholder p { color: rgba(255,255,255,0.35); font-size: 0.85rem; }
 
 @media (max-width: 1024px) {
   .storySplit, .valuesGrid, .visitBox { grid-template-columns: 1fr; }
