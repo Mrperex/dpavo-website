@@ -14,6 +14,9 @@ import { restaurantJsonLd, menuJsonLd } from '@/lib/schema';
 import { WebVitals } from '@/components/analytics/WebVitals';
 import { PWAInstallPrompt } from '@/components/ui/PWAInstallPrompt/PWAInstallPrompt';
 import { ServiceWorkerRegister } from '@/components/analytics/ServiceWorkerRegister';
+import { MicrosoftClarity } from '@/components/analytics/MicrosoftClarity';
+import { MetaPixel } from '@/components/analytics/MetaPixel';
+import { PromoBanner } from '@/components/ui/PromoBanner/PromoBanner';
 import './globals.css';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? 'G-R8WQJE9BKW';
@@ -150,6 +153,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${antonio.variable} ${schibsted.variable} ${dancing.variable} ${anton.variable}`}>
         <a href="#main-content" className="skip-link">Saltar al contenido</a>
+        <PromoBanner />
         <CartProvider><Providers>{children}</Providers></CartProvider>
         <PageTransition />
         <WAFab />
@@ -158,6 +162,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CookieConsent />
         <PWAInstallPrompt />
         <ServiceWorkerRegister />
+        <MicrosoftClarity />
+        <MetaPixel />
         <WebVitals />
         <Analytics />
         <SpeedInsights />

@@ -22,6 +22,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitReveal, ParallaxLayer, StaggerGrid } from '@/components/animations';
 import { MagneticButton } from '@/components/animations/MagneticButton';
 import { OrderModal } from '@/components/ui/OrderModal/OrderModal';
+import { ReviewsCarousel } from '@/components/ui/ReviewsCarousel/ReviewsCarousel';
 import styles from './page.module.css';
 
 function AnimSection({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -647,6 +648,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <ReviewsCarousel />
 
       <Footer
         tagline={t.footer.tagline}

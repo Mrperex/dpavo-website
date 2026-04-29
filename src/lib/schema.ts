@@ -42,6 +42,13 @@ export const restaurantJsonLd = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Sunday'], opens: '11:00', closes: '00:00' },
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday', 'Saturday'], opens: '11:00', closes: '02:00' },
   ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: '3',
+    bestRating: '5',
+    worstRating: '1',
+  },
   sameAs: [
     'https://www.instagram.com/dpavo_pizzeria_y_restaurante',
     'https://www.facebook.com/dpavopizzeria',
