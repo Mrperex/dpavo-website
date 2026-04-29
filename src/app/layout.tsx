@@ -10,9 +10,10 @@ import { ScrollProgress } from '@/components/ui/ScrollProgress/ScrollProgress';
 import { CookieConsent } from '@/components/ui/CookieConsent/CookieConsent';
 import { Providers } from './providers';
 import { CartProvider } from '@/context/CartContext';
+import { restaurantJsonLd, menuJsonLd } from '@/lib/schema';
 import './globals.css';
 
-const GA_ID = 'G-R8WQJE9BKW';
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? 'G-R8WQJE9BKW';
 
 const antonio = Antonio({
   variable: '--font-antonio',
@@ -96,35 +97,6 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FoodEstablishment',
-  name: "D'Pavo Pizza",
-  description: 'Pizzería artesanal urbana tropical en Verón, Punta Cana.',
-  url: SITE_URL,
-  telephone: '+18096090000',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Plaza Verón Center',
-    addressLocality: 'Verón',
-    addressRegion: 'La Altagracia',
-    addressCountry: 'DO',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 18.7073,
-    longitude: -68.4538,
-  },
-  openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Sunday'], opens: '11:00', closes: '00:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday', 'Saturday'], opens: '11:00', closes: '02:00' },
-  ],
-  servesCuisine: ['Pizza', 'Seafood', 'Dominican'],
-  priceRange: '$$',
-  image: `${SITE_URL}/media/red-hero-background.webp`,
-  sameAs: ['https://www.instagram.com/dpavo_pizzeria_y_restaurante'],
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
@@ -132,10 +104,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preload" as="image" href="/media/red-hero-background.webp" />
-        <script
+        <Script
+          id="ld-restaurant"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+          strategy="beforeInteractive"
+        >
+          {JSON.stringify(restaurantJsonLd)}
+        </Script>
+        <Script
+          id="ld-menu"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+        >
+          {JSON.stringify(menuJsonLd)}
+        </Script>
       </head>
       <body className={`${antonio.variable} ${schibsted.variable} ${dancing.variable} ${anton.variable}`}>
         <CartProvider><Providers>{children}</Providers></CartProvider>

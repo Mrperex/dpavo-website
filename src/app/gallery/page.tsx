@@ -11,7 +11,6 @@ import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL } from '@/content/config';
 import { GALLERY_ITEMS } from '@/content/gallery';
 import { ClipReveal } from '@/components/animations';
-import { InstaGrid } from '@/components/sections/InstagramFeed/InstaGrid';
 import { X } from 'lucide-react';
 import styles from './gallery.module.css';
 
@@ -76,14 +75,6 @@ export default function GalleryPage() {
             ))}
           </div>
           </ClipReveal>
-        </div>
-      </section>
-
-      {/* Instagram feed — dynamic via API, falls back to static embeds */}
-      <section className={styles.instaSection}>
-        <div className="container">
-          <p className={styles.instaLabel}>@dpavo_pizzeria_y_restaurante</p>
-          <InstaGrid />
         </div>
       </section>
 
