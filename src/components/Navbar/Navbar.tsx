@@ -67,10 +67,10 @@ export default function Navbar() {
                 {WA_ICON} {t.nav.order}
               </a>
             </MagneticButton>
-            <button className={styles.langBtn} onClick={toggle} aria-label="Toggle language">
+            <button type="button" className={styles.langBtn} onClick={toggle} aria-label="Toggle language">
               {t.nav.lang}
             </button>
-            <button
+            <button type="button"
               className={`${styles.hamburger} ${open ? styles.hamburgerOpen : ''}`}
               aria-label="Toggle menu"
               onClick={() => setOpen(v => !v)}
@@ -108,7 +108,7 @@ export default function Navbar() {
           ))}
         </ul>
         <div className={styles.drawerActions}>
-          <button className={styles.langBtn} onClick={toggle}>{t.nav.lang}</button>
+          <button type="button" className={styles.langBtn} onClick={toggle}>{t.nav.lang}</button>
           <MagneticButton>
             <a href={WA_GENERAL} className={styles.orderBtn} target="_blank" rel="noopener noreferrer">
               {WA_ICON} {t.nav.order}

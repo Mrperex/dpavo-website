@@ -26,7 +26,7 @@ export default function CateringPage() {
   const [stepsRef, stepsInView] = useInView<HTMLDivElement>();
 
   return (
-    <main>
+    <main id="main-content">
       <Navbar />
 
       <PageHero

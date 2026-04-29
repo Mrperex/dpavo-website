@@ -23,7 +23,7 @@ export default function ContactPage() {
   const cp = t.contactPage;
 
   return (
-    <main>
+    <main id="main-content">
       <Navbar />
 
       <PageHero

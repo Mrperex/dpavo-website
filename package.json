@@ -1,5 +1,5 @@
 {
-  "name": "tmp-app",
+  "name": "dpavo-pizza-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,18 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "optimize-images": "node scripts/optimize-images.mjs",
     "remotion:studio": "remotion studio src/remotion/index.ts",
     "remotion:render": "remotion render src/remotion/index.ts DPavoPromo out/dpavo-promo.mp4",
     "record:website": "node scripts/record-website.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "@remotion/bundler": "^4.0.448",
-    "@remotion/cli": "^4.0.448",
-    "@remotion/google-fonts": "^4.0.448",
-    "@remotion/player": "^4.0.448",
-    "@remotion/renderer": "^4.0.448",
-    "@remotion/transitions": "^4.0.448",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "canvas-confetti": "^1.9.4",
@@ -28,10 +23,15 @@
     "next": "16.2.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "remotion": "^4.0.448",
     "splitting": "^1.1.0"
   },
   "devDependencies": {
+    "@remotion/bundler": "^4.0.448",
+    "@remotion/cli": "^4.0.448",
+    "@remotion/google-fonts": "^4.0.448",
+    "@remotion/player": "^4.0.448",
+    "@remotion/renderer": "^4.0.448",
+    "@remotion/transitions": "^4.0.448",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -40,6 +40,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "playwright": "^1.59.1",
+    "remotion": "^4.0.448",
     "typescript": "^5"
   }
 }

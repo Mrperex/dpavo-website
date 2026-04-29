@@ -237,7 +237,7 @@ export default function Home() {
   }, { scope: hSectionRef });
 
   return (
-    <main>
+    <main id="main-content">
       <Navbar />
 
       {/* ══════════════════════════════════════
@@ -252,9 +252,9 @@ export default function Home() {
           <div className={styles.heroCtas}>
             <MagneticButton>
               <button
+                type="button"
                 className={styles.heroCtaDark}
                 onClick={() => setOrderModalOpen(true)}
-                type="button"
               >
                 {t.hero.cta1} <ArrowRight size={15} />
               </button>

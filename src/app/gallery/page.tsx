@@ -29,7 +29,7 @@ export default function GalleryPage() {
   const lightboxItem = lightbox !== null ? GALLERY_ITEMS.find((i) => i.id === lightbox) : null;
 
   return (
-    <main>
+    <main id="main-content">
       <Navbar />
 
       <PageHero
@@ -41,7 +41,7 @@ export default function GalleryPage() {
       >
         <div className={styles.cats}>
           {cats.map((cat, i) => (
-            <button
+            <button type="button"
               key={cat}
               className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
               onClick={() => setActive(cat)}
@@ -81,7 +81,7 @@ export default function GalleryPage() {
       {/* Lightbox */}
       {lightboxItem && (
         <div className={styles.lightbox} onClick={() => setLightbox(null)}>
-          <button className={styles.close} onClick={() => setLightbox(null)} aria-label="Close">
+          <button type="button" className={styles.close} onClick={() => setLightbox(null)} aria-label="Close">
             <X size={24} />
           </button>
           <div className={styles.lightboxInner} onClick={(e) => e.stopPropagation()}>

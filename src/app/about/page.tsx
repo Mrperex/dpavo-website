@@ -19,7 +19,7 @@ export default function AboutPage() {
   const [valuesRef, valuesInView] = useInView<HTMLDivElement>();
 
   return (
-    <main>
+    <main id="main-content">
       <Navbar />
 
       <PageHero

@@ -120,6 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
       </head>
       <body className={`${antonio.variable} ${schibsted.variable} ${dancing.variable} ${anton.variable}`}>
+        <a href="#main-content" className="skip-link">Saltar al contenido</a>
         <CartProvider><Providers>{children}</Providers></CartProvider>
         <PageTransition />
         <WAFab />

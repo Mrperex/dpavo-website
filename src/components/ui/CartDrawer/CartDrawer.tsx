@@ -26,10 +26,10 @@ export function CartDrawer() {
     <>
       {/* Floating trigger */}
       <button
+        type="button"
         className={styles.fab}
         onClick={() => setOpen(true)}
         aria-label="Ver carrito"
-        type="button"
       >
         <ShoppingCart size={22} />
         {totalItems > 0 && (
@@ -49,7 +49,7 @@ export function CartDrawer() {
             <span>Tu Pedido</span>
             {totalItems > 0 && <span className={styles.headerCount}>{totalItems}</span>}
           </div>
-          <button className={styles.closeBtn} onClick={() => setOpen(false)} aria-label="Cerrar carrito">
+          <button type="button" className={styles.closeBtn} onClick={() => setOpen(false)} aria-label="Cerrar carrito">
             <X size={20} />
           </button>
         </div>
@@ -75,7 +75,7 @@ export function CartDrawer() {
                   <p className={styles.itemPrice}>{item.price}</p>
                 </div>
                 <div className={styles.itemControls}>
-                  <button
+                  <button type="button"
                     className={styles.qtyBtn}
                     onClick={() => item.qty === 1 ? removeItem(item.id) : setQty(item.id, item.qty - 1)}
                     aria-label="Reducir cantidad"
@@ -83,14 +83,14 @@ export function CartDrawer() {
                     <Minus size={14} />
                   </button>
                   <span className={styles.qty}>{item.qty}</span>
-                  <button
+                  <button type="button"
                     className={styles.qtyBtn}
                     onClick={() => setQty(item.id, item.qty + 1)}
                     aria-label="Aumentar cantidad"
                   >
                     <Plus size={14} />
                   </button>
-                  <button
+                  <button type="button"
                     className={`${styles.qtyBtn} ${styles.removeBtn}`}
                     onClick={() => removeItem(item.id)}
                     aria-label="Eliminar"
@@ -110,10 +110,10 @@ export function CartDrawer() {
               <span>Total aprox.</span>
               <span className={styles.totalPrice}>RD$ {totalPrice.toLocaleString('es-DO', { maximumFractionDigits: 0 })}</span>
             </div>
-            <button className={styles.checkoutBtn} onClick={checkout}>
+            <button type="button" className={styles.checkoutBtn} onClick={checkout}>
               <MessageCircle size={16} /> Pedir por WhatsApp
             </button>
-            <button className={styles.clearBtn} onClick={clearCart}>
+            <button type="button" className={styles.clearBtn} onClick={clearCart}>
               Vaciar carrito
             </button>
           </div>

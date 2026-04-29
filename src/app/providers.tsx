@@ -13,6 +13,14 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export function Providers({ children }: { children: ReactNode }) {
   useEffect(() => {
+    // Respect prefers-reduced-motion: skip smooth scrolling entirely
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const onLoad = () => ScrollTrigger.refresh();
+      if (document.readyState === 'complete') onLoad();
+      else window.addEventListener('load', onLoad);
+      return () => window.removeEventListener('load', onLoad);
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

@@ -50,7 +50,7 @@ export function OrderModal({ open, onClose, orderLabel, title = 'Our Menu' }: Or
       <div className={styles.panel}>
         <div className={styles.header}>
           <h2 id="order-modal-title" className={styles.title}>{title}</h2>
-          <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+          <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <X size={18} />
           </button>
         </div>

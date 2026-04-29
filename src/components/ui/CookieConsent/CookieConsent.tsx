@@ -42,8 +42,8 @@ export function CookieConsent() {
         <Link href="/about" className={styles.link}>{cc.learnMore}</Link>
       </p>
       <div className={styles.actions}>
-        <button className={styles.decline} onClick={decline}>{cc.decline}</button>
-        <button className={styles.accept} onClick={accept}>{cc.accept}</button>
+        <button type="button" className={styles.decline} onClick={decline}>{cc.decline}</button>
+        <button type="button" className={styles.accept} onClick={accept}>{cc.accept}</button>
       </div>
     </div>
   );

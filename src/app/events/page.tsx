@@ -21,7 +21,7 @@ export default function EventsPage() {
   const featured = EVENTS.find((e) => e.featured) ?? EVENTS[1];
 
   return (
-    <main>
+    <main id="main-content">
       <Navbar />
 
       <PageHero

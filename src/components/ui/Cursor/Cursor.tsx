@@ -1,17 +1,23 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import styles from './Cursor.module.css';
 
 export function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    // Only on pointer-fine devices (desktop)
+    // Only on pointer-fine devices (desktop) without reduced-motion preference
     if (!window.matchMedia('(pointer: fine)').matches) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setEnabled(true);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
 
     const dot = dotRef.current;
     const ring = ringRef.current;
@@ -47,7 +53,9 @@ export function Cursor() {
       window.removeEventListener('mouseover', onEnter);
       window.removeEventListener('mouseout',  onLeave);
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <>

@@ -2,7 +2,6 @@
 
 import { useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import confetti from 'canvas-confetti';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Navbar from '@/components/Navbar/Navbar';
@@ -28,7 +27,8 @@ export default function MenuPage() {
   const catsRef = useRef<HTMLDivElement>(null);
   const allItemsRef = useRef<HTMLElement>(null);
 
-  const fireConfetti = useCallback(() => {
+  const fireConfetti = useCallback(async () => {
+    const { default: confetti } = await import('canvas-confetti');
     confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 }, colors: ['#E63329', '#FFD700', '#ffffff'] });
   }, []);
 
@@ -69,7 +69,7 @@ export default function MenuPage() {
   const featured = MENU_ITEMS.filter((i) => i.featured);
 
   return (
-    <main>
+    <main id="main-content">
       <Navbar />
 
       <PageHero
@@ -89,7 +89,7 @@ export default function MenuPage() {
         <div className="container">
           <div ref={catsRef} className={styles.cats}>
             {cats.map((cat, i) => (
-              <button
+              <button type="button"
                 key={cat}
                 data-filter-pill
                 className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
@@ -131,9 +131,9 @@ export default function MenuPage() {
                   <p>{item.description}</p>
                   <MagneticButton>
                     <button
+                      type="button"
                       className="btn-primary"
                       onClick={() => { addItem({ id: String(item.id), name: item.name, price: item.price, image: item.image }); fireConfetti(); }}
-                      type="button"
                     >
                       <ShoppingCart size={15} /> {t.menuPage.order}
                     </button>
@@ -172,9 +172,9 @@ export default function MenuPage() {
                 <h3>{item.name} <span className={styles.listSubtitle}>{item.subtitle}</span></h3>
                 <p>{item.description}</p>
                 <button
+                  type="button"
                   className={styles.addBtn}
                   onClick={() => { addItem({ id: String(item.id), name: item.name, price: item.price, image: item.image }); fireConfetti(); }}
-                  type="button"
                 >
                   <ShoppingCart size={13} /> {t.menuPage.ask}
                 </button>
