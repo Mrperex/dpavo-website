@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Sobre D'Pavo Pizza — Nuestra Historia en Punta Cana",
     description: 'Pizza artesanal con alma caribeña. Conoce el equipo y los valores de D\'Pavo.',
     url: `${SITE_URL}/about`,
-    images: [{ url: '/media/dpavo-food-1.jpg', width: 1200, height: 630, alt: "D'Pavo Pizza — Nuestra Historia" }],
+    images: [{ url: '/media/dpavo-food-1.webp', width: 1200, height: 630, alt: "D'Pavo Pizza — Nuestra Historia" }],
   },
   alternates: { canonical: `${SITE_URL}/about` },
 };

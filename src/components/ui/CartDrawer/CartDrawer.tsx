@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { ShoppingCart, X, Trash2, Plus, Minus, MessageCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { WHATSAPP_NUMBER } from '@/content/config';
@@ -8,7 +9,7 @@ import styles from './CartDrawer.module.css';
 
 function buildWAMessage(items: { name: string; qty: number; price: string }[], total: number): string {
   const lines = items.map((i) => `• ${i.name} x${i.qty} — ${i.price}`).join('\n');
-  const totalStr = total > 0 ? `RD$ ${total.toLocaleString('es-DO')}` : '—';
+  const totalStr = total > 0 ? `RD$ ${total.toLocaleString('es-DO', { maximumFractionDigits: 0 })}` : '—';
   return `Hola D'Pavo! 🍕 Quiero hacer el siguiente pedido:\n\n${lines}\n\nTotal aprox: ${totalStr}\n\nGracias!`;
 }
 
@@ -65,7 +66,9 @@ export function CartDrawer() {
             items.map((item) => (
               <div key={item.id} className={styles.item}>
                 {item.image && (
-                  <img src={item.image} alt={item.name} className={styles.itemImg} />
+                  <div className={styles.itemImg}>
+                    <Image src={item.image} alt={item.name} fill sizes="48px" style={{ objectFit: 'cover' }} />
+                  </div>
                 )}
                 <div className={styles.itemInfo}>
                   <p className={styles.itemName}>{item.name}</p>
@@ -105,7 +108,7 @@ export function CartDrawer() {
           <div className={styles.footer}>
             <div className={styles.total}>
               <span>Total aprox.</span>
-              <span className={styles.totalPrice}>RD$ {totalPrice.toLocaleString('es-DO')}</span>
+              <span className={styles.totalPrice}>RD$ {totalPrice.toLocaleString('es-DO', { maximumFractionDigits: 0 })}</span>
             </div>
             <button className={styles.checkoutBtn} onClick={checkout}>
               <MessageCircle size={16} /> Pedir por WhatsApp

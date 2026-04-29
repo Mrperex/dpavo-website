@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Galería D'Pavo Pizza — Fotos de Comida y Ambiente",
     description: 'Las mejores fotos de D\'Pavo Pizza: comida, venue y eventos en Punta Cana.',
     url: `${SITE_URL}/gallery`,
-    images: [{ url: '/media/pizza-venue.jpg', width: 1200, height: 630, alt: "Galería D'Pavo Pizza" }],
+    images: [{ url: '/media/pizza-venue.webp', width: 1200, height: 630, alt: "Galería D'Pavo Pizza" }],
   },
   alternates: { canonical: `${SITE_URL}/gallery` },
 };

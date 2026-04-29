@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { PageHero } from '@/components/layout/PageHero/PageHero';
@@ -49,7 +50,14 @@ export default function CateringPage() {
                 </a>
               </div>
               <div className={styles.introVisual}>
-                <img src="/media/dpavo-food-1.jpg" alt="D'Pavo catering" className={styles.introImg} />
+                <Image
+                  src="/media/dpavo-food-1.webp"
+                  alt="D'Pavo catering"
+                  width={800}
+                  height={420}
+                  className={styles.introImg}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
           </ClipReveal>

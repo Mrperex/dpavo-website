@@ -121,7 +121,7 @@ const jsonLd = {
   ],
   servesCuisine: ['Pizza', 'Seafood', 'Dominican'],
   priceRange: '$$',
-  image: `${SITE_URL}/media/red-hero-background.jpg`,
+  image: `${SITE_URL}/media/red-hero-background.webp`,
   sameAs: ['https://www.instagram.com/dpavo_pizzeria_y_restaurante'],
 };
 
@@ -131,7 +131,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" as="image" href="/media/red-hero-background.jpg" />
+        <link rel="preload" as="image" href="/media/red-hero-background.webp" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

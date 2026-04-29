@@ -31,7 +31,7 @@ export default function ContactPage() {
         title={<>{cp.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={cp.subtitle}
         tone="warm"
-        backgroundImage="/media/red-hero-background.jpg"
+        backgroundImage="/media/red-hero-background.webp"
       />
 
       {/* Info + Map */}

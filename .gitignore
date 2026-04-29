@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# image optimization backup originals (kept locally for re-runs only)
+public/media/_originals/

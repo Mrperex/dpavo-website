@@ -29,7 +29,7 @@ export default function EventsPage() {
         title={<>{t.eventsPage.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={t.eventsPage.subtitle}
         tone="dark"
-        backgroundImage="/media/dj-events.jpg"
+        backgroundImage="/media/dj-events.webp"
       />
 
       {/* Featured event */}
@@ -38,7 +38,7 @@ export default function EventsPage() {
           <div className={styles.featCard}>
             <div className={styles.featVisual}>
               <Image
-                src="/media/dj-events.jpg"
+                src="/media/dj-events.webp"
                 alt="D'Pavo live event night"
                 fill
                 style={{ objectFit: 'cover', opacity: 0.75 }}

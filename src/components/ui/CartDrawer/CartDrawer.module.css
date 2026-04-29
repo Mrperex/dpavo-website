@@ -179,10 +179,11 @@
 .item:hover { background: rgba(255,255,255,0.02); }
 
 .itemImg {
+  position: relative;
   width: 48px;
   height: 48px;
   border-radius: var(--radius-sm);
-  object-fit: cover;
+  overflow: hidden;
   flex-shrink: 0;
   background: #1e1e1e;
 }

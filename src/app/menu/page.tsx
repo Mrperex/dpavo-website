@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import confetti from 'canvas-confetti';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -81,7 +82,7 @@ export default function MenuPage() {
         }
         subtitle={t.menuPage.subtitle}
         tone="default"
-        backgroundImage="/media/menu-hero-background-2.jpg"
+        backgroundImage="/media/menu-hero-background-2.webp"
       />
 
       <div className={styles.catsBar}>
@@ -114,7 +115,7 @@ export default function MenuPage() {
               >
                 <div className={styles.featVisual}>
                   {item.image
-                    ? <img src={item.image} alt={item.name} className={styles.featImg} />
+                    ? <Image src={item.image} alt={item.name} fill sizes="220px" className={styles.featImg} style={{ objectFit: 'cover' }} />
                     : <div className={`${styles.featPlaceholder} ${styles[item.tone]}`} />
                   }
                   <Badge color="red"><Flame size={12} /> {t.menuPage.trending}</Badge>

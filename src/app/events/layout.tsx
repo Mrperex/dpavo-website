@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Eventos en D'Pavo Pizza — Vida Nocturna Punta Cana",
     description: 'DJ nights, eventos especiales y la mejor vibra en Verón, Punta Cana.',
     url: `${SITE_URL}/events`,
-    images: [{ url: '/media/dj-events.jpg', width: 1200, height: 630, alt: "Eventos D'Pavo Pizza" }],
+    images: [{ url: '/media/dj-events.webp', width: 1200, height: 630, alt: "Eventos D'Pavo Pizza" }],
   },
   alternates: { canonical: `${SITE_URL}/events` },
 };

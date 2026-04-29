@@ -38,7 +38,7 @@ export default function GalleryPage() {
         title={<>{t.galleryPage.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={t.galleryPage.subtitle}
         tone="dark"
-        backgroundImage="/media/nightlife.jpg"
+        backgroundImage="/media/nightlife.webp"
       >
         <div className={styles.cats}>
           {cats.map((cat, i) => (

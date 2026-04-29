@@ -27,7 +27,7 @@ export default function AboutPage() {
         title={<>{t.aboutPage.title.replace('.', '')} <span style={{ color: 'var(--primary)' }}>.</span></>}
         subtitle={t.aboutPage.subtitle}
         tone="warm"
-        backgroundImage="/media/pizza-venue.jpg"
+        backgroundImage="/media/pizza-venue.webp"
       />
 
       {/* Origin story */}
@@ -47,7 +47,7 @@ export default function AboutPage() {
               <ClipReveal start="top 80%" duration={1.0}>
                 <div style={{ position: 'relative', height: 420, borderRadius: 'var(--radius-xl)', overflow: 'hidden' }}>
                   <Image
-                    src="/media/pizza-venue.jpg"
+                    src="/media/pizza-venue.webp"
                     alt="D'Pavo Pizza venue — Verón, Punta Cana"
                     fill
                     style={{ objectFit: 'cover' }}

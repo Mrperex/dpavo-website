@@ -1,6 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react';
+
+const STORAGE_KEY = 'dpavo-cart';
 
 export interface CartItem {
   id: string;
@@ -33,6 +35,23 @@ function parsePrice(price: string): number {
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartEntry[]>([]);
+  const hydrated = useRef(false);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) setItems(parsed);
+      }
+    } catch {}
+    hydrated.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated.current) return;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); } catch {}
+  }, [items]);
 
   const addItem = useCallback((item: CartItem) => {
     setItems((prev) => {

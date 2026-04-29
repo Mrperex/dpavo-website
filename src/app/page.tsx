@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Phone, ArrowRight, Flame, Star,
   Pizza, Fish, Music, Utensils, Camera, Calendar,
@@ -271,7 +272,7 @@ export default function Home() {
           <div className={styles.heroImageWrap}>
             <ParallaxLayer speed={0.35}>
               <img
-                src="/media/pizza-hero.png"
+                src="/media/pizza-hero.webp"
                 alt="La Pavorosa - D'Pavo signature pizza"
                 className={styles.heroImg}
               />
@@ -321,7 +322,7 @@ export default function Home() {
               </span>
               <div className={styles.aboutImgWrap}>
                 <img
-                  src="/media/pizza-pepperoni.png"
+                  src="/media/pizza-pepperoni.webp"
                   alt="D'Pavo signature pizza"
                 />
               </div>
@@ -387,7 +388,7 @@ export default function Home() {
             >
               <div className={styles.hCardImg}>
                 {item.image
-                  ? <img src={item.image} alt={item.name} loading="lazy" />
+                  ? <Image src={item.image} alt={item.name} fill sizes="300px" />
                   : <Pizza size={52} strokeWidth={1.1} color="var(--red)" />
                 }
               </div>
@@ -429,7 +430,7 @@ export default function Home() {
               >
                 <div className={styles.pickImgWrap}>
                   {item.image ? (
-                    <img src={item.image} alt={item.name} />
+                    <Image src={item.image} alt={item.name} fill sizes="200px" style={{ objectFit: 'cover' }} />
                   ) : (
                     <div style={{ width: '100%', height: '100%', background: '#f5f4f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Pizza size={40} strokeWidth={1.2} color="var(--red)" />
@@ -460,7 +461,7 @@ export default function Home() {
                   className={styles.pickCard}
                 >
                   <div className={styles.pickImgWrap}>
-                    <img src="/media/alitas-infierno.png" alt={alitas.name} />
+                    <Image src="/media/alitas-infierno.webp" alt={alitas.name} fill sizes="200px" style={{ objectFit: 'cover' }} />
                   </div>
                   <div className={styles.pickRating}>
                     <span className={styles.pickStars}>★★★★★</span>
@@ -507,7 +508,7 @@ export default function Home() {
                 <div>
                   {item.image ? (
                     <div className={styles.menuListImg}>
-                      <img src={item.image} alt={item.name} />
+                      <Image src={item.image} alt={item.name} fill sizes="72px" style={{ objectFit: 'cover' }} />
                     </div>
                   ) : (
                     <div className={styles.menuListImgPlaceholder}>
@@ -590,7 +591,7 @@ export default function Home() {
                 </a>
               </div>
               <img
-                src="/media/pizza-ham-and-pepperonni.png"
+                src="/media/pizza-ham-and-pepperonni.webp"
                 alt="La Pavorosa"
                 className={styles.promoBannerImg}
               />
@@ -611,7 +612,7 @@ export default function Home() {
                 </Link>
               </div>
               <img
-                src="/media/dj-events.jpg"
+                src="/media/dj-events.webp"
                 alt="DJ Events at D'Pavo"
                 className={styles.promoBannerImg}
               />

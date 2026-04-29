@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "Menú de D'Pavo Pizza — Pizzas & Mariscos en Punta Cana",
     description: 'Pizzas artesanales, mariscos, alitas y más. Ordena por WhatsApp.',
     url: `${SITE_URL}/menu`,
-    images: [{ url: '/media/menu-hero-background.jpg', width: 1200, height: 630, alt: "Menú D'Pavo Pizza" }],
+    images: [{ url: '/media/menu-hero-background.webp', width: 1200, height: 630, alt: "Menú D'Pavo Pizza" }],
   },
   alternates: { canonical: `${SITE_URL}/menu` },
 };

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { X, ArrowUpRight, Pizza, Fish, Utensils, GlassWater } from 'lucide-react';
 import { MENU_ITEMS } from '@/content/menu';
 import { WA_ORDER } from '@/content/config';
@@ -66,7 +67,7 @@ export function OrderModal({ open, onClose, orderLabel, title = 'Our Menu' }: Or
             >
               <div className={styles.cardImg}>
                 {item.image
-                  ? <img src={item.image} alt={item.name} />
+                  ? <Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 50vw, (max-width: 900px) 33vw, 220px" style={{ objectFit: 'cover' }} />
                   : <span className={styles.cardIconPlaceholder}>{CATEGORY_ICONS[item.category]}</span>
                 }
               </div>
