@@ -75,6 +75,14 @@ export const metadata: Metadata = {
         alt: "D'Pavo Pizza — Pizzería Urbana Tropical Verón Punta Cana",
       },
     ],
+    videos: [
+      {
+        url: `${SITE_URL}/media/dpavo-hero.mp4`,
+        width: 1920,
+        height: 1080,
+        type: 'video/mp4',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

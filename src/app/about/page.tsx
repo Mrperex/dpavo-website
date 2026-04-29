@@ -1,9 +1,11 @@
 'use client';
 
+import Script from 'next/script';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { PageHero } from '@/components/layout/PageHero/PageHero';
 import { SectionHeader } from '@/components/ui/SectionHeader/SectionHeader';
+import { FAQ } from '@/components/ui/FAQ/FAQ';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInView } from '@/hooks/useInView';
 import { WA_GENERAL } from '@/content/config';
@@ -13,6 +15,62 @@ import { Clock3, MapPin, MessageCircle } from 'lucide-react';
 import { ClipReveal } from '@/components/animations';
 import styles from './about.module.css';
 
+const FAQ_ITEMS = [
+  {
+    q: '¿Hacen delivery?',
+    a: 'Sí, hacemos delivery en Verón y zonas cercanas. Escríbenos por WhatsApp con tu dirección y te confirmamos disponibilidad y tiempo de entrega.',
+  },
+  {
+    q: '¿Cuáles son los horarios de apertura?',
+    a: 'Lunes a jueves: 11:00 AM – 11:00 PM · Viernes: 11:00 AM – 2:00 AM · Sábado: 11:00 AM – 3:00 AM · Domingo: 12:00 PM – 10:00 PM.',
+  },
+  {
+    q: '¿Cómo puedo hacer un pedido?',
+    a: 'La forma más rápida es por WhatsApp. Entra al menú, elige lo que quieres y toca el botón de WhatsApp. Te respondemos de inmediato.',
+  },
+  {
+    q: '¿Tienen opciones vegetarianas?',
+    a: 'Sí. Nuestras pizzas Veggies Supreme, Triple Queso, Pavo Blanco y Hongos & Trufa son 100% vegetarianas. Están marcadas en el menú.',
+  },
+  {
+    q: '¿Aceptan reservas?',
+    a: 'Sí, especialmente para viernes y sábados con DJ. Escríbenos por WhatsApp con la fecha, hora y número de personas y te confirmamos disponibilidad.',
+  },
+  {
+    q: '¿Tienen opciones sin gluten?',
+    a: 'Algunos platos como nuestros mariscos y bebidas son naturalmente sin gluten. Escríbenos si tienes alguna restricción dietética y te asesoramos.',
+  },
+  {
+    q: '¿Cuál es la dirección exacta?',
+    a: 'Estamos en Plaza Verón Center, Verón, Punta Cana 23000 — en el corazón de Verón. También puedes escribirnos por WhatsApp y te mandamos la ubicación.',
+  },
+  {
+    q: '¿Tienen estacionamiento?',
+    a: 'Sí, hay estacionamiento disponible en Plaza Verón Center frente al local.',
+  },
+  {
+    q: '¿Hacen catering para eventos?',
+    a: "Sí, hacemos catering completo para cumpleaños, bodas, eventos corporativos y más. Visita nuestra página de Catering o escríbenos para una cotización.",
+  },
+  {
+    q: '¿Cuáles métodos de pago aceptan?',
+    a: 'Aceptamos efectivo (DOP y USD), tarjetas de crédito/débito y transferencias bancarias.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+
 export default function AboutPage() {
   const { t } = useLanguage();
   const [storyRef, storyInView] = useInView<HTMLDivElement>();
@@ -20,6 +78,10 @@ export default function AboutPage() {
 
   return (
     <main id="main-content">
+      <Script id="ld-faq" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(faqJsonLd)}
+      </Script>
+
       <Navbar />
 
       <PageHero
@@ -96,6 +158,13 @@ export default function AboutPage() {
           </div>
         </section>
       )}
+
+      {/* FAQ */}
+      <FAQ
+        label="Preguntas Frecuentes"
+        title="¿Tienes Dudas?"
+        items={FAQ_ITEMS}
+      />
 
       {/* Location & Visit */}
       <section className={styles.visitSection}>

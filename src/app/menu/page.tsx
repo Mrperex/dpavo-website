@@ -13,11 +13,21 @@ import { useLanguage } from '@/context/LanguageContext';
 import { WA_GENERAL } from '@/content/config';
 import { SplitReveal, StaggerGrid } from '@/components/animations';
 import { MagneticButton } from '@/components/animations/MagneticButton';
-import { MENU_ITEMS } from '@/content/menu';
+import { MENU_ITEMS, type DietTag } from '@/content/menu';
 import { CartDrawer } from '@/components/ui/CartDrawer/CartDrawer';
 import { useCart } from '@/context/CartContext';
-import { ShoppingCart, Flame, Search, X } from 'lucide-react';
+import { trackAddToCart, trackViewMenu, trackSearch } from '@/lib/analytics';
+import { ShoppingCart, Flame, Search, X, Leaf, Fish, Zap, WheatOff } from 'lucide-react';
 import styles from './menu.module.css';
+
+const DIET_LABELS: Record<DietTag, { label: string; icon: React.ReactNode }> = {
+  vegetarian:   { label: 'Vegetariano', icon: <Leaf size={12} /> },
+  seafood:      { label: 'Mariscos',    icon: <Fish size={12} /> },
+  spicy:        { label: 'Picante',     icon: <Zap size={12} /> },
+  'gluten-free':{ label: 'Sin Gluten',  icon: <WheatOff size={12} /> },
+};
+
+const ALL_DIETS = Object.keys(DIET_LABELS) as DietTag[];
 
 export default function MenuPage() {
   const { t } = useLanguage();
@@ -26,32 +36,49 @@ export default function MenuPage() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [active, setActive] = useState<string>('All');
+  const [activeDiet, setActiveDiet] = useState<DietTag | null>(null);
   const [isFiltering, setIsFiltering] = useState(false);
   const [search, setSearch] = useState('');
-  const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks']; // internal filter keys
+  const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks'];
   const catsRef = useRef<HTMLDivElement>(null);
   const allItemsRef = useRef<HTMLElement>(null);
 
-  // Hydrate search + category from URL on mount
+  // Hydrate from URL on mount
   useEffect(() => {
     const q = searchParams.get('q') ?? '';
     const cat = searchParams.get('cat') ?? 'All';
+    const diet = searchParams.get('diet') as DietTag | null;
     if (q !== search) setSearch(q);
     if (cats.includes(cat) && cat !== active) setActive(cat);
+    if (diet && ALL_DIETS.includes(diet)) setActiveDiet(diet);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Sync URL with active filter + search (debounced search)
+  // Sync URL (debounced)
   useEffect(() => {
-    const t = setTimeout(() => {
+    const timer = setTimeout(() => {
       const params = new URLSearchParams();
       if (search.trim()) params.set('q', search.trim());
       if (active !== 'All') params.set('cat', active);
+      if (activeDiet) params.set('diet', activeDiet);
       const qs = params.toString();
       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     }, 200);
-    return () => clearTimeout(t);
-  }, [search, active, pathname, router]);
+    return () => clearTimeout(timer);
+  }, [search, active, activeDiet, pathname, router]);
+
+  // Track search after 600ms idle
+  useEffect(() => {
+    if (!search.trim()) return;
+    const timer = setTimeout(() => {
+      const results = MENU_ITEMS.filter(i =>
+        i.name.toLowerCase().includes(search.toLowerCase()) ||
+        i.description.toLowerCase().includes(search.toLowerCase())
+      ).length;
+      trackSearch(search.trim(), results);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [search]);
 
   const fireConfetti = useCallback(async () => {
     const { default: confetti } = await import('canvas-confetti');
@@ -60,6 +87,7 @@ export default function MenuPage() {
 
   const handleFilter = (cat: string) => {
     if (cat === active) return;
+    trackViewMenu(cat);
     const section = allItemsRef.current;
     if (section && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const cards = section.querySelectorAll('article');
@@ -73,24 +101,22 @@ export default function MenuPage() {
     }
   };
 
-  // Filter pills bounce-in on mount
+  const toggleDiet = (diet: DietTag) => {
+    setActiveDiet(d => d === diet ? null : diet);
+  };
+
   useGSAP(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const pills = catsRef.current?.querySelectorAll('[data-filter-pill]');
     if (pills && pills.length && !prefersReducedMotion) {
-      gsap.from(pills, {
-        x: -10,
-        opacity: 0,
-        stagger: 0.06,
-        duration: 0.55,
-        ease: 'back.out(1.4)',
-      });
+      gsap.from(pills, { x: -10, opacity: 0, stagger: 0.06, duration: 0.55, ease: 'back.out(1.4)' });
     }
   }, { scope: catsRef });
 
   const searchLower = search.trim().toLowerCase();
   const filtered = MENU_ITEMS.filter((i) => {
     if (active !== 'All' && i.category !== active) return false;
+    if (activeDiet && !i.diet?.includes(activeDiet)) return false;
     if (!searchLower) return true;
     return (
       i.name.toLowerCase().includes(searchLower) ||
@@ -156,6 +182,20 @@ export default function MenuPage() {
               )}
             </label>
           </div>
+          {/* Diet filter row */}
+          <div className={styles.dietRow}>
+            {ALL_DIETS.map((diet) => (
+              <button
+                type="button"
+                key={diet}
+                className={`${styles.dietBtn} ${activeDiet === diet ? styles.dietActive : ''}`}
+                onClick={() => toggleDiet(diet)}
+              >
+                {DIET_LABELS[diet].icon}
+                {DIET_LABELS[diet].label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -166,10 +206,7 @@ export default function MenuPage() {
           </SplitReveal>
           <StaggerGrid className={styles.featuredGrid} stagger={0.12} y={40} scale={0.94}>
             {featured.map((item) => (
-              <article
-                key={item.id}
-                className={styles.featCard}
-              >
+              <article key={item.id} className={styles.featCard}>
                 <div className={styles.featVisual}>
                   {item.image
                     ? <Image src={item.image} alt={item.name} fill sizes="220px" className={styles.featImg} style={{ objectFit: 'cover' }} />
@@ -186,11 +223,24 @@ export default function MenuPage() {
                     <span className={styles.price}>{item.price}</span>
                   </div>
                   <p>{item.description}</p>
+                  {item.diet && item.diet.length > 0 && (
+                    <div className={styles.dietTags}>
+                      {item.diet.map(d => (
+                        <span key={d} className={styles.dietTag}>
+                          {DIET_LABELS[d].icon} {DIET_LABELS[d].label}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   <MagneticButton>
                     <button
                       type="button"
                       className="btn-primary"
-                      onClick={() => { addItem({ id: String(item.id), name: item.name, price: item.price, image: item.image }); fireConfetti(); }}
+                      onClick={() => {
+                        addItem({ id: String(item.id), name: item.name, price: item.price, image: item.image });
+                        trackAddToCart({ id: item.id, name: item.name, price: item.price, category: item.category });
+                        fireConfetti();
+                      }}
                     >
                       <ShoppingCart size={15} /> {t.menuPage.order}
                     </button>
@@ -218,38 +268,48 @@ export default function MenuPage() {
           ) : filtered.length === 0 ? (
             <div className={styles.noResults} role="status">
               <Search size={28} strokeWidth={1.2} aria-hidden="true" />
-              <p>No encontramos resultados para <strong>“{search}”</strong></p>
+              <p>No encontramos resultados para <strong>&quot;{search || (activeDiet && DIET_LABELS[activeDiet].label)}&quot;</strong></p>
               <button
                 type="button"
                 className={styles.noResultsClear}
-                onClick={() => { setSearch(''); setActive('All'); }}
+                onClick={() => { setSearch(''); setActive('All'); setActiveDiet(null); }}
               >
                 Limpiar filtros
               </button>
             </div>
           ) : (
-          <StaggerGrid key={`${active}-${searchLower}`} className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
-            {filtered.map((item) => (
-              <article
-                key={item.id}
-                className={`${styles.listCard} surface-low`}
-              >
-                <div className={styles.listTop}>
-                  <Badge>{item.category}</Badge>
-                  <span className={styles.price}>{item.price}</span>
-                </div>
-                <h3>{item.name} <span className={styles.listSubtitle}>{item.subtitle}</span></h3>
-                <p>{item.description}</p>
-                <button
-                  type="button"
-                  className={styles.addBtn}
-                  onClick={() => { addItem({ id: String(item.id), name: item.name, price: item.price, image: item.image }); fireConfetti(); }}
-                >
-                  <ShoppingCart size={13} /> {t.menuPage.ask}
-                </button>
-              </article>
-            ))}
-          </StaggerGrid>
+            <StaggerGrid key={`${active}-${searchLower}-${activeDiet}`} className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
+              {filtered.map((item) => (
+                <article key={item.id} className={`${styles.listCard} surface-low`}>
+                  <div className={styles.listTop}>
+                    <Badge>{item.category}</Badge>
+                    <span className={styles.price}>{item.price}</span>
+                  </div>
+                  <h3>{item.name} <span className={styles.listSubtitle}>{item.subtitle}</span></h3>
+                  <p>{item.description}</p>
+                  {item.diet && item.diet.length > 0 && (
+                    <div className={styles.dietTags}>
+                      {item.diet.map(d => (
+                        <span key={d} className={styles.dietTag}>
+                          {DIET_LABELS[d].icon} {DIET_LABELS[d].label}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    className={styles.addBtn}
+                    onClick={() => {
+                      addItem({ id: String(item.id), name: item.name, price: item.price, image: item.image });
+                      trackAddToCart({ id: item.id, name: item.name, price: item.price, category: item.category });
+                      fireConfetti();
+                    }}
+                  >
+                    <ShoppingCart size={13} /> {t.menuPage.ask}
+                  </button>
+                </article>
+              ))}
+            </StaggerGrid>
           )}
         </div>
       </section>
