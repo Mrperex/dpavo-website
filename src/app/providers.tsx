@@ -3,6 +3,7 @@
 
 import { useEffect } from 'react';
 import { LanguageProvider } from '@/context/LanguageContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 import type { ReactNode } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -49,5 +50,5 @@ export function Providers({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  return <LanguageProvider>{children}</LanguageProvider>;
+  return <ThemeProvider><LanguageProvider>{children}</LanguageProvider></ThemeProvider>;
 }

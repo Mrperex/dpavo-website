@@ -48,6 +48,27 @@
 }
 
 /* ============================================================
+   DARK MODE TOKENS
+   ============================================================ */
+[data-theme="dark"] {
+  --bg:           #141414;
+  --bg-light:     #1e1e1e;
+  --text:         #F0EEEA;
+  --text-muted:   #9A9A9A;
+  --border:       #2E2E2E;
+  --background:   #141414;
+  --foreground:   #F0EEEA;
+  --surface:      #1e1e1e;
+  --surface-low:  #1a1a1a;
+  --surface-high: #2a2a2a;
+  --surface-highest: #333333;
+  --surface-highest-rgb: 51, 51, 51;
+  --on-surface:   #F0EEEA;
+  --on-surface-variant: #AAAAAA;
+  color-scheme: dark;
+}
+
+/* ============================================================
    BASE RESET
    ============================================================ */
 *, *::before, *::after {

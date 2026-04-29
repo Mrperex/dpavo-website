@@ -13,6 +13,7 @@ import { CartProvider } from '@/context/CartContext';
 import { restaurantJsonLd, menuJsonLd } from '@/lib/schema';
 import { WebVitals } from '@/components/analytics/WebVitals';
 import { PWAInstallPrompt } from '@/components/ui/PWAInstallPrompt/PWAInstallPrompt';
+import { ServiceWorkerRegister } from '@/components/analytics/ServiceWorkerRegister';
 import './globals.css';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? 'G-R8WQJE9BKW';
@@ -114,6 +115,14 @@ export const metadata: Metadata = {
   other: {
     'mobile-web-app-capable': 'yes',
     'msapplication-TileColor': '#BD1F17',
+    // Pinterest Rich Pins — restaurant product tags
+    'og:type': 'restaurant.restaurant',
+    'restaurant:contact_info:street_address': 'Plaza Verón Center',
+    'restaurant:contact_info:locality': 'Verón',
+    'restaurant:contact_info:region': 'Punta Cana',
+    'restaurant:contact_info:postal_code': '23000',
+    'restaurant:contact_info:country_name': 'Dominican Republic',
+    'restaurant:contact_info:phone_number': '+18297531995',
   },
 };
 
@@ -148,6 +157,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollProgress />
         <CookieConsent />
         <PWAInstallPrompt />
+        <ServiceWorkerRegister />
         <WebVitals />
         <Analytics />
         <SpeedInsights />

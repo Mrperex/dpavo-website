@@ -9,6 +9,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useScrolled } from '@/hooks/useScrolled';
 import { WA_GENERAL } from '@/content/config';
 import { MagneticButton } from '@/components/animations/MagneticButton';
+import { ThemeToggle } from '@/components/ui/ThemeToggle/ThemeToggle';
 import styles from './Navbar.module.css';
 
 const WA_ICON = (
@@ -70,6 +71,7 @@ export default function Navbar() {
             <button type="button" className={styles.langBtn} onClick={toggle} aria-label="Toggle language">
               {t.nav.lang}
             </button>
+            <ThemeToggle />
             <button type="button"
               className={`${styles.hamburger} ${open ? styles.hamburgerOpen : ''}`}
               aria-label="Toggle menu"
