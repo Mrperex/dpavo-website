@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import { PageHero } from '@/components/layout/PageHero/PageHero';
@@ -15,17 +16,42 @@ import { MagneticButton } from '@/components/animations/MagneticButton';
 import { MENU_ITEMS } from '@/content/menu';
 import { CartDrawer } from '@/components/ui/CartDrawer/CartDrawer';
 import { useCart } from '@/context/CartContext';
-import { ShoppingCart, Flame } from 'lucide-react';
+import { ShoppingCart, Flame, Search, X } from 'lucide-react';
 import styles from './menu.module.css';
 
 export default function MenuPage() {
   const { t } = useLanguage();
   const { addItem } = useCart();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [active, setActive] = useState<string>('All');
   const [isFiltering, setIsFiltering] = useState(false);
+  const [search, setSearch] = useState('');
   const cats = ['All', 'Pizza', 'Mariscos', 'Picaderas', 'Drinks']; // internal filter keys
   const catsRef = useRef<HTMLDivElement>(null);
   const allItemsRef = useRef<HTMLElement>(null);
+
+  // Hydrate search + category from URL on mount
+  useEffect(() => {
+    const q = searchParams.get('q') ?? '';
+    const cat = searchParams.get('cat') ?? 'All';
+    if (q !== search) setSearch(q);
+    if (cats.includes(cat) && cat !== active) setActive(cat);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Sync URL with active filter + search (debounced search)
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const params = new URLSearchParams();
+      if (search.trim()) params.set('q', search.trim());
+      if (active !== 'All') params.set('cat', active);
+      const qs = params.toString();
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    }, 200);
+    return () => clearTimeout(t);
+  }, [search, active, pathname, router]);
 
   const fireConfetti = useCallback(async () => {
     const { default: confetti } = await import('canvas-confetti');
@@ -62,9 +88,17 @@ export default function MenuPage() {
     }
   }, { scope: catsRef });
 
-  const filtered = active === 'All'
-    ? MENU_ITEMS
-    : MENU_ITEMS.filter((i) => i.category === active);
+  const searchLower = search.trim().toLowerCase();
+  const filtered = MENU_ITEMS.filter((i) => {
+    if (active !== 'All' && i.category !== active) return false;
+    if (!searchLower) return true;
+    return (
+      i.name.toLowerCase().includes(searchLower) ||
+      i.subtitle.toLowerCase().includes(searchLower) ||
+      i.description.toLowerCase().includes(searchLower) ||
+      i.descriptionEs.toLowerCase().includes(searchLower)
+    );
+  });
 
   const featured = MENU_ITEMS.filter((i) => i.featured);
 
@@ -87,17 +121,40 @@ export default function MenuPage() {
 
       <div className={styles.catsBar}>
         <div className="container">
-          <div ref={catsRef} className={styles.cats}>
-            {cats.map((cat, i) => (
-              <button type="button"
-                key={cat}
-                data-filter-pill
-                className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
-                onClick={() => handleFilter(cat)}
-              >
-                {t.menuPage.categories[i]}
-              </button>
-            ))}
+          <div className={styles.controlsRow}>
+            <div ref={catsRef} className={styles.cats}>
+              {cats.map((cat, i) => (
+                <button type="button"
+                  key={cat}
+                  data-filter-pill
+                  className={`${styles.catBtn} ${active === cat ? styles.active : ''}`}
+                  onClick={() => handleFilter(cat)}
+                >
+                  {t.menuPage.categories[i]}
+                </button>
+              ))}
+            </div>
+            <label className={styles.searchWrap}>
+              <Search size={14} className={styles.searchIcon} aria-hidden="true" />
+              <input
+                type="search"
+                className={styles.searchInput}
+                placeholder={t.menuPage.searchPlaceholder ?? 'Buscar…'}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                aria-label="Buscar en el menú"
+              />
+              {search && (
+                <button
+                  type="button"
+                  className={styles.searchClear}
+                  onClick={() => setSearch('')}
+                  aria-label="Limpiar búsqueda"
+                >
+                  <X size={12} />
+                </button>
+              )}
+            </label>
           </div>
         </div>
       </div>
@@ -158,8 +215,20 @@ export default function MenuPage() {
                 </div>
               ))}
             </div>
+          ) : filtered.length === 0 ? (
+            <div className={styles.noResults} role="status">
+              <Search size={28} strokeWidth={1.2} aria-hidden="true" />
+              <p>No encontramos resultados para <strong>“{search}”</strong></p>
+              <button
+                type="button"
+                className={styles.noResultsClear}
+                onClick={() => { setSearch(''); setActive('All'); }}
+              >
+                Limpiar filtros
+              </button>
+            </div>
           ) : (
-          <StaggerGrid key={active} className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
+          <StaggerGrid key={`${active}-${searchLower}`} className={styles.listGrid} stagger={0.05} y={25} scale={0.97} start="top 90%">
             {filtered.map((item) => (
               <article
                 key={item.id}

@@ -157,6 +157,7 @@ export const es: Content = {
     trending: 'Tendencia',
     order: 'Pedir por WhatsApp',
     ask: 'Consultar por WhatsApp',
+    searchPlaceholder: 'Buscar plato, ingrediente…',
   },
   eventsPage: {
     label: '¿Qué pasa esta noche?',

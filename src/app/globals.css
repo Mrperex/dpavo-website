@@ -90,6 +90,38 @@ p {
 
 a { text-decoration: none; }
 
+/* ============================================================
+   View Transitions (cross-document smooth nav)
+   ============================================================ */
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes vtFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes vtFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+::view-transition-old(root) {
+  animation: 180ms cubic-bezier(0.4, 0, 1, 1) both vtFadeOut;
+}
+
+::view-transition-new(root) {
+  animation: 320ms cubic-bezier(0, 0, 0.2, 1) 80ms both vtFadeIn;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 /* Accessibility: skip-to-content link */
 .skip-link {
   position: absolute;

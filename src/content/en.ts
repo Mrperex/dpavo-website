@@ -154,6 +154,7 @@ export const en = {
     trending: 'Trending',
     order: 'Order on WhatsApp',
     ask: 'Ask on WhatsApp',
+    searchPlaceholder: 'Search dish, ingredient…',
   },
   eventsPage: {
     label: 'Nightlife & Events',
