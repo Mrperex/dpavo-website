@@ -1,0 +1,37 @@
+{
+  "name": "D'Pavo Pizza",
+  "short_name": "D'Pavo",
+  "description": "Pizza artesanal, mariscos frescos y vida nocturna en Verón, Punta Cana.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a0a08",
+  "theme_color": "#BD1F17",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Ver Menú",
+      "url": "/menu",
+      "description": "Explora nuestro menú completo"
+    },
+    {
+      "name": "Eventos",
+      "url": "/events",
+      "description": "Próximos eventos y vida nocturna"
+    }
+  ]
+}

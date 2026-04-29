@@ -3,11 +3,7 @@
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 16px 24px;
+  padding: 20px 24px;
   background: rgba(18,18,18,0.97);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: var(--radius-lg);
@@ -23,12 +19,16 @@
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .text {
-  flex: 1;
   font-size: 0.85rem;
   color: rgba(255,255,255,0.7);
   line-height: 1.5;
-  min-width: 200px;
 }
 
 .link {
@@ -37,14 +37,76 @@
   text-underline-offset: 3px;
 }
 
-.actions {
+/* Granular categories */
+.categories {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  flex-shrink: 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 14px;
 }
 
+.catRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.catInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.catInfo strong {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  font-family: var(--font-labels), sans-serif;
+}
+
+.catInfo span {
+  font-size: 0.73rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
+}
+
+.check {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Action buttons */
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.customize {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-labels), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.customize:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+
 .decline {
-  padding: 8px 18px;
+  padding: 8px 16px;
   border-radius: var(--radius-md);
   border: 1px solid rgba(255,255,255,0.15);
   background: transparent;
@@ -59,8 +121,25 @@
 }
 .decline:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
 
+.saveCustom {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.8);
+  font-family: var(--font-labels), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.saveCustom:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
 .accept {
-  padding: 8px 18px;
+  margin-left: auto;
+  padding: 8px 20px;
   border-radius: var(--radius-md);
   border: none;
   background: var(--primary);

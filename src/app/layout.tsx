@@ -11,6 +11,8 @@ import { CookieConsent } from '@/components/ui/CookieConsent/CookieConsent';
 import { Providers } from './providers';
 import { CartProvider } from '@/context/CartContext';
 import { restaurantJsonLd, menuJsonLd } from '@/lib/schema';
+import { WebVitals } from '@/components/analytics/WebVitals';
+import { PWAInstallPrompt } from '@/components/ui/PWAInstallPrompt/PWAInstallPrompt';
 import './globals.css';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? 'G-R8WQJE9BKW';
@@ -95,6 +97,16 @@ export const metadata: Metadata = {
   verification: {
     google: 'qWdXRzi12vtr10rDDrUtdwxBgzfleEDlNWhVGsl59Jw',
   },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: "D'Pavo Pizza",
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+    'msapplication-TileColor': '#BD1F17',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -127,6 +139,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Cursor />
         <ScrollProgress />
         <CookieConsent />
+        <PWAInstallPrompt />
+        <WebVitals />
         <Analytics />
         <SpeedInsights />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
@@ -134,11 +148,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('consent', 'default', { analytics_storage: 'denied' });
-          var consent = localStorage.getItem('dpavo-cookie-consent');
-          if (consent === 'accepted') {
-            gtag('consent', 'update', { analytics_storage: 'granted' });
-          }
+          gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            functionality_storage: 'granted',
+            personalization_storage: 'denied',
+            security_storage: 'granted',
+            wait_for_update: 500,
+          });
+          try {
+            var raw = localStorage.getItem('dpavo-cookie-consent-v2');
+            if (raw) {
+              var prefs = JSON.parse(raw);
+              gtag('consent', 'update', {
+                analytics_storage: prefs.analytics ? 'granted' : 'denied',
+                ad_storage: prefs.marketing ? 'granted' : 'denied',
+                ad_user_data: prefs.marketing ? 'granted' : 'denied',
+                ad_personalization: prefs.marketing ? 'granted' : 'denied',
+                personalization_storage: prefs.preferences ? 'granted' : 'denied',
+              });
+            } else if (localStorage.getItem('dpavo-cookie-consent') === 'accepted') {
+              gtag('consent', 'update', { analytics_storage: 'granted' });
+            }
+          } catch(e) {}
           gtag('config', '${GA_ID}', { page_path: window.location.pathname });
         `}</Script>
       </body>
